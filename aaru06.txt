@@ -1,1 +1,0 @@
-Checking merge options with git..
