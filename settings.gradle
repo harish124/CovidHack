@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-rootProject.name='covid-hack'
-include ':app'
-=======
-include ':app'
-rootProject.name='Bourbon'
->>>>>>> d438107875409ef976bdc9019ee3e773914400cc
