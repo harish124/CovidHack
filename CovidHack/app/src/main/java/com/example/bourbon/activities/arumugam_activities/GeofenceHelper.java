@@ -1,4 +1,4 @@
-package com.arumugam.geofencing;
+package com.example.bourbon.activities.arumugam_activities;
 
 import android.app.PendingIntent;
 import android.content.Context;

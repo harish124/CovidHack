@@ -1,4 +1,4 @@
-package com.arumugam.geofencing;
+package com.example.bourbon.activities.arumugam_activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +15,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bourbon.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loc = findViewById(R.id.location);
+        loc = findViewById(R.id.btn2);
 
         //checkingPermissions();
 
