@@ -16,7 +16,7 @@ public class Main_menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_main);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
     }
