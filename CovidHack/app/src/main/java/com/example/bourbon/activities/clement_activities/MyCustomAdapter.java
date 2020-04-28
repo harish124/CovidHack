@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.bourbon.R;
-
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -54,17 +54,17 @@ public class MyCustomAdapter extends BaseAdapter {
 
 
         videodetails videodetails = this.videodetailsArrayList.get(position);
-//        Picasso.get().load(videodetails.getUrl()).into(imageView);
-//
-//        textView.setText(videodetails.getTitle());
-//        linearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(activity,YoutubePlay.class);
-//                i.putExtra("videoid",videodetails.getVideoId());
-//                activity.startActivity(i);
-//            }
-//        });
+        Picasso.get().load(videodetails.getUrl()).into(imageView);
+
+        textView.setText(videodetails.getTitle());
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity,YoutubePlay.class);
+                i.putExtra("videoid",videodetails.getVideoId());
+                activity.startActivity(i);
+            }
+        });
         return convertView;
     }
 }
