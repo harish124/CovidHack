@@ -15,7 +15,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
 
-
 import com.example.bourbon.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     void init(){
         p=new Print(MainActivity.this);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
