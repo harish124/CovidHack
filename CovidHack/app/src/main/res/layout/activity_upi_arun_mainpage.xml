@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/loan"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="     Name"
+            android:textSize="20dp"
+            android:textColorHint="#000000"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/button"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="80dp"
+            android:id="@+id/name" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="     AMOUNT "
+            android:textSize="20dp"
+            android:textColorHint="#000000"
+            android:background="@drawable/button"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/amount" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:hint="     NOTES "
+            android:textColorHint="#000000"
+            android:textSize="20dp"
+            android:background="@drawable/button"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/notes" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:id="@+id/send"
+            android:textSize="20dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="60dp"
+            android:layout_centerHorizontal="true"
+            android:text="Pay Now"/>
+    </LinearLayout>
+</LinearLayout>

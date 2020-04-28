@@ -50,7 +50,7 @@ public class YoutubeList extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(YoutubeList.this, "GOt Response", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(YoutubeList.this, "GOt Response", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("items");
@@ -69,7 +69,7 @@ public class YoutubeList extends AppCompatActivity {
                        vd.setTitle(jsonobjectSnippet.getString("title"));
                        vd.setDescription(jsonobjectSnippet.getString("description"));
                        vd.setUrl(jsonObjectDefault.getString("url"));
-                        Toast.makeText(YoutubeList.this,vd.getTitle(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(YoutubeList.this,vd.getTitle(), Toast.LENGTH_SHORT).show();
 
                        videodetailsArrayList.add(vd);
                     }
