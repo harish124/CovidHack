@@ -23,6 +23,9 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class Verifi extends AppCompatActivity {
 
     String no;
@@ -34,38 +37,36 @@ public class Verifi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verifi);
+        setContentView(R.layout.activity_otp_main);
+        ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
         Bundle b = getIntent().getExtras();
         String no = b.getString("Mobile");
         Toast.makeText(this, "+91" + no, Toast.LENGTH_SHORT).show();
         sendVerificationCode(no);
-        otp = findViewById(R.id.verify);
-        submit = findViewById(R.id.sub1);
+        otp = findViewById(R.id.otp);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
 
-                String code = otp.getText().toString().trim();
-                if (code.isEmpty() || code.length() < 6) {
-                    otp.setError("Enter valid code");
-                    otp.requestFocus();
-                    return;
-                }
+    @OnClick(R.id.next)
+    public void onViewClicked() {
 
-                //verifying the code entered manually
-                verifyVerificationCode(code);
+        String code = otp.getText().toString().trim();
+        if (code.isEmpty() || code.length() < 6) {
+            otp.setError("Enter valid code");
+            otp.requestFocus();
+            return;
+        }
 
-            }
-        });
+        //verifying the code entered manually
+        verifyVerificationCode(code);
     }
 
 
     private void sendVerificationCode(String no) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+91"+no,
+                "+91" + no,
                 60,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
@@ -137,4 +138,6 @@ public class Verifi extends AppCompatActivity {
                     }
                 });
     }
+
+
 }
