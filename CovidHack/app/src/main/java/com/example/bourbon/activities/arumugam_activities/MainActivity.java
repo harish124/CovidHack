@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.example.bourbon.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +29,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import print.Print;
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -40,13 +42,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private Geofence geofence;
     private GeofencingClient geofenceclient;
     private GeofenceHelper geofenceHelper;
+    private Print p;
+    void init(){
+        p=new Print(MainActivity.this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.geofence_layout);
 
-        loc = findViewById(R.id.btn2);
+        loc = findViewById(R.id.location);
 
         //checkingPermissions();
 
@@ -72,18 +78,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
 
         geofenceclient.addGeofences(geofencingRequest, pendingIntent)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Geofencing", "onSuccess: Geofence Added...");
-                    }
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Geofencing", "onSuccess: Geofence Added...");
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        String errorMessage = geofenceHelper.getErrorString(e);
-                        Log.d("Geofencing", "onFailure: " + errorMessage);
-                    }
+                .addOnFailureListener(e -> {
+                    String errorMessage = geofenceHelper.getErrorString(e);
+                    Log.d("Geofencing", "onFailure: " + errorMessage);
                 });
     }
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this,"Permission not granted..!",Toast.LENGTH_SHORT).show();
+            p.fprintf("Permission not granted..!");
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             Uri uri = Uri.fromParts("package",getPackageName(),null);
             intent.setData(uri);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         if(!checkPlayServices())
         {
-            Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
+            p.fprintf("Please install Google Play Services.!");
         }
     }
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onLocationChanged(Location location) {
         if (location == null) {
             //loc.setText("Location Unkown");
-            Toast.makeText(this,"Location is switched off.!",Toast.LENGTH_SHORT).show();
+            p.fprintf("Location is switched off.!");
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         } else {
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         catch(Exception e)
         {
-            Toast.makeText(this,"Please grant permissions to proceed.!",Toast.LENGTH_SHORT).show();
+            p.fprintf("Please grant permissions to proceed.!");
         }
     }
 
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             googleapiClient.connect();
         }
         else{
-            Toast.makeText(this,"Google API is not initialised",Toast.LENGTH_SHORT).show();
+            p.fprintf("Google API is not initialised");
         }
     }
 

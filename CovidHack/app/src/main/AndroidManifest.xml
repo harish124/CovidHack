@@ -22,7 +22,7 @@
         <activity android:name=".activities.clement_activities.YoutubeList"></activity>
         <activity android:name=".activities.arumugam_activities.MainActivity"></activity>
 
-        <receiver android:name=".GeofenceBroadcastReceiver"/>
+        <receiver android:name=".activities.arumugam_activities.GeofenceBroadcastReceiver"/>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
