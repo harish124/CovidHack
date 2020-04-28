@@ -13,15 +13,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
         <activity android:name=".activities.clement_activities.Main_menu"></activity>
+
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity android:name=".activities.clement_activities.Startact">
+
+        </activity>
+        <activity android:name=".activities.harish_activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Launcher Denotes that it will be the first launching activity -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
         <activity android:name=".activities.clement_activities.Voip" />
@@ -29,6 +36,11 @@
         <activity android:name=".activities.clement_activities.Upi_payments" />
         <activity android:name=".activities.clement_activities.Main2Activity" />
         <activity android:name=".activities.arumugam_activities.MainActivity" />
+
+
+
+        <receiver android:name=".activities.arumugam_activities.GeofenceBroadcastReceiver"/>
+
     </application>
 
 </manifest>
