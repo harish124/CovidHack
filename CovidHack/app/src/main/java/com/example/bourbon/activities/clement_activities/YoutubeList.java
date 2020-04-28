@@ -37,7 +37,7 @@ public class YoutubeList extends AppCompatActivity {
 
         myCustomAdapter = new MyCustomAdapter(YoutubeList.this,videodetailsArrayList);
 
-        Toast.makeText(this, "Inside Youtube Play", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Inside Youtube Play", Toast.LENGTH_SHORT).show();
 
         displayVideos();
 
