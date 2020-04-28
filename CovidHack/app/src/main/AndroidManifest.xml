@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.harish_activities.MainActivity">
 
-        </activity>
         <activity android:name=".activities.clement_activities.Startact">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +24,13 @@
         <activity android:name=".activities.clement_activities.Verifi"/>
         <activity android:name=".activities.clement_activities.Upi_payments"/>
         <activity android:name=".activities.clement_activities.Main2Activity"></activity>
+
+        <activity android:name=".activities.arumugam_activities.MainActivity"></activity>
+
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
 </manifest>
