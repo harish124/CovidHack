@@ -40,12 +40,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private LocationRequest locationRequest;
     private Geofence geofence;
     private GeofencingClient geofenceclient;
+<<<<<<< HEAD
+    private com.example.bourbon.activities.arumugam_activities.GeofenceHelper geofenceHelper;
+=======
     private GeofenceHelper geofenceHelper;
     private Print p;
     void init(){
         p=new Print(MainActivity.this);
     }
 
+>>>>>>> bb296a5b008cad10949f568df9c8aaa84c604bf0
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .build();
 
         geofenceclient = LocationServices.getGeofencingClient(this);
+<<<<<<< HEAD
+        geofenceHelper = new com.example.bourbon.activities.arumugam_activities.GeofenceHelper(this);
+=======
         geofenceHelper = new GeofenceHelper(this);
+>>>>>>> bb296a5b008cad10949f568df9c8aaa84c604bf0
 
         Location l = new Location("");
         l.setLatitude(13.044623d);
