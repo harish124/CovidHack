@@ -50,8 +50,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="50dp"
-            android:id="@+id/notes"
-            android:inputType="numberDecimal" />
+            android:id="@+id/notes" />
 
         <Button
             android:layout_width="120dp"
