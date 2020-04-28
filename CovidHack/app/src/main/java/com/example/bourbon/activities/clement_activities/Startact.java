@@ -9,11 +9,14 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Startact extends AppCompatActivity {
 
     EditText mobile ;
     Button submit;
+    FirebaseAuth mauth;
     private static final int RC_SIGN_IN = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,12 @@ public class Startact extends AppCompatActivity {
 //        }
 
 
-
+        mauth = FirebaseAuth.getInstance();
+        FirebaseUser user = mauth.getCurrentUser();
+        if(user!=null){
+            Intent intent = new Intent(Startact.this,Main_menu.class);
+            startActivity(intent);
+        }
         mobile = findViewById(R.id.mobi);
         submit = findViewById(R.id.sub);
 
