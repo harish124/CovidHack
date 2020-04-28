@@ -93,4 +93,6 @@ dependencies {
     implementation files('libs/sinch-android-rtc-3.17.4.aar')
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
+    //noinspection GradleCompatible,GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
 }
