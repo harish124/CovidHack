@@ -20,7 +20,13 @@
         <activity android:name=".activities.clement_activities.startact"></activity>
         <activity android:name=".activities.clement_activities.verifi"></activity>
         <activity android:name=".activities.clement_activities.YoutubeList"></activity>
+        <activity android:name=".activities.arumugam_activities.MainActivity"></activity>
 
+        <receiver android:name=".GeofenceBroadcastReceiver"/>
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
 </manifest>
