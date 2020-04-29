@@ -25,7 +25,7 @@ public class YoutubeList extends AppCompatActivity {
     ListView listView;
     ArrayList<videodetails> videodetailsArrayList ;
     MyCustomAdapter myCustomAdapter;
-    String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCzpl6CJP6lo5vjsEAeIHnsg&key=AIzaSyCgMfU9aS6h8qjAF8NxzBHhTS84palI7UY";
+    String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC8butISFwT-Wl7EV0hUK0BQ&maxResults=15&key=AIzaSyCgMfU9aS6h8qjAF8NxzBHhTS84palI7UY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
