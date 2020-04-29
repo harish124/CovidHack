@@ -18,8 +18,14 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +36,8 @@ public class Verifi extends AppCompatActivity {
 
     String no;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private DatabaseReference mDatabase;
     private String mVerificationId;
     EditText otp;
     Button submit;
@@ -41,9 +49,9 @@ public class Verifi extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
+
         Bundle b = getIntent().getExtras();
         String no = b.getString("Mobile");
-        Toast.makeText(this, "+91" + no, Toast.LENGTH_SHORT).show();
         sendVerificationCode(no);
         otp = findViewById(R.id.otp);
 
@@ -119,9 +127,29 @@ public class Verifi extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
-                            Intent intent = new Intent(Verifi.this, Main_menu.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+                            user = mAuth.getCurrentUser();
+                            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    if (snapshot.hasChild(user.getUid())) {
+                                        // run some code
+                                        Intent intent = new Intent(Verifi.this, Main_menu.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                    }else{
+                                        Intent intent = new Intent(Verifi.this, User_Registration.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
 
                         } else {
 
