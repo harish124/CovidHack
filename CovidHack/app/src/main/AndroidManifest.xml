@@ -19,13 +19,15 @@
         <activity android:name=".activities.barathan_activities.user_data"></activity>
 
         <activity android:name=".activities.clement_activities.Main_menu" />
-        <activity android:name=".activities.clement_activities.Startact"/>
-        <activity android:name=".activities.harish_activities.MainActivity">
+        <activity android:name=".activities.clement_activities.Startact">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Launcher Denotes that it will be the first launching activity -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.harish_activities.MainActivity">
+
         </activity>
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
@@ -34,6 +36,7 @@
         <activity android:name=".activities.clement_activities.Upi_payments" />
         <activity android:name=".activities.clement_activities.Main2Activity" />
         <activity android:name=".activities.arumugam_activities.MainActivity" />
+        <activity android:name=".activities.clement_activities.EmergencyContactInfo"/>
 
         <service
             android:name=".activities.clement_activities.MyFirebaseMessagingService"
