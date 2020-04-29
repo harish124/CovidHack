@@ -10,9 +10,15 @@ public class User {
         this.address=addr;
     }
 
+<<<<<<< HEAD
     public User() {
     }
 
+=======
+    public User(){
+
+    }
+>>>>>>> f812f2b81fc588ee7d80f33b1f8dda58cf9d0abd
     public String getName() {
         return name;
     }
