@@ -29,9 +29,6 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.sinch.android.rtc.Sinch;
-import com.sinch.android.rtc.SinchClient;
-import com.sinch.android.rtc.calling.CallClient;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,6 +57,8 @@ public class Voip extends AppCompatActivity {
 
             }
         });
+
+
         getLastLocation();
     }
 
@@ -78,6 +77,7 @@ public class Voip extends AppCompatActivity {
                                     Toast.makeText(Voip.this, "Lattutude : " + location.getLatitude()+ "Longitude : "+location.getLongitude(), Toast.LENGTH_SHORT).show();
 //                                    latTextView.setText(location.getLatitude()+"");
 //                                    lonTextView.setText(location.getLongitude()+"");
+                                    getLocationName(location.getLatitude(),location.getLongitude());
                                 }
                             }
                         }
@@ -169,8 +169,16 @@ public class Voip extends AppCompatActivity {
                     String city = adrs.getLocality();
                     if (city != null && !city.equals("")) {
                         cityName = city;
-                        System.out.println("city ::  " + cityName);
+//                        System.out.println("city ::  " + cityName);
+                        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                        List<Address> addressess = geocoder.getFromLocation(lattitude,longitude, 1);
+                        String cityNam = addressess.get(0).getAddressLine(4);
+                        String stateName = addressess.get(0).getAddressLine(1);
+                        String countryName = addressess.get(0).getAddressLine(2);
+//                        String pincode = addresses
+                        Toast.makeText(this, "City : " + cityNam, Toast.LENGTH_SHORT).show();
                     } else {
+
 
                     }
                     // // you should also try with addresses.get(0).toSring();

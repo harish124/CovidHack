@@ -2,13 +2,20 @@ package com.example.bourbon.activities.clement_activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,14 +34,25 @@ public class Startact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_main);
         ButterKnife.bind(this);
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Successful" ;
+                        if (!task.isSuccessful()) {
+                            msg = "Failed";
+                        }
+                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             mobilenum.setCursorVisible(false);
-//        mauth = FirebaseAuth.getInstance();
-//        FirebaseUser user = mauth.getCurrentUser();
-//        if(user!=null){
-//            Intent intent = new Intent(Startact.this,Main_menu.class);
-//            startActivity(intent);
-//        }
+        mauth = FirebaseAuth.getInstance();
+        FirebaseUser user = mauth.getCurrentUser();
+        if(user!=null){
+            Intent intent = new Intent(Startact.this,Main_menu.class);
+            startActivity(intent);
+        }
 //        mobile = findViewById(R.id.mobi);
 //        submit = findViewById(R.id.sub);
 
