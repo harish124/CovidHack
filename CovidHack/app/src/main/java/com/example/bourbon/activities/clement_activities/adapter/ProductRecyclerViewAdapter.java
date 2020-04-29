@@ -56,6 +56,12 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
             private MyViewHolder(@NonNull CardHarishEmergencyContactNumBinding itemView) {
                 super(itemView.getRoot());
                 binding=itemView;
+
+                binding.emergencyCard.setOnClickListener((v)->{
+                    p.sprintf("Card Clicked");
+                    //on card click
+                    //clement fill this fn
+                });
             }
         }
 
