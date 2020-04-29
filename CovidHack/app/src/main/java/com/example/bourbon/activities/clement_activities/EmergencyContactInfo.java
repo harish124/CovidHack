@@ -40,6 +40,10 @@ public class EmergencyContactInfo extends Activity {
     void fetchProdFromFirebase(){
         //clement complete this function
         //this.products=prod fetched from firebase;
+        for (int i=1;i<5;i++) {
+            ProductDetails pd=new ProductDetails("Chennai","1234567890","1234567890");
+            products.add(pd);
+        }
         adapter.notifyDataSetChanged();
     }
 }
