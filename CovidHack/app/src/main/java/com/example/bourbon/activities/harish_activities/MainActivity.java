@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.bourbon.R;
 import com.example.bourbon.activities.clement_activities.Main2Activity;
+import com.example.bourbon.activities.clement_activities.Startact;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 p.sprintf("Aru Success");
                 break;
             case R.id.btn2:
-                transition.goTo(Main2Activity.class);
+                transition.goTo(Startact.class);
                 p.fprintf("Clement Success");
                 break;
             case R.id.btn3:

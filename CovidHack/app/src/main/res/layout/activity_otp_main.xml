@@ -28,6 +28,7 @@
         tools:layout_editor_absoluteY="165dp"></TextView>
 
     <EditText
+        android:id="@+id/otp"
         android:layout_width="330dp"
         android:layout_height="55dp"
         android:background="@drawable/button"

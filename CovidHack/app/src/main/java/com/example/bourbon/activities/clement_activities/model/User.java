@@ -10,6 +10,9 @@ public class User {
         this.address=addr;
     }
 
+    public User() {
+    }
+
     public String getName() {
         return name;
     }

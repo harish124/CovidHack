@@ -30,6 +30,7 @@
 
 
     <EditText
+        android:id="@+id/mobilenum"
         android:layout_width="330dp"
         android:layout_height="58dp"
         android:background="@drawable/button"
