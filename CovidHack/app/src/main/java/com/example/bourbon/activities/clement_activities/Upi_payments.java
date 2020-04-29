@@ -18,27 +18,26 @@ import butterknife.ButterKnife;
 public class Upi_payments extends AppCompatActivity {
 
 
-    @BindView(R.id.namename)
+    @BindView(R.id.name)
     EditText name;
-    @BindView(R.id.upid)
-    EditText upid;
     @BindView(R.id.amount)
     EditText amount;
-    @BindView(R.id.sendmoney)
+    @BindView(R.id.notes)
+    EditText notes;
+    @BindView(R.id.send)
     Button send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upi_payments);
+        setContentView(R.layout.activity_upi_arun_mainpage);
         ButterKnife.bind(this);
-
 
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payusingUpi("modi", "pmcares@sbi", amount.getText().toString());
+                payusingUpi(name.getText().toString(), "pmcares@sbi", amount.getText().toString());
             }
         });
 
@@ -55,7 +54,7 @@ public class Upi_payments extends AppCompatActivity {
                         .appendQueryParameter("pn", name)
 //                        .appendQueryParameter("mc", "your-merchant-code")
 //                        .appendQueryParameter("tr", "your-transaction-ref-id")
-                        .appendQueryParameter("tn", "your-transaction-note")
+                        .appendQueryParameter("tn", notes.getText().toString())
                         .appendQueryParameter("am", money)
                         .appendQueryParameter("cu", "INR")
 //                        .appendQueryParameter("url", "your-transaction-url")
