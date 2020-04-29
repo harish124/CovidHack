@@ -1,9 +1,14 @@
-package com.example.bourbon.activities.clement_activities;
+package com.example.bourbon.activities.clement_activities.model;
 
-public class user {
+public class User {
 
-    String name ;
-    String address ;
+    String name="" ;
+    String address="" ;
+
+    public User(String name,String addr){
+        this.name=name;
+        this.address=addr;
+    }
 
     public String getName() {
         return name;
