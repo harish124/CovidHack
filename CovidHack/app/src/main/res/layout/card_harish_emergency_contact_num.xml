@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="pd"
+            type="com.example.bourbon.activities.clement_activities.model.ProductDetails" />
+    </data>
+<androidx.cardview.widget.CardView
+    android:id="@+id/emergencyCard"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="20dp"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/emerDistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="District Name"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/emergencyNoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency No: "
+            android:layout_below="@+id/emerDistName"
+            />
+        <TextView
+            android:id="@+id/emergencyNo"
+            android:layout_toRightOf="@+id/emergencyNoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{pd.emergencyNo}"
+            android:layout_below="@+id/emerDistName"
+            />
+        <TextView
+            android:id="@+id/emerLandLineNoLabel"
+            android:layout_below="@+id/emergencyNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Landline No: "
+            />
+        <TextView
+            android:layout_below="@+id/emergencyNo"
+            android:layout_toRightOf="@+id/emerLandLineNoLabel"
+            android:id="@+id/emerLandLineNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{pd.landLineNo}"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+</layout>
