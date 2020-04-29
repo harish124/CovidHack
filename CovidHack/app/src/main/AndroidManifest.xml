@@ -33,6 +33,7 @@
         <activity android:name=".activities.clement_activities.Upi_payments" />
         <activity android:name=".activities.clement_activities.Main2Activity" />
         <activity android:name=".activities.arumugam_activities.MainActivity" />
+        <activity android:name=".activities.clement_activities.EmergencyContactInfo"/>
 
         <service
             android:name=".activities.clement_activities.MyFirebaseMessagingService"

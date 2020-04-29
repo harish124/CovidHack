@@ -48,11 +48,11 @@ public class Startact extends AppCompatActivity {
 
             mobilenum.setCursorVisible(false);
         mauth = FirebaseAuth.getInstance();
-        FirebaseUser user = mauth.getCurrentUser();
-        if(user!=null){
-            Intent intent = new Intent(Startact.this,Main_menu.class);
-            startActivity(intent);
-        }
+//        FirebaseUser user = mauth.getCurrentUser();
+//        if(user!=null){
+//            Intent intent = new Intent(Startact.this,Main_menu.class);
+//            startActivity(intent);
+//        }
 //        mobile = findViewById(R.id.mobi);
 //        submit = findViewById(R.id.sub);
 
