@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class EmergencyContactInfo extends Activity {
 
     private RvHarishEmergencyContactNumBinding binding;
-    private ArrayList<ProductDetails> products;
+    private ArrayList<ProductDetails> products =new ArrayList<>();
     private ProductRecyclerViewAdapter adapter;
 
     void configRecyclerView() {

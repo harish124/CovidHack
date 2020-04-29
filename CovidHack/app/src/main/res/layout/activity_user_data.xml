@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,140 +8,90 @@
     android:background="@color/blue"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter user details before continuing"
-        android:layout_gravity="center"
-        android:textSize="20dp"/>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
 
-        <com.google.android.material.textfield.TextInputEditText
+    android:src="@drawable/person"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="First Name"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last Name"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Date of Birth"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Medical Issues if any"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="180px"
-            android:layout_marginTop="90px"
-            android:text="Gender:"
-            android:textColor="@android:color/black"
-            android:textSize="15dp" />
-        <RadioGroup
-            android:id="@+id/RadioGroup"
-            android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/RadioButton1"
-                android:layout_width="92dp"
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="     First Name "
+                android:textSize="20dp"
+                android:inputType="textPersonName"
+                android:textColorHint="#000000"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/first_name" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="     Last Name "
+                android:textSize="20dp"
+                android:inputType="textPersonName"
+                android:textColorHint="#000000"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/last_name" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="     Address "
+                android:textSize="20dp"
+                android:textColorHint="#000000"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/address" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="     Date of Birth "
+                android:textSize="20dp"
+                android:textColorHint="#000000"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/dob" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="20dp"
+                android:textColorHint="#000000"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/gender"
+                android:prompt="@string/gender_prompt"
+                android:entries="@array/gender_arrays"
+                />
+            <Button
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginTop="80px"
-                android:text="Male"
-                android:textColor="@android:color/black"
-                android:textSize="15dp" />
+                android:background="@color/colorPrimary"
+                android:id="@+id/send"
+                android:textSize="20dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="50dp"
+                android:layout_centerHorizontal="true"
+                android:text="Submit"/>
+        </LinearLayout>
+    </ScrollView>
 
-            <RadioButton
-                android:id="@+id/RadioButton2"
-                android:layout_width="92dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginTop="30px"
-                android:text="Female"
-                android:textColor="@android:color/black"
-                android:textSize="15dp" />
 
-            <RadioButton
-                android:id="@+id/RadioButton3"
-                android:layout_width="91dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginTop="30px"
-                android:text="Other"
-                android:textSize="15dp" />
-        </RadioGroup>
-    </LinearLayout>
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/submit_button"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="submit"/>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>
