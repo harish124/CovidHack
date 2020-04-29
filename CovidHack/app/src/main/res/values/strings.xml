@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bourbon</string>
+    <string name="gender_prompt">Choose Gender</string>
+    <string-array name="gender_arrays">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
 </resources>
