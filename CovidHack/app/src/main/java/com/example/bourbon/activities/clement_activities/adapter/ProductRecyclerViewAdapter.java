@@ -41,7 +41,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             holder.binding.setPd(productDetails.get(position));
-            p.sprintf("DistrictName: "+productDetails.get(position).getDistrictName());
+//            p.sprintf("DistrictName: "+productDetails.get(position).getDistrictName());
         }
 
         @Override

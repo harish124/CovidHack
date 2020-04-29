@@ -39,7 +39,7 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case R.id.tollfree:
-                Intent intent2 = new Intent(Main_menu.this,Voip.class);
+                Intent intent2 = new Intent(Main_menu.this,EmergencyContactInfo.class);
                 startActivity(intent2);
                 break;
         }

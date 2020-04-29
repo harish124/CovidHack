@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
@@ -28,6 +30,7 @@ public class Startact extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     @BindView(R.id.mobilenum)
     EditText mobilenum;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +45,18 @@ public class Startact extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             msg = "Failed";
                         }
-                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
+
             mobilenum.setCursorVisible(false);
         mauth = FirebaseAuth.getInstance();
-//        FirebaseUser user = mauth.getCurrentUser();
-//        if(user!=null){
-//            Intent intent = new Intent(Startact.this,Main_menu.class);
-//            startActivity(intent);
-//        }
+        FirebaseUser user = mauth.getCurrentUser();
+        if(user!=null){
+            Intent intent = new Intent(Startact.this,Main_menu.class);
+            startActivity(intent);
+        }
 //        mobile = findViewById(R.id.mobi);
 //        submit = findViewById(R.id.sub);
 

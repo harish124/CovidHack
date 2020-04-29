@@ -31,6 +31,7 @@ public class YoutubePlay extends YouTubeBaseActivity {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.loadVideo(video_id);
+                youTubePlayerView.initialize("AIzaSyCgMfU9aS6h8qjAF8NxzBHhTS84palI7UY",onInitializedListener);
             }
 
             @Override
@@ -39,14 +40,7 @@ public class YoutubePlay extends YouTubeBaseActivity {
             }
         };
 
-        play = findViewById(R.id.playvideo);
 
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                youTubePlayerView.initialize("AIzaSyCgMfU9aS6h8qjAF8NxzBHhTS84palI7UY",onInitializedListener);
-            }
-        });
 
     }
 }
