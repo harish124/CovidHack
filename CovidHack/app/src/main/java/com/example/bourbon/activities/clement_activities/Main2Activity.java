@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.clement_activities.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ public class Main2Activity extends AppCompatActivity {
         TextView tv = findViewById(R.id.set);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        user newuser = new user();
+        User newuser = new User();
         newuser.setName("Clement");
         newuser.setAddress("Thuraipakkam");
 

@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.clement_activities.Home_Alarm_Manager"></activity>
+
+        <activity android:name=".activities.barathan_activities.user_data"></activity>
+
         <activity android:name=".activities.clement_activities.Main_menu" />
         <activity android:name=".activities.clement_activities.Startact">
             <intent-filter>
@@ -39,6 +41,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <receiver android:name=".activities.arumugam_activities.GeofenceBroadcastReceiver" />
     </application>
 
