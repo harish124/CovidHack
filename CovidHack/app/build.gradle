@@ -48,7 +48,7 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     //butterknife
     implementation 'com.jakewharton:butterknife:10.2.1'

@@ -8,18 +8,20 @@
     android:background="@color/blue"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter user details before continuing"
-        android:layout_gravity="center"
-        android:textSize="20dp"/>
+        android:gravity="center"
+        android:layout_margin="100px"
+        android:textColor="@android:color/black"
+        android:text="Please fill in your information to continue to next stage " />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/filledTextField1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
