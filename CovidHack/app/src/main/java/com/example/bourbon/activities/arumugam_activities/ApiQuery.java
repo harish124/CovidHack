@@ -15,16 +15,15 @@ import java.util.ArrayList;
 
 
 public class ApiQuery {
-    private static String my_api_key="AIzaSyCzUnFNJooxdc_xjVQRnx6yKknEuzym_t8";
+    private static String my_api_key = "AIzaSyCzUnFNJooxdc_xjVQRnx6yKknEuzym_t8";
     private static Location location;
     private static StringBuffer sbuff;
     private static String cat;
     private static ArrayList<HospitalDetails> hospdetails;
 
-    public static ArrayList<HospitalDetails> ping(Location loc,String category)
-    {
-        location=loc;
-        cat=category;
+    public static ArrayList<HospitalDetails> ping(Location loc, String category) {
+        location = loc;
+        cat = category;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -34,7 +33,7 @@ public class ApiQuery {
 
         thread.start();
 
-        while(thread.isAlive());
+        while (thread.isAlive()) ;
 
         thread = new Thread(new Runnable() {
             @Override
@@ -46,53 +45,49 @@ public class ApiQuery {
 
         thread.start();
 
-        while(thread.isAlive());
+        while (thread.isAlive()) ;
 
         return hospdetails;
     }
 
-    public static void query()
-    {
+    public static void query() {
         String q;
 
         StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        sb.append("types="+cat);
-        sb.append("&location="+location.getLatitude()+","+location.getLongitude());
+        sb.append("types=" + cat);
+        sb.append("&location=" + location.getLatitude() + "," + location.getLongitude());
         sb.append("&radius=3000");
-        sb.append("&key="+my_api_key);
+        sb.append("&key=" + my_api_key);
 
-        q=sb.toString();
+        q = sb.toString();
 
         try {
             URL url = new URL(q);
-            HttpURLConnection httpconn = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpconn = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpconn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             StringBuffer buff = new StringBuffer();
-            String s="";
+            String s = "";
 
-            while((s=br.readLine())!=null)
-            {
+            while ((s = br.readLine()) != null) {
                 buff.append(s);
             }
 
-            sbuff=buff;
+            sbuff = buff;
             return;
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             Log.d("url exception", e.toString());
         }
 
-        sbuff=null;
+        sbuff = null;
         return;
     }
 
     public static void stringToObjects() {
         hospdetails = new ArrayList();
 
-        if (sbuff == null)
-        {
-            hospdetails=null;
+        if (sbuff == null) {
+            hospdetails = null;
             return;
         }
 
@@ -100,40 +95,42 @@ public class ApiQuery {
             JSONObject jsonobj = new JSONObject(sbuff.toString());
             JSONArray jsonarray = jsonobj.getJSONArray("results");
 
-            for(int i=0; i<jsonarray.length(); i++){
+            for (int i = 0; i < jsonarray.length(); i++) {
 
-                    HospitalDetails hospitalDetails = new HospitalDetails();
+                HospitalDetails hospitalDetails = new HospitalDetails();
 
-                    JSONObject jsonObject = jsonarray.getJSONObject(i);
+                JSONObject jsonObject = jsonarray.getJSONObject(i);
 
-                    if(jsonObject.getString("name")!=null)  hospitalDetails.setHospitalName(jsonObject.getString("name"));
-                    else  hospitalDetails.setHospitalName("Not Available");
+                if (jsonObject.getString("name") != null)
+                    hospitalDetails.setHospitalName(jsonObject.getString("name"));
+                else hospitalDetails.setHospitalName("Not Available");
 
-                    try {
-                        hospitalDetails.setRating(String.valueOf(jsonObject.getDouble("rating")));
-                    }catch (Exception e){
-                        hospitalDetails.setRating("Not Available");
-                    }
+                try {
+                    hospitalDetails.setRating(String.valueOf(jsonObject.getDouble("rating")));
+                } catch (Exception e) {
+                    hospitalDetails.setRating("Not Available");
+                }
 
-                    try {
-                        if (jsonObject.getJSONObject("opening_hours").getBoolean("open_now"))  hospitalDetails.setOpeningHours("Opened");
-                        else hospitalDetails.setOpeningHours("closed");
-                    } catch (Exception e) {
-                        hospitalDetails.setOpeningHours("Not Available");
-                    }
+                try {
+                    if (jsonObject.getJSONObject("opening_hours").getBoolean("open_now"))
+                        hospitalDetails.setOpeningHours("Opened");
+                    else hospitalDetails.setOpeningHours("closed");
+                } catch (Exception e) {
+                    hospitalDetails.setOpeningHours("Not Available");
+                }
 
-                    hospitalDetails.setAddress(jsonObject.getString("vicinity"));
-                    hospitalDetails.setLocationlatlng(new double[]{jsonObject.getJSONObject("geometry").getJSONObject("location").getDouble("lat"),
-                            jsonObject.getJSONObject("geometry").getJSONObject("location").getDouble("lng")});
+                hospitalDetails.setAddress(jsonObject.getString("vicinity"));
+                hospitalDetails.setLocationlatlng(new double[]{jsonObject.getJSONObject("geometry").getJSONObject("location").getDouble("lat"),
+                        jsonObject.getJSONObject("geometry").getJSONObject("location").getDouble("lng")});
 
-                    hospdetails.add(hospitalDetails);
+                hospdetails.add(hospitalDetails);
             }
             return;
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             Log.d("jsonobject", e.toString());
-            hospdetails=null;
+            hospdetails = null;
             return;
         }
 
     }
+}
