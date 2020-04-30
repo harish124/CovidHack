@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.clement_activities.User_Registration"></activity>
+        <activity android:name=".activities.clement_activities.Donation"></activity>
+        <activity android:name=".activities.clement_activities.Volunteer_Registration" />
+        <activity android:name=".activities.clement_activities.User_Registration" />
         <activity android:name=".activities.barathan_activities.user_data" />
         <activity android:name=".activities.clement_activities.Main_menu" />
         <activity android:name=".activities.clement_activities.Startact">
@@ -24,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.harish_activities.MainActivity"></activity>
+        <activity android:name=".activities.harish_activities.MainActivity" />
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
         <activity android:name=".activities.clement_activities.Voip" />
