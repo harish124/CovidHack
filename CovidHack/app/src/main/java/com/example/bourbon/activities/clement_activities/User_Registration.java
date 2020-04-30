@@ -39,7 +39,7 @@ public class User_Registration extends AppCompatActivity {
     @BindView(R.id.gender)
     Spinner gender;
     @BindView(R.id.dob)
-    Button dob;
+    EditText dob;
     SimpleDateFormat sdf;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
