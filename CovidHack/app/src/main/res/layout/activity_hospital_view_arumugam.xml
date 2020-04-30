@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HospitalView"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="50dp"
+        android:id="@+id/hospitalname"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="50dp"
+        android:id="@+id/rating"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="50dp"
+        android:id="@+id/address"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="50dp"
+        android:id="@+id/openinghrs"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:layout_margin="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DIRECTIONS"
+        android:id="@+id/directions"
+        />
+
+</LinearLayout>

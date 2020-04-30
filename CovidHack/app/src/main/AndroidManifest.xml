@@ -36,6 +36,15 @@
         <activity android:name=".activities.arumugam_activities.MainActivity" />
         <activity android:name=".activities.clement_activities.EmergencyContactInfo" />
 
+        <activity android:name=".activities.arumugam_activities.MapsActivity" />
+        <activity android:name=".activities.arumugam_activities.HospitalView" />
+
+        <!-- Added by Arumugam -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <!-- Google api key -->
+
         <service
             android:name=".activities.clement_activities.MyFirebaseMessagingService"
             android:exported="false">
