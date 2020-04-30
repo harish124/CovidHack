@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.harish_activities.MainActivity" />
+<!--        <activity android:name=".activities.harish_activities.MainActivity" />-->
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
         <activity android:name=".activities.clement_activities.Voip" />
