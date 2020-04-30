@@ -55,17 +55,16 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="40dp"
                 android:id="@+id/address" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="     Date of Birth "
-                android:textSize="20dp"
-                android:textColorHint="#000000"
-                android:background="@drawable/button"
+
+            <Button
+                android:id="@+id/dob"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Click to choose your Date of Birth"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="40dp"
-                android:id="@+id/dob" />
+           />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
