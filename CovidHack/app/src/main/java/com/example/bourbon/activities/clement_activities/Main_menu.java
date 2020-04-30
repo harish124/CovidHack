@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.arumugam_activities.MainActivity;
+import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,6 +27,8 @@ public class Main_menu extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.hospital:
+                Intent intent6 = new Intent(Main_menu.this, MapsActivity.class);
+                startActivity(intent6);
                 break;
             case R.id.fund:
                 Intent intent = new Intent(Main_menu.this, Upi_payments.class);

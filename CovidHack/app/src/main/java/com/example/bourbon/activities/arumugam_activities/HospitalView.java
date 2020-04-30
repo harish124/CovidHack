@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.bourbon.R;
+
 import java.net.URI;
 
 public class HospitalView extends AppCompatActivity {
