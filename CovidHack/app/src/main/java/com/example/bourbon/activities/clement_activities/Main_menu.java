@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.arumugam_activities.MainActivity;
+import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,27 +23,39 @@ public class Main_menu extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.hospitals, R.id.fund, R.id.labs, R.id.hotspot, R.id.courses, R.id.tollfree})
+    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll,R.id.volunteer, R.id.donation})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.hospitals:
+            case R.id.hospital:
+                Intent intent6 = new Intent(Main_menu.this, MapsActivity.class);
+                startActivity(intent6);
                 break;
             case R.id.fund:
-                Intent intent = new Intent(Main_menu.this,Upi_payments.class);
+                Intent intent = new Intent(Main_menu.this, Upi_payments.class);
                 startActivity(intent);
                 break;
-            case R.id.labs:
+            case R.id.lab:
                 break;
             case R.id.hotspot:
                 break;
-            case R.id.courses:
-                Intent intent1 = new Intent(Main_menu.this,YoutubeList.class);
+            case R.id.course:
+                Intent intent1 = new Intent(Main_menu.this, YoutubeList.class);
                 startActivity(intent1);
                 break;
-            case R.id.tollfree:
-                Intent intent2 = new Intent(Main_menu.this,EmergencyContactInfo.class);
+            case R.id.toll:
+                Intent intent2 = new Intent(Main_menu.this, EmergencyContactInfo.class);
                 startActivity(intent2);
                 break;
+            case R.id.volunteer:
+                Intent intent3 = new Intent(Main_menu.this,Volunteer_Registration.class);
+                startActivity(intent3);
+                 break;
+            case R.id.donation:
+                Intent intent4 = new Intent(Main_menu.this,Donation.class);
+                startActivity(intent4);
+                 break;
         }
     }
+
+
 }
