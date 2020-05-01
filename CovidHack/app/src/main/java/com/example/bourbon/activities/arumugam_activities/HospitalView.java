@@ -1,6 +1,7 @@
 package com.example.bourbon.activities.arumugam_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatRatingBar;
 
 import android.content.Intent;
 import android.location.Location;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.bourbon.R;
@@ -27,13 +29,13 @@ public class HospitalView extends AppCompatActivity {
         obj = (HospitalDetails)getIntent().getSerializableExtra("obj");
         TextView hospitalname =findViewById(R.id.hospitalname);
         TextView address = findViewById(R.id.address);
-        TextView rating = findViewById(R.id.rating);
+        RatingBar rating = findViewById(R.id.rating);
         TextView openinghrs = findViewById(R.id.openinghrs);
         Button directionbutton = findViewById(R.id.directions);
 
         hospitalname.setText(obj.getHospitalName());
         address.setText(obj.getAddress());
-        rating.setText(obj.getRating());
+        rating.setRating(Float.parseFloat(obj.getRating()));
         openinghrs.setText(obj.getOpeningHours());
 
         directionbutton.setOnClickListener(new View.OnClickListener() {
