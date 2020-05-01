@@ -1,5 +1,9 @@
 package com.example.bourbon.activities.clement_activities.adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -20,6 +24,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
 
         private ArrayList<ProductDetails> productDetails;
         private Print p;
+        Context context ;
 
         public ProductRecyclerViewAdapter(ArrayList<ProductDetails> productDetails){
             this.productDetails = productDetails;
@@ -34,6 +39,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
             );
 
             p=new Print(parent.getContext());
+            context = parent.getContext();
 
             return new MyViewHolder(binding);
         }
@@ -53,6 +59,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
 
             CardHarishEmergencyContactNumBinding binding;
 
+            @SuppressLint("MissingPermission")
             private MyViewHolder(@NonNull CardHarishEmergencyContactNumBinding itemView) {
                 super(itemView.getRoot());
                 binding=itemView;
@@ -62,7 +69,19 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
                     //on card click
                     //clement fill this fn
                 });
+
+                binding.emergencyNo.setOnClickListener((v)->{
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + binding.emergencyNo.getText()));
+                    context.startActivity(intent);
+                });
+
+                binding.emerLandLineNo.setOnClickListener((v)->{
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + binding.emerLandLineNo.getText()));
+                    context.startActivity(intent);
+                });
             }
+
+
         }
 
 

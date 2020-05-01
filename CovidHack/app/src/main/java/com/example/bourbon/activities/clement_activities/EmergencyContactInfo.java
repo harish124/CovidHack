@@ -1,15 +1,23 @@
 package com.example.bourbon.activities.clement_activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 import com.example.bourbon.activities.clement_activities.adapter.ProductRecyclerViewAdapter;
 import com.example.bourbon.activities.clement_activities.model.ProductDetails;
 import com.example.bourbon.databinding.RvHarishEmergencyContactNumBinding;
@@ -21,6 +29,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import print.Print;
 
 public class EmergencyContactInfo extends Activity {
 
@@ -44,6 +54,7 @@ public class EmergencyContactInfo extends Activity {
         configRecyclerView();
 
         fetchProdFromFirebase();
+        checkingPermissions();
     }
 
     void fetchProdFromFirebase(){
@@ -69,5 +80,26 @@ public class EmergencyContactInfo extends Activity {
                 });
 
 
+    }
+
+    private void checkingPermissions()
+    {
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CALL_PHONE},100);
+            }
+            //return false;
+        }
+        else{
+            Print p =new Print(this);
+            p.sprintf("Permission Already Granted");
+        }
     }
 }
