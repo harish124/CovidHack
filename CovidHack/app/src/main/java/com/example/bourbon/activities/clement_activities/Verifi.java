@@ -137,7 +137,7 @@ public class Verifi extends AppCompatActivity {
                                         Intent intent = new Intent(Verifi.this, Main_menu.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
-                                    }else{
+                                    } else {
                                         Intent intent = new Intent(Verifi.this, User_Registration.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
@@ -168,4 +168,41 @@ public class Verifi extends AppCompatActivity {
     }
 
 
+    @OnClick({R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.back, R.id.zero})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.one:
+                otp.setText(otp.getText()+"1");
+                break;
+            case R.id.two:
+                otp.setText(otp.getText()+"2");
+                break;
+            case R.id.three:
+                otp.setText(otp.getText()+"3");
+                break;
+            case R.id.four:
+                otp.setText(otp.getText()+"4");
+                break;
+            case R.id.five:
+                otp.setText(otp.getText()+"5");
+                break;
+            case R.id.six:
+                otp.setText(otp.getText()+"6");
+                break;
+            case R.id.seven:
+                otp.setText(otp.getText()+"7");
+                break;
+            case R.id.eight:
+                otp.setText(otp.getText()+"8");
+                break;
+            case R.id.nine:
+                otp.setText(otp.getText()+"9");
+                break;
+            case R.id.back:
+                break;
+            case R.id.zero:
+                otp.setText(otp.getText()+"0");
+                break;
+        }
+    }
 }

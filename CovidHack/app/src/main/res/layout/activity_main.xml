@@ -27,6 +27,7 @@
             android:id="@+id/textView"
             android:textColor="#000000"
             android:layout_width="0dp"
+            android:paddingBottom="70dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
@@ -50,7 +51,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="175dp"
+            android:layout_height="200dp"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +61,10 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/yellow"
                 app:cardCornerRadius="12dp"
-                android:id="@+id/GeoFencing"
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -74,7 +75,7 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/hospitals"
+                        android:layout_below="@id/hospital"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="HOSPITAL"
@@ -83,7 +84,7 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/hospitals"
+                        android:id="@+id/hospital"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
@@ -94,10 +95,10 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
+                app:cardBackgroundColor="@color/yellow"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="12dp"
-                android:id="@+id/btn2"
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -127,11 +128,10 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="175dp"
+            android:layout_height="200dp"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,10 +141,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/yellow"
+
                 app:cardCornerRadius="12dp"
-                android:id="@+id/btn3"
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -155,7 +156,7 @@
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/labs"
+                        android:layout_below="@id/lab"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="LAB TEST"
@@ -165,7 +166,7 @@
                         />
 
                     <ImageView
-                        android:id="@+id/labs"
+                        android:id="@+id/lab"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
@@ -176,10 +177,10 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="12dp"
-                android:id="@+id/btn4"
+                app:cardBackgroundColor="@color/yellow"
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -212,8 +213,9 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="175dp"
+            android:layout_height="200dp"
             android:orientation="horizontal"
+            android:id="@+id/linearLayout3"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -222,8 +224,10 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/yellow"
+
                 app:cardCornerRadius="12dp"
                 android:layout_weight="1">
 
@@ -235,7 +239,7 @@
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/courses"
+                        android:layout_below="@id/course"
                         android:textColor="#000000"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
@@ -245,7 +249,7 @@
                         />
 
                     <ImageView
-                        android:id="@+id/courses"
+                        android:id="@+id/course"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
@@ -256,7 +260,8 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
+                app:cardBackgroundColor="@color/yellow"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="12dp"
                 android:layout_weight="1">
@@ -269,7 +274,7 @@
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tollfree"
+                        android:layout_below="@id/toll"
                         android:layout_centerHorizontal="true"
                         android:textColor="#000000"
                         android:layout_marginTop="10dp"
@@ -279,12 +284,99 @@
                         />
 
                     <ImageView
-                        android:id="@+id/tollfree"
+                        android:id="@+id/toll"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         app:srcCompat="@drawable/call" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                app:cardBackgroundColor="@color/yellow"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="12dp"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/volunteer"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="   VOLUNTEER  "
+                        android:textColor="#000000"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/volunteer"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/support" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/yellow"
+
+                app:cardCornerRadius="12dp"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/donation"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="DONATION"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textColor="#000000"
+                        />
+
+                    <ImageView
+                        android:id="@+id/donation"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/donation" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

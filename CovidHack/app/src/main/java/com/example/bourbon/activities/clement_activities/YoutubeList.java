@@ -1,6 +1,7 @@
 package com.example.bourbon.activities.clement_activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -77,8 +78,11 @@ public class YoutubeList extends AppCompatActivity {
                     listView.setAdapter((myCustomAdapter));
                     myCustomAdapter.notifyDataSetChanged();
                 }catch (JSONException e){
-                    Toast.makeText(YoutubeList.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(YoutubeList.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    e.printStackTrace();
+                    Log.d("CLEMENT",e.toString());
                 }
+
                 }
         },new Response.ErrorListener(){
 
