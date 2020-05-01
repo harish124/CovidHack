@@ -41,6 +41,8 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
                 parent,false
         );
 
+        p.sprintf("Oncreateb");
+
         return new MyViewHolder(binding);
 
 
@@ -49,6 +51,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
     @Override
     public void onBindViewHolder(@NonNull CovidStatusRecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.binding.setPd(covidStatuses.get(position));
+        p.sprintf("Bind View");
     }
 
     @Override

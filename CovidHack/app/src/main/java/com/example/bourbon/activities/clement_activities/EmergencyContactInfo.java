@@ -70,9 +70,9 @@ public class EmergencyContactInfo extends Activity {
                             String landline = snapshot.child("landline").getValue().toString();
                             ProductDetails pd=new ProductDetails(city,emergency,landline);
                             products.add(pd);
-                            adapter.notifyDataSetChanged();
 
                         }
+                        adapter.notifyDataSetChanged();
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
