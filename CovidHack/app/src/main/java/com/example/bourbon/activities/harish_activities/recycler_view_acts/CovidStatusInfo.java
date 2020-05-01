@@ -72,7 +72,7 @@ public class CovidStatusInfo extends AppCompatActivity {
             products.add(covidStatus);
         }
 
-//        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
 
         Toast.makeText(this, "Inside Firebase", Toast.LENGTH_SHORT).show();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
