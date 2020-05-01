@@ -25,7 +25,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dataBinding{
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/harish_layouts',
+                            'src/main/res/layout',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+    dataBinding {
         enabled true
     }
 }
