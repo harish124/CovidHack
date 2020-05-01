@@ -37,7 +37,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
         init(parent.getContext());
 
         CovidStatusCardBinding binding=DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()), R.layout.card_harish_emergency_contact_num,
+                LayoutInflater.from(parent.getContext()), R.layout.covid_status_card,
                 parent,false
         );
 
