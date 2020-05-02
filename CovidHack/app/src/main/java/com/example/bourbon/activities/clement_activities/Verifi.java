@@ -147,7 +147,7 @@ public class Verifi extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                    Toast.makeText(Verifi.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
 

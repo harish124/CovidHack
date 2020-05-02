@@ -28,6 +28,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
             this.productDetails = productDetails;
         }
 
+
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
