@@ -4,9 +4,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,6 +25,9 @@ import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 import com.example.bourbon.activities.clement_activities.adapter.ProductRecyclerViewAdapter;
 import com.example.bourbon.activities.clement_activities.model.ProductDetails;
 import com.example.bourbon.databinding.RvHarishEmergencyContactNumBinding;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,11 +36,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import print.Print;
 
 public class EmergencyContactInfo extends Activity {
-
+    String city  ;
+    private FusedLocationProviderClient flpc;
     private RvHarishEmergencyContactNumBinding binding;
     private ArrayList<ProductDetails> products =new ArrayList<>();
     private ProductRecyclerViewAdapter adapter;
@@ -52,7 +62,7 @@ public class EmergencyContactInfo extends Activity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         binding= DataBindingUtil.setContentView(EmergencyContactInfo.this, R.layout.rv_harish_emergency_contact_num);
         configRecyclerView();
-
+        flpc = LocationServices.getFusedLocationProviderClient(this);
         fetchProdFromFirebase();
         checkingPermissions();
     }
@@ -60,6 +70,29 @@ public class EmergencyContactInfo extends Activity {
     void fetchProdFromFirebase(){
         //clement complete this function
         //this.products=prod fetched from firebase;
+
+//        flpc.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+//            @Override
+//            public void onSuccess(Location location) {
+//                try {
+//                    if (location != null) {
+//                        Toast.makeText(getApplicationContext(), location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+//                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+//                        if (addresses.size() > 0) {
+//                            Toast.makeText(getApplicationContext(), addresses.get(0).getLocality() + "", Toast.LENGTH_SHORT).show();
+////                            city = addresses.get(0).getLocality() + "" ;
+//                        }
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                } catch (Exception e) {
+//                    Log.d("loc", e.toString());
+//                }
+//            }
+//
+//        });
         FirebaseDatabase.getInstance().getReference().child("toll-free")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -99,7 +132,9 @@ public class EmergencyContactInfo extends Activity {
         }
         else{
             Print p =new Print(this);
-            p.sprintf("Permission Already Granted");
+//            p.sprintf("Permission Already Granted");
         }
     }
+
+
 }
