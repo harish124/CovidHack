@@ -26,6 +26,8 @@ import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 import com.example.bourbon.activities.clement_activities.adapter.ProductRecyclerViewAdapter;
 import com.example.bourbon.activities.clement_activities.model.ProductDetails;
 import com.example.bourbon.databinding.RvHarishEmergencyContactNumBinding;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +63,13 @@ public class EmergencyContactInfo extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         binding= DataBindingUtil.setContentView(EmergencyContactInfo.this, R.layout.rv_harish_emergency_contact_num);
         configRecyclerView();
         flpc = LocationServices.getFusedLocationProviderClient(this);
-        fetchProdFromFirebase();
         checkingPermissions();
+
+
     }
 
     void fetchProdFromFirebase(){
@@ -77,36 +81,37 @@ public class EmergencyContactInfo extends Activity {
             public void onSuccess(Location location) {
                 try {
                     if (location != null) {
-                        Toast.makeText(getApplicationContext(), location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(EmergencyContactInfo.this, "Succccesss", Toast.LENGTH_SHORT).show();
                         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                         if (addresses.size() > 0) {
                             Toast.makeText(getApplicationContext(), addresses.get(0).getSubAdminArea() + "", Toast.LENGTH_SHORT).show();
                             String district = addresses.get(0).getSubAdminArea();
-
-
-                            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot snapshot) {
-                                    if (snapshot.child("toll-free").hasChild(district)) {
-                                        // run some code
-
-                                        String emergency = snapshot.child("toll-free").child(district).child("emergency").getValue().toString();
-                                        String landline = snapshot.child("toll-free").child(district).child("landline").getValue().toString();
-                                        ProductDetails pd=new ProductDetails(district,emergency,landline);
-                                        products.add(pd);
-                                        adapter.notifyDataSetChanged();
-
-                                    } else {
-                                        Toast.makeText(EmergencyContactInfo.this, "Contact Info Not Found", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
+                            Toast.makeText(EmergencyContactInfo.this,district, Toast.LENGTH_SHORT).show();
+                            mDatabase = FirebaseDatabase.getInstance().getReference();
+//                            mDatabase.child("toll-free").addListenerForSingleValueEvent(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(DataSnapshot snapshot) {
+//                                    if (snapshot.hasChild(district)) {
+//                                        // run some code
+//
+//                                        String emergency = snapshot.child("toll-free").child(district).child("emergency").getValue().toString();
+//                                        String landline = snapshot.child("toll-free").child(district).child("landline").getValue().toString();
+//                                        ProductDetails pd=new ProductDetails(district,emergency,landline);
+//                                        products.add(pd);
+//                                        adapter.notifyDataSetChanged();
+//
+//                                    } else {
+//                                        Toast.makeText(EmergencyContactInfo.this, "Contact Info Not Found", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError databaseError) {
+//                                    Toast.makeText(EmergencyContactInfo.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
@@ -114,6 +119,7 @@ public class EmergencyContactInfo extends Activity {
                     }
                 } catch (Exception e) {
                     Log.d("loc", e.toString());
+                    Toast.makeText(EmergencyContactInfo.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -137,11 +143,63 @@ public class EmergencyContactInfo extends Activity {
                         new String[]{Manifest.permission.CALL_PHONE},100);
             }
             //return false;
-        }
-        else{
+        }else{
             Print p =new Print(this);
 //            p.sprintf("Permission Already Granted");
         }
+
+        boolean per = checkingPermissions1();
+        if(per){
+            fetchProdFromFirebase();
+        }
+
+    }
+
+    private boolean checkingPermissions1()
+    {
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(EmergencyContactInfo.this,
+                    Manifest.permission.READ_CONTACTS)) {
+                Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
+            } else {
+                ActivityCompat.requestPermissions(EmergencyContactInfo.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},100);
+            }
+            //return false;
+        }
+
+
+        if(!checkPlayServices())
+        {
+            Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
+        }
+
+        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
+        if(!lm.isProviderEnabled("gps"))
+        {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+        return true;
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, 9000);
+            } else {
+                finish();
+            }
+
+            return false;
+        }
+        return true;
     }
 
 
