@@ -90,28 +90,28 @@ public class EmergencyContactInfo extends Activity {
                             String district = addresses.get(0).getSubAdminArea();
                             Toast.makeText(EmergencyContactInfo.this,district, Toast.LENGTH_SHORT).show();
                             mDatabase = FirebaseDatabase.getInstance().getReference();
-//                            mDatabase.child("toll-free").addListenerForSingleValueEvent(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(DataSnapshot snapshot) {
-//                                    if (snapshot.hasChild(district)) {
-//                                        // run some code
-//
-//                                        String emergency = snapshot.child("toll-free").child(district).child("emergency").getValue().toString();
-//                                        String landline = snapshot.child("toll-free").child(district).child("landline").getValue().toString();
-//                                        ProductDetails pd=new ProductDetails(district,emergency,landline);
-//                                        products.add(pd);
-//                                        adapter.notifyDataSetChanged();
-//
-//                                    } else {
-//                                        Toast.makeText(EmergencyContactInfo.this, "Contact Info Not Found", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                                    Toast.makeText(EmergencyContactInfo.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
+                            mDatabase.child("toll-free").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    if (snapshot.hasChild(district)) {
+                                        // run some code
+
+                                        String emergency = snapshot.child("toll-free").child(district).child("emergency").getValue().toString();
+                                        String landline = snapshot.child("toll-free").child(district).child("landline").getValue().toString();
+                                        ProductDetails pd=new ProductDetails(district,emergency,landline);
+                                        products.add(pd);
+                                        adapter.notifyDataSetChanged();
+
+                                    } else {
+                                        Toast.makeText(EmergencyContactInfo.this, "Contact Info Not Found", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(EmergencyContactInfo.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
