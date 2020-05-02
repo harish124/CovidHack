@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="pd"
@@ -8,12 +9,15 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_margin="20dp"
+        app:cardCornerRadius="40dp"
+        android:background="@color/yellow"
         android:padding="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:background="@color/yellow"
             android:layout_height="match_parent">
 
             <TextView
@@ -21,15 +25,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="@{pd.cityName}"
+                android:text="      CITY NAME     "
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="24dp"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/activeCasesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Active Cases: "
-
+                android:text="      Active Cases           =   "
+                android:textColor="#ff0000"
+                android:textStyle="bold"
+                android:textSize="22dp"
                 android:layout_below="@+id/cityName" />
 
             <TextView
@@ -38,13 +47,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cityName"
                 android:layout_toRightOf="@+id/activeCasesLabel"
-                android:text="@{pd.activeCases}" />
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="20" />
 
             <TextView
                 android:id="@+id/recoveredCasesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recovered Cases: "
+                android:text="      Recovered Cases   =   "
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:textSize="22dp"
                 android:layout_below="@+id/activeCasesLabel" />
 
             <TextView
@@ -52,24 +67,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activeCasesLabel"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 android:layout_toRightOf="@+id/recoveredCasesLabel"
-                android:text="@{pd.recovered}" />
+                android:text="8" />
 
 
             <TextView
                 android:id="@+id/deathsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No. of deaths : "
+                android:text="      No. of deaths          =    "
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:textColor="#ff0000"
                 android:layout_below="@+id/recoveredCasesLabel" />
 
             <TextView
                 android:id="@+id/deathsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_below="@+id/recoveredCasesLabel"
                 android:layout_toRightOf="@+id/deathsLabel"
-                android:text="@{pd.deaths}" />
+                android:textColor="#000000"
+                android:text="7" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
