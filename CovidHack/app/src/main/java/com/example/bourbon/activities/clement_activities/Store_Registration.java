@@ -4,14 +4,19 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,13 +58,28 @@ public class Store_Registration extends AppCompatActivity {
 
 
         if(checkadd.isChecked()){
-            mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(mDatabase.child(auth.getUid()).child("Address"));
+            mDatabase.child("users").child(auth.getUid()).child("Address").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String address = dataSnapshot.getValue(String.class);
+//                    Toast.makeText(Store_Registration.this, address, Toast.LENGTH_SHORT).show();
+                    mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(address);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(Store_Registration.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }else{
             mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(storeaddress.getText().toString());
         }
 
         Print p = new Print(this);
         p.sprintf("Store Details Added");
+        finish();
 
     }
 }
