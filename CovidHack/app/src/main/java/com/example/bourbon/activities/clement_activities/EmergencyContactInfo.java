@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -42,12 +43,12 @@ import java.util.Locale;
 import print.Print;
 
 public class EmergencyContactInfo extends Activity {
-    String city  ;
     private FusedLocationProviderClient flpc;
     private RvHarishEmergencyContactNumBinding binding;
     private ArrayList<ProductDetails> products =new ArrayList<>();
     private ProductRecyclerViewAdapter adapter;
     private DatabaseReference mDatabase;
+
 
     void configRecyclerView() {
         binding.recyclerView.setHasFixedSize(true);
@@ -71,46 +72,53 @@ public class EmergencyContactInfo extends Activity {
         //clement complete this function
         //this.products=prod fetched from firebase;
 
-//        flpc.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-//            @Override
-//            public void onSuccess(Location location) {
-//                try {
-//                    if (location != null) {
-//                        Toast.makeText(getApplicationContext(), location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
-//                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-//                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-//                        if (addresses.size() > 0) {
-//                            Toast.makeText(getApplicationContext(), addresses.get(0).getLocality() + "", Toast.LENGTH_SHORT).show();
-////                            city = addresses.get(0).getLocality() + "" ;
-//                        }
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                } catch (Exception e) {
-//                    Log.d("loc", e.toString());
-//                }
-//            }
-//
-//        });
-        FirebaseDatabase.getInstance().getReference().child("toll-free")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String city = snapshot.getKey().toString();
-                            String emergency = snapshot.child("emergency").getValue().toString();
-                            String landline = snapshot.child("landline").getValue().toString();
-                            ProductDetails pd=new ProductDetails(city,emergency,landline);
-                            products.add(pd);
+        flpc.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                try {
+                    if (location != null) {
+                        Toast.makeText(getApplicationContext(), location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        if (addresses.size() > 0) {
+                            Toast.makeText(getApplicationContext(), addresses.get(0).getSubAdminArea() + "", Toast.LENGTH_SHORT).show();
+                            String district = addresses.get(0).getSubAdminArea();
 
+
+                            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    if (snapshot.child("toll-free").hasChild(district)) {
+                                        // run some code
+
+                                        String emergency = snapshot.child("toll-free").child(district).child("emergency").getValue().toString();
+                                        String landline = snapshot.child("toll-free").child(district).child("landline").getValue().toString();
+                                        ProductDetails pd=new ProductDetails(district,emergency,landline);
+                                        products.add(pd);
+                                        adapter.notifyDataSetChanged();
+
+                                    } else {
+                                        Toast.makeText(EmergencyContactInfo.this, "Contact Info Not Found", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
-                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
+
                     }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+                } catch (Exception e) {
+                    Log.d("loc", e.toString());
+                }
+            }
+
+        });
+
 
 
     }

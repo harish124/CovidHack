@@ -65,7 +65,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
                 binding=itemView;
 
                 binding.emergencyCard.setOnClickListener((v)->{
-                    p.sprintf("Card Clicked");
+//                    p.sprintf("Card Clicked");
                     //on card click
                     //clement fill this fn
                 });
