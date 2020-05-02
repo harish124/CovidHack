@@ -22,24 +22,24 @@ public class CovidStatus {
         this.cityName = cityName;
     }
 
-    public int getActiveCases() {
-        return activeCases;
+    public String getActiveCases() {
+        return ""+activeCases;
     }
 
     public void setActiveCases(int activeCases) {
         this.activeCases = activeCases;
     }
 
-    public int getRecovered() {
-        return recovered;
+    public String getRecovered() {
+        return ""+recovered;
     }
 
     public void setRecovered(int recovered) {
         this.recovered = recovered;
     }
 
-    public int getDeaths() {
-        return deaths;
+    public String getDeaths() {
+        return ""+deaths;
     }
 
     public void setDeaths(int deaths) {

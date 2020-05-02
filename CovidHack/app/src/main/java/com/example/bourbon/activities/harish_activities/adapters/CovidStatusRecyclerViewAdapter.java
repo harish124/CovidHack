@@ -1,8 +1,8 @@
 package com.example.bourbon.activities.harish_activities.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,51 +19,55 @@ import print.Print;
 
 public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidStatusRecyclerViewAdapter.MyViewHolder> {
 
-    private ArrayList<CovidStatus> covidStatuses;
-    private Print p;
-    void init(Context ctx)
-    {
-        covidStatuses=new ArrayList<>();
-        p=new Print(ctx);
-    }
 
-    public CovidStatusRecyclerViewAdapter(ArrayList<CovidStatus> covidStatuses) {
-        this.covidStatuses = covidStatuses;
-    }
+        private ArrayList<CovidStatus> productDetails;
+        private Print p;
+        Context context ;
 
-    @NonNull
-    @Override
-    public CovidStatusRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        init(parent.getContext());
-
-        CovidStatusCardBinding binding=DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()), R.layout.card_harish_emergency_contact_num,
-                parent,false
-        );
-
-        p.sprintf("Oncreateb");
-
-        return new MyViewHolder(binding);
-
-
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull CovidStatusRecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.binding.setPd(covidStatuses.get(position));
-        p.sprintf("Bind View");
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        private CovidStatusCardBinding binding;
-        public MyViewHolder(@NonNull CovidStatusCardBinding itemView) {
-            super(itemView.getRoot());
-            this.binding=itemView;
+        public CovidStatusRecyclerViewAdapter(ArrayList<CovidStatus> productDetails){
+            this.productDetails = productDetails;
         }
+
+        @NonNull
+        @Override
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            CovidStatusCardBinding binding= DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.getContext()), R.layout.covid_status_card,
+                    parent,false
+            );
+
+            p=new Print(parent.getContext());
+            context = parent.getContext();
+
+            return new MyViewHolder(binding);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            holder.binding.setPd(productDetails.get(position));
+//            p.sprintf("DistrictName: "+productDetails.get(position).getDistrictName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return productDetails.size();
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder{
+
+            CovidStatusCardBinding binding;
+
+            @SuppressLint("MissingPermission")
+            private MyViewHolder(@NonNull CovidStatusCardBinding itemView) {
+                super(itemView.getRoot());
+                binding=itemView;
+
+
+            }
+
+
+        }
+
+
+
     }
-}
