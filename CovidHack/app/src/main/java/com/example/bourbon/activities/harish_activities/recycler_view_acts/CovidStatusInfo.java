@@ -1,13 +1,18 @@
 package com.example.bourbon.activities.harish_activities.recycler_view_acts;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,15 +21,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bourbon.R;
-import com.example.bourbon.activities.clement_activities.YoutubeList;
-import com.example.bourbon.activities.clement_activities.videodetails;
+import com.example.bourbon.activities.clement_activities.adapter.ProductRecyclerViewAdapter;
+import com.example.bourbon.activities.clement_activities.model.ProductDetails;
 import com.example.bourbon.activities.harish_activities.adapters.CovidStatusRecyclerViewAdapter;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
-import com.example.bourbon.databinding.CovidStatusCardBinding;
 import com.example.bourbon.databinding.RvActivityCovidStatusBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,47 +39,47 @@ import java.util.ArrayList;
 
 import print.Print;
 
-public class CovidStatusInfo extends AppCompatActivity {
+public class CovidStatusInfo extends Activity {
 
     private RvActivityCovidStatusBinding binding;
-    private Print p;
-
-    void init() {
-        p = new Print(this);
-    }
-
-    private ArrayList<CovidStatus> products = new ArrayList<>();
+    private ArrayList<CovidStatus> products =new ArrayList<>();
     private CovidStatusRecyclerViewAdapter adapter;
     private DatabaseReference mDatabase;
+    private Print p;
 
     void configRecyclerView() {
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CovidStatusRecyclerViewAdapter(products);
-        binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(CovidStatusInfo.this));
+        adapter=new CovidStatusRecyclerViewAdapter(products);
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(CovidStatusInfo.this, DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.rv_activity_covid_status);
-        init();
-        Toast.makeText(this, "Triggered", Toast.LENGTH_SHORT).show();
-        configRecyclerView();
-        fetchDetailsFromFirebase();
+    void init(){
+        p=new Print(this);
     }
 
-    private void fetchDetailsFromFirebase() {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        binding= DataBindingUtil.setContentView(CovidStatusInfo.this, R.layout.rv_activity_covid_status);
+        configRecyclerView();
 
+        fetchProdFromFirebase();
 
+    }
 
-        for (int i = 0; i < 10; i++) {
-            CovidStatus covidStatus = new CovidStatus("Chennai" + i, 606, 200, 15);
-            products.add(covidStatus);
+    void fetchProdFromFirebase(){
+        //clement complete this function
+        //this.products=prod fetched from firebase;
+        for(int i=0;i<5;i++){
+            CovidStatus cs=new CovidStatus("Chennai",10,10,10);
+            products.add(cs);
+            adapter.notifyItemInserted(i);
         }
 
-        adapter.notifyDataSetChanged();
 
         Toast.makeText(this, "Inside Firebase", Toast.LENGTH_SHORT).show();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -96,13 +103,9 @@ public class CovidStatusInfo extends AppCompatActivity {
                 }
 
             }
-        },new Response.ErrorListener(){
+        }, error -> p.fprintf(error.getMessage()));
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
+
 }

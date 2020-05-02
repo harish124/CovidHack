@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.harish_activities.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -95,7 +96,7 @@ public class User_Registration extends AppCompatActivity {
         mDatabase.child(user.getUid()).child("Gender").setValue(gender.getSelectedItem().toString());
         mDatabase.child(user.getUid()).child("DOB").setValue(sdf.format(myCalendar.getTime()));
 
-        Intent intent = new Intent(User_Registration.this,Main_menu.class);
+        Intent intent = new Intent(User_Registration.this, MainActivity.class);
         startActivity(intent);
     }
 
