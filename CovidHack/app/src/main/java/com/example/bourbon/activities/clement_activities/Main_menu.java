@@ -40,6 +40,8 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent7);
                 break;
             case R.id.hotspot:
+                Intent intent8 = new Intent(this,Store_Registration.class);
+                startActivity(intent8);
                 break;
             case R.id.course:
                 Intent intent1 = new Intent(Main_menu.this, YoutubeList.class);

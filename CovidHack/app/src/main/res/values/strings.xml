@@ -15,4 +15,11 @@
         <item>Others</item>
     </string-array>
 
+    <string-array name="store_type">
+        <item>Grocery</item>
+        <item>Departmental</item>
+        <item>Fruits</item>
+        <item>Fruits and Groceries</item>
+    </string-array>
+
 </resources>
