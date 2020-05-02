@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.harish_activities.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,15 +39,12 @@ public class Startact extends AppCompatActivity {
         setContentView(R.layout.activity_mobile_main);
         ButterKnife.bind(this);
         FirebaseMessaging.getInstance().subscribeToTopic("general")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Successful" ;
-                        if (!task.isSuccessful()) {
-                            msg = "Failed";
-                        }
-//                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(task -> {
+                    String msg = "Successful" ;
+                    if (!task.isSuccessful()) {
+                        msg = "Failed";
                     }
+//                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
                 });
 
 
@@ -54,7 +52,7 @@ public class Startact extends AppCompatActivity {
         mauth = FirebaseAuth.getInstance();
         FirebaseUser user = mauth.getCurrentUser();
         if(user!=null){
-            Intent intent = new Intent(Startact.this,Main_menu.class);
+            Intent intent = new Intent(Startact.this, MainActivity.class);
             startActivity(intent);
         }
 //        mobile = findViewById(R.id.mobi);
