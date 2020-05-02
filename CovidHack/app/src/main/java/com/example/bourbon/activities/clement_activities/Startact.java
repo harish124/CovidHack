@@ -52,7 +52,10 @@ public class Startact extends AppCompatActivity {
         mauth = FirebaseAuth.getInstance();
         FirebaseUser user = mauth.getCurrentUser();
         if(user!=null){
+
             Intent intent = new Intent(Startact.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
             startActivity(intent);
         }
 //        mobile = findViewById(R.id.mobi);
