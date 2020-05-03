@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -107,4 +109,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
