@@ -19,10 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".activities.clement_activities.Store_Registration"></activity>
+        <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo"></activity>
+        <activity android:name=".activities.clement_activities.Store_Registration" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.CovidStatusInfo" />
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,20 +37,19 @@
         <activity android:name=".activities.harish_activities.MainActivity">
 
         </activity>
-
-
-
         <activity android:name=".activities.clement_activities.Donation" />
-        <activity android:name=".activities.clement_activities.Main_menu"/>
-        <activity android:name=".activities.clement_activities.Volunteer_Registration" />
-        <activity android:name=".activities.clement_activities.User_Registration" />
-        <activity android:name=".activities.barathan_activities.user_data" />
-        <activity android:name=".activities.clement_activities.Startact">
+        <activity android:name=".activities.clement_activities.Main_menu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Launcher Denotes that it will be the first launching activity -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.clement_activities.Volunteer_Registration" />
+        <activity android:name=".activities.clement_activities.User_Registration" />
+        <activity android:name=".activities.barathan_activities.user_data" />
+        <activity android:name=".activities.clement_activities.Startact">
+
         </activity>
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
@@ -63,7 +61,6 @@
         <activity android:name=".activities.clement_activities.EmergencyContactInfo" />
         <activity android:name=".activities.arumugam_activities.MapsActivity" />
         <activity android:name=".activities.arumugam_activities.HospitalView" /> <!-- Added by Arumugam -->
-
         <service
             android:name=".activities.clement_activities.MyFirebaseMessagingService"
             android:exported="false">
