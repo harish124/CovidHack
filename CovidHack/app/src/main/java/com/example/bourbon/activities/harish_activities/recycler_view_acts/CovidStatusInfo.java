@@ -106,7 +106,7 @@ public class CovidStatusInfo extends Activity {
                         products.add(cs);
                         adapter.notifyItemInserted(i);
                         i++;
-                        Toast.makeText(CovidStatusInfo.this,active + "" + recovered + "" + deceased + "", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CovidStatusInfo.this,active + "" + recovered + "" + deceased + "", Toast.LENGTH_SHORT).show();
 
                     }
 //                    JSONObject chennai = city.getJSONObject("Chennai");
