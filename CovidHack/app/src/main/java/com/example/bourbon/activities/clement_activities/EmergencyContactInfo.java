@@ -96,8 +96,8 @@ public class EmergencyContactInfo extends Activity {
                                     if (snapshot.hasChild(district)) {
                                         // run some code
 
-                                        String emergency = snapshot.child("toll-free").child(district).child("emergency").getValue().toString();
-                                        String landline = snapshot.child("toll-free").child(district).child("landline").getValue().toString();
+                                        String emergency = snapshot.child(district).child("emergency").getValue().toString();
+                                        String landline = snapshot.child(district).child("landline").getValue().toString();
                                         ProductDetails pd=new ProductDetails(district,emergency,landline);
                                         products.add(pd);
                                         adapter.notifyDataSetChanged();
@@ -148,14 +148,12 @@ public class EmergencyContactInfo extends Activity {
 //            p.sprintf("Permission Already Granted");
         }
 
-        boolean per = checkingPermissions1();
-        if(per){
-            fetchProdFromFirebase();
-        }
+        checkingPermissions1();
+
 
     }
 
-    private boolean checkingPermissions1()
+    private void checkingPermissions1()
     {
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -181,9 +179,16 @@ public class EmergencyContactInfo extends Activity {
         if(!lm.isProviderEnabled("gps"))
         {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
+            startActivityForResult(intent,1);
+        }else{
+            fetchProdFromFirebase();
         }
-        return true;
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        checkingPermissions();
     }
 
     private boolean checkPlayServices() {
@@ -201,6 +206,7 @@ public class EmergencyContactInfo extends Activity {
         }
         return true;
     }
+
 
 
 }
