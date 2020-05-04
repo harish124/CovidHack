@@ -22,8 +22,7 @@ public class user_data extends AppCompatActivity {
 
     @BindView(R.id.first_name)
     EditText user_firstName;
-    @BindView(R.id.last_name)
-    EditText user_lastName;
+
     @BindView(R.id.address)
     EditText user_address;
     @BindView(R.id.dob)
