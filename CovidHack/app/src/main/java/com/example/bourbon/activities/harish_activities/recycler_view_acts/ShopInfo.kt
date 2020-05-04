@@ -41,7 +41,7 @@ class ShopInfo : AppCompatActivity() {
 
     fun fetchProductsFromFirebase(){
         for(i in 1..5){
-            products?.add(Shop("chennai $i","addr$i","stationary $i"))
+            products?.add(Shop("chennai $i","addr$i","stationary $i","$i"))
             adapter?.notifyItemInserted(i)
         }
 
