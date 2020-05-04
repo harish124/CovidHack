@@ -52,7 +52,8 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent7);
                 break;
             case R.id.hotspot:
-
+                Intent intent9 = new Intent(Main_menu.this,E_Pass.class);
+                startActivity(intent9);
                 break;
             case R.id.course:
                 Intent intent1 = new Intent(Main_menu.this, YoutubeList.class);
@@ -67,9 +68,9 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent3);
                  break;
             case R.id.donation:
-//                Intent intent4 = new Intent(Main_menu.this,Donation.class);
-//                startActivity(intent4);
-                transition.goTo(ShopInfo.class);
+                Intent intent4 = new Intent(Main_menu.this,Donation.class);
+                startActivity(intent4);
+//                transition.goTo(ShopInfo.class);
                  break;
             case R.id.store:
                 Intent intent8 = new Intent(this,Store_Menu.class);
