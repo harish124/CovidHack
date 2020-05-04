@@ -10,6 +10,7 @@ import com.example.bourbon.R;
 import com.example.bourbon.activities.arumugam_activities.MainActivity;
 import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
+import com.example.bourbon.activities.harish_activities.recycler_view_acts.OrderInfo;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.ShopInfo;
 
 import butterknife.ButterKnife;
@@ -70,7 +71,6 @@ public class Main_menu extends AppCompatActivity {
             case R.id.donation:
                 Intent intent4 = new Intent(Main_menu.this,Donation.class);
                 startActivity(intent4);
-//                transition.goTo(ShopInfo.class);
                  break;
             case R.id.store:
                 Intent intent8 = new Intent(this,Store_Menu.class);
