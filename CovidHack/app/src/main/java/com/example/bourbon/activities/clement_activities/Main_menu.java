@@ -36,7 +36,7 @@ public class Main_menu extends AppCompatActivity {
 
 
 
-    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll,R.id.volunteer, R.id.donation})
+    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll,R.id.volunteer, R.id.donation,R.id.store})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.hospital:
@@ -52,8 +52,7 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent7);
                 break;
             case R.id.hotspot:
-                Intent intent8 = new Intent(this,Store_Registration.class);
-                startActivity(intent8);
+
                 break;
             case R.id.course:
                 Intent intent1 = new Intent(Main_menu.this, YoutubeList.class);
@@ -72,6 +71,10 @@ public class Main_menu extends AppCompatActivity {
 //                startActivity(intent4);
                 transition.goTo(ShopInfo.class);
                  break;
+            case R.id.store:
+                Intent intent8 = new Intent(this,Store_Menu.class);
+                startActivity(intent8);
+                break;
         }
     }
 

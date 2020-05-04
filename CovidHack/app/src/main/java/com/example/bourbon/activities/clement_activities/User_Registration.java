@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -32,8 +30,6 @@ public class User_Registration extends AppCompatActivity {
 
     @BindView(R.id.first_name)
     EditText firstName;
-    @BindView(R.id.last_name)
-    EditText lastName;
     @BindView(R.id.address)
     EditText address;
     Calendar myCalendar;
@@ -42,6 +38,8 @@ public class User_Registration extends AppCompatActivity {
     @BindView(R.id.dob)
     EditText dob;
     SimpleDateFormat sdf;
+    @BindView(R.id.pincode)
+    EditText pincode;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private DatabaseReference mDatabase;
@@ -91,12 +89,13 @@ public class User_Registration extends AppCompatActivity {
     @OnClick(R.id.send)
     public void onViewClicked() {
 
-        mDatabase.child(user.getUid()).child("Name").setValue(firstName.getText().toString() + " " + lastName.getText().toString());
+        mDatabase.child(user.getUid()).child("Name").setValue(firstName.getText().toString());
         mDatabase.child(user.getUid()).child("Address").setValue(address.getText().toString());
+        mDatabase.child(user.getUid()).child("Pincode").setValue(pincode.getText().toString());
         mDatabase.child(user.getUid()).child("Gender").setValue(gender.getSelectedItem().toString());
         mDatabase.child(user.getUid()).child("DOB").setValue(sdf.format(myCalendar.getTime()));
 
-        Intent intent = new Intent(User_Registration.this, MainActivity.class);
+        Intent intent = new Intent(User_Registration.this, Main_menu.class);
         startActivity(intent);
     }
 
