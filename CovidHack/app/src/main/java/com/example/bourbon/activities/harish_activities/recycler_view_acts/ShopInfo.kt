@@ -59,6 +59,7 @@ class ShopInfo : AppCompatActivity() {
 
 
 
+
         mDatabase?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 pincode = dataSnapshot.child("users").child(uid.toString()).child("Pincode").value.toString()
@@ -70,7 +71,7 @@ class ShopInfo : AppCompatActivity() {
                         var name:String = postSnapshot.child("Name").value.toString()
                         var type:String = postSnapshot.child("Type").value.toString()
                         var address:String= postSnapshot.child("Address").value.toString()
-                        products?.add(Shop(name,address,type))
+                        products?.add(Shop(name,address,type,"10"))
                         adapter?.notifyItemInserted(i)
                         i++
                     }
@@ -89,6 +90,7 @@ class ShopInfo : AppCompatActivity() {
 //            products?.add(Shop("chennai $i","addr$i","stationary $i"))
 //            adapter?.notifyItemInserted(i)
 //        }
+
 
     }
 }
