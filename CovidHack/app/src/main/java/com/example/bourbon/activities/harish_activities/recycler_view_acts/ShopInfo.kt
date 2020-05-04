@@ -70,8 +70,11 @@ class ShopInfo : AppCompatActivity() {
                     if(postSnapshot.child("Pincode").value.toString() == pincode){
                         var name:String = postSnapshot.child("Name").value.toString()
                         var type:String = postSnapshot.child("Type").value.toString()
-                        var address:String= postSnapshot.child("Address").value.toString()
-                        products?.add(Shop(name,address,type,"10"))
+                        var address:String = postSnapshot.child("Address").value.toString()
+//                        val toast = Toast.makeText(applicationContext, postSnapshot.key.toString(), Toast.LENGTH_LONG)
+//                        toast.show()
+                        var shopId:String = postSnapshot.key.toString()
+                        products?.add(Shop(name,address,type,shopId))
                         adapter?.notifyItemInserted(i)
                         i++
                     }
@@ -80,6 +83,8 @@ class ShopInfo : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
+                val toast = Toast.makeText(applicationContext, databaseError.message, Toast.LENGTH_LONG)
+                        toast.show()
 
                 // ...
             }

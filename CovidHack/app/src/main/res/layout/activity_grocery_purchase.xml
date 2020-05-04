@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fillViewport="true"
     android:layout_height="match_parent"
     android:background="@color/blue">
 
@@ -34,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
-        <EditText
+        <TextView
             android:id="@+id/store_name"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -42,7 +43,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/button"
-            android:hint="     Grocery Store Name"
             android:textColorHint="#000000"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,54 +76,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
+
         <Button
             android:id="@+id/add_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add to Cart"
-            android:layout_marginTop="35dp"
-            android:layout_marginStart="120dp"
-            android:layout_marginEnd="120dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_quantity"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="#00F000"
-            />
-        <TextView
-            android:id="@+id/tv2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            android:text="LONG PRESS TO DELETE ITEM"
-            android:textColor="#FF0000"
-            android:textSize="15dp"
+            android:text="Add to Cart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_item" />
-
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/grcery_list"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_item"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/item_quantity" />
 
         <Button
             android:id="@+id/submit_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit grocery List"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="35dp"
-            android:layout_marginStart="120dp"
-            android:layout_marginEnd="120dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/grcery_list"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="#00F000"
-            />
+            android:text="Submit grocery List"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cart" />
+
+        <Button
+            android:id="@+id/cart"
+            android:layout_width="306dp"
+            android:layout_height="55dp"
+            android:text="View Cart"
+            android:backgroundTint="#00F000"
+            app:layout_constraintBottom_toTopOf="@+id/submit_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

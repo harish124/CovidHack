@@ -26,8 +26,8 @@ public class Store_Menu extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.storeregister:
-//                Intent intent = new Intent(this, Store_Registration.class);
-//                startActivity(intent);
+                Intent intent = new Intent(this, Store_Registration.class);
+                startActivity(intent);
                 break;
             case R.id.nearbystore:
                 Intent intent1 = new Intent(this, ShopInfo.class);
