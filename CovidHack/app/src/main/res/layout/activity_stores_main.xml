@@ -19,9 +19,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -30,10 +31,10 @@
         android:layout_marginBottom="23dp"
         app:layout_constraintBottom_toTopOf="@+id/storename"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/store" />
 
     <TextView
@@ -47,15 +48,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toStartOf="@+id/storename"
-        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintVertical_bias="0.894" />
 
     <EditText
         android:id="@+id/storename"
-        android:layout_width="227dp"
-        android:layout_height="81dp"
+        android:layout_width="236dp"
+        android:layout_height="55dp"
         android:background="@drawable/drop"
         android:ems="10"
         android:hint="Name of Your Store"
@@ -66,10 +67,10 @@
         android:textSize="22dp"
         app:layout_constraintBottom_toTopOf="@+id/storetype"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintHorizontal_bias="0.908"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintVertical_bias="0.888" />
 
     <TextView
         android:id="@+id/textView10"
@@ -82,10 +83,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/storetype"
-        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintHorizontal_bias="0.443"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894" />
+        app:layout_constraintVertical_bias="0.869" />
 
     <Spinner
         android:id="@+id/storetype"
@@ -95,10 +96,10 @@
         android:entries="@array/store_type"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
+        app:layout_constraintVertical_bias="0.365" />
 
     <TextView
         android:id="@+id/textView11"
@@ -111,17 +112,17 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/storeaddress"
-        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.253" />
+        app:layout_constraintVertical_bias="0.162" />
 
     <EditText
         android:id="@+id/storeaddress"
-        android:layout_width="159dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="188dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/drop"
         android:ems="10"
         android:inputType="textMultiLine"
@@ -144,10 +145,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storeaddress"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintVertical_bias="0.832" />
 
     <TextView
         android:id="@+id/textView12"
@@ -160,10 +161,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkadd"
-        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storetype"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.081" />
 
     <CheckBox
         android:id="@+id/checkadd"
@@ -174,9 +175,35 @@
         android:scaleY="1.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.886"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storetype"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.081" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="121dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="72dp"
+        android:text="PINCODE"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@+id/submit"
+        app:layout_constraintEnd_toStartOf="@+id/pincode"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/pincode"
+        android:layout_width="188dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="72dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="PINCODE"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@+id/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.856"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

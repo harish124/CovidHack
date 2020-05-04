@@ -36,6 +36,8 @@ public class Store_Registration extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference mDatabase;
+    @BindView(R.id.pincode)
+    EditText pincode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class Store_Registration extends AppCompatActivity {
         mDatabase.child("Stores").child(auth.getUid()).child("Type").setValue(storetype.getSelectedItem().toString());
 
 
-        if(checkadd.isChecked()){
+        if (checkadd.isChecked()) {
             mDatabase.child("users").child(auth.getUid()).child("Address").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,12 +70,13 @@ public class Store_Registration extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(Store_Registration.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Store_Registration.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
             });
 
-        }else{
+        } else {
+            mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pincode.getText().toString());
             mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(storeaddress.getText().toString());
         }
 
