@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo"></activity>
+        <activity android:name=".activities.harish_activities.recycler_view_acts.OrderInfo"></activity>
+        <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo" />
         <activity android:name=".activities.clement_activities.Store_Registration" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.CovidStatusInfo" />
         <!--
@@ -34,11 +35,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.harish_activities.MainActivity">
-
-        </activity>
+        <activity android:name=".activities.harish_activities.MainActivity"></activity>
         <activity android:name=".activities.clement_activities.Donation" />
-        <activity android:name=".activities.clement_activities.Main_menu" >
+        <activity android:name=".activities.clement_activities.Main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Launcher Denotes that it will be the first launching activity -->
@@ -48,9 +47,7 @@
         <activity android:name=".activities.clement_activities.Volunteer_Registration" />
         <activity android:name=".activities.clement_activities.User_Registration" />
         <activity android:name=".activities.barathan_activities.user_data" />
-        <activity android:name=".activities.clement_activities.Startact">
-
-        </activity>
+        <activity android:name=".activities.clement_activities.Startact"></activity>
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
         <activity android:name=".activities.clement_activities.Voip" />
