@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:background="@drawable/bgapps"
     android:layout_height="match_parent"
-    tools:context="com.example.bourbon.activities.clement_activities.Main_menu">
+    tools:context="com.example.bourbon.activities.clement_activities.Main_menu"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -309,11 +310,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                app:cardBackgroundColor="@color/yellow"
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -345,10 +346,10 @@
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
-                app:cardBackgroundColor="@color/yellow"
+                android:layout_weight="1"
 
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -362,10 +363,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="MY ORDERS"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
                         android:textColor="#000000"
-                        />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/checkout"
@@ -461,5 +461,88 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                app:cardBackgroundColor="@color/yellow"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="12dp"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pass"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="   E-PASS  "
+                        android:textColor="#000000"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/pass"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/pass" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/yellow"
+
+                app:cardCornerRadius="12dp"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/logout"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="LOG-OUT"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textColor="#000000"
+                        />
+
+                    <ImageView
+                        android:id="@+id/logout"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/logout" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
