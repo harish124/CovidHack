@@ -92,7 +92,7 @@ public class CovidStatusInfo extends Activity {
                 Toast.makeText(CovidStatusInfo.this, "GOt Response", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONObject jsonObject1 = jsonObject.getJSONObject("Tamil Nadu");
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("Kerala");
                     JSONObject district = jsonObject1.getJSONObject("districtData");
                     int i = 0 ;
                     for(Iterator<String> iter = district.keys(); iter.hasNext();) {
