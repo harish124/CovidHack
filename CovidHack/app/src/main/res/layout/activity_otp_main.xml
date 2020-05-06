@@ -215,18 +215,18 @@
     <Button
         android:id="@+id/back"
         android:layout_width="85dp"
-        android:layout_height="48dp"
+        android:layout_height="85dp"
         android:background="@drawable/back"
         android:textColor="#ffffff"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872"
-        tools:ignore="MissingConstraints"/>
+        app:layout_constraintVertical_bias="0.899"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/zero"
