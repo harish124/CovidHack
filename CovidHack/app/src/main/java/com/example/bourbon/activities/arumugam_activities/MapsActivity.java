@@ -76,13 +76,13 @@ public class MapsActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        searchbutton = (Button) findViewById(R.id.search);
+//        searchbutton = (Button) findViewById(R.id.search);
 
-        sp = (Spinner) findViewById(R.id.category);
-        String[] options = {"Hospital", "Pharmacy"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MapsActivity.this, android.R.layout.simple_spinner_item, options);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(adapter);
+//        sp = (Spinner) findViewById(R.id.category);
+//        String[] options = {"Hospital", "Pharmacy"};
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MapsActivity.this, android.R.layout.simple_spinner_item, options);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        sp.setAdapter(adapter);
 
        locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    public void getHospitals(){
+    public void getPlaces(String place){
         try {
 
             runOnUiThread(new Runnable() {
@@ -145,7 +145,7 @@ public class MapsActivity extends FragmentActivity
 //                    mMap.addMarker(currmarker);
 //                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,15.0f));
 
-                    results = ApiQuery.ping(location,sp.getSelectedItem().toString().toLowerCase());
+                    results = ApiQuery.ping(location,place.toLowerCase());
 
                     if(results==null)
                     {
@@ -184,14 +184,14 @@ public class MapsActivity extends FragmentActivity
         // Add a marker in Sydney and move the camera
         checkingPermissions();
 
-        searchbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getHospitals();
-
-            }
-        });
+//        searchbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                getPlaces("hospital");
+//
+//            }
+//        });
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -349,9 +349,9 @@ public class MapsActivity extends FragmentActivity
         @Override
         public void onLocationChanged(Location location) {
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
             mMap.animateCamera(cameraUpdate);
-            getHospitals();
+            getPlaces("hospital");
             locationManager.removeUpdates(this);
         }
 
@@ -378,6 +378,7 @@ public class MapsActivity extends FragmentActivity
             view.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_selected));
             pharmacy.setTextColor(getApplication().getResources().getColor(R.color.black));
             pharmacy.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
+            getPlaces("hospital");
         }
         else  if(view == pharmacy && checked==1)
         {
@@ -386,6 +387,7 @@ public class MapsActivity extends FragmentActivity
             view.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_selected));
             hospital.setTextColor(getApplication().getResources().getColor(R.color.black));
             hospital.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
+            getPlaces("pharmacy");
         }
     }
 }
