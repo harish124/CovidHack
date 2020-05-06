@@ -60,6 +60,7 @@ public class MapsActivity extends FragmentActivity
     private int checked;
     private Button hospital;
     private Button pharmacy;
+    private LinearLayout hospitaldetailslayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,9 @@ public class MapsActivity extends FragmentActivity
         checked=1;
         hospital= findViewById(R.id.search_hospital);
         pharmacy = findViewById(R.id.search_pharmacy);
+        hospitaldetailslayout = findViewById(R.id.hospital_details_linear);
 
+        hospitaldetailslayout.setVisibility(View.INVISIBLE);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -84,34 +87,41 @@ public class MapsActivity extends FragmentActivity
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        sp.setAdapter(adapter);
 
-       locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+        try{
 
-        View bottomSheet = findViewById(R.id.bottom_sheet);
-        behavior = BottomSheetBehavior.from(bottomSheet);
-
-        final LinearLayout inner = findViewById(R.id.linear1);
-
-        inner.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                inner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                View hidden = inner.getChildAt(inner.getChildCount()-1);
-
-                behavior.setPeekHeight(hidden.getBottom());
+            locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
             }
-        });
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
 
+            View bottomSheet = findViewById(R.id.bottom_sheet);
+            behavior = BottomSheetBehavior.from(bottomSheet);
+
+            final LinearLayout inner = findViewById(R.id.linear1);
+
+            inner.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    inner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    View hidden = inner.getChildAt(inner.getChildCount() - 1);
+
+                    behavior.setPeekHeight(hidden.getBottom());
+                }
+            });
+        }
+        catch(Exception e)
+        {
+            Log.d("oncreatebottomsheet",e.toString());
+            Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -202,57 +212,69 @@ public class MapsActivity extends FragmentActivity
                     return true;
                 }
 
-
+                hospitaldetailslayout.setVisibility(View.VISIBLE);
 
 //                Intent intent = new Intent(getApplicationContext(),HospitalView.class);
 //                intent.putExtra("obj",results.get(Integer.parsInt(marker.getSnippet())));
-                Location l = mMap.getMyLocation();
-                StringBuilder sb = new StringBuilder();
-                sb.append(l.getLatitude()+","+l.getLongitude());
-                String location = sb.toString();
+                try {
+                    Location l = mMap.getMyLocation();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(l.getLatitude() + "," + l.getLongitude());
+                    String location = sb.toString();
 //                intent.putExtra("loc",loc);
 //                startActivity(intent);
 //                return true;
 
 
-                HospitalDetails obj = results.get(Integer.parseInt(marker.getSnippet()));
-                TextView hospitalname =findViewById(R.id.hospitalname);
-                TextView address = findViewById(R.id.address);
-                RatingBar rating = findViewById(R.id.rating);
-                TextView openinghrs = findViewById(R.id.openinghrs);
-                Button directionbutton = findViewById(R.id.directions);
+                    HospitalDetails obj = results.get(Integer.parseInt(marker.getSnippet()));
+                    TextView hospitalname = findViewById(R.id.hospitalname);
+                    TextView address = findViewById(R.id.address);
+                    RatingBar rating = findViewById(R.id.rating);
+                    TextView openinghrs = findViewById(R.id.openinghrs);
+                    Button directionbutton = findViewById(R.id.directions);
 
-                hospitalname.setText(obj.getHospitalName());
-                address.setText(obj.getAddress());
-                try {
-                    rating.setRating(Float.parseFloat(obj.getRating()));
-                }
-                catch (Exception e)
-                {
-                    rating.setVisibility(View.GONE);
-                }
-                openinghrs.setText(obj.getOpeningHours());
-
-                directionbutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String direction="";
-                        StringBuilder sb= new StringBuilder();
-                        sb.append("https://www.google.com/maps/dir/?api=1");
-                        sb.append("&origin="+location);
-                        sb.append("&destination="+obj.getLocationlatlng()[0]+","+obj.getLocationlatlng()[1]);
-
-                        direction=sb.toString();
-
-                        Uri uri = Uri.parse(direction);
-
-                        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                        startActivity(intent);
-
+                    hospitalname.setText(obj.getHospitalName());
+                    address.setText(obj.getAddress());
+                    try {
+                        rating.setVisibility(View.VISIBLE);
+                        rating.setRating(Float.parseFloat(obj.getRating()));
+                    } catch (Exception e) {
+                        rating.setVisibility(View.GONE);
                     }
-                });
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                    if(obj.getOpeningHours()!="Not Available") {
+                        openinghrs.setVisibility(View.VISIBLE);
+                        openinghrs.setText(obj.getOpeningHours());
+                    }
+                    else
+                    {
+                        openinghrs.setVisibility(View.GONE);
+                    }
+                    directionbutton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String direction = "";
+                            StringBuilder sb = new StringBuilder();
+                            sb.append("https://www.google.com/maps/dir/?api=1");
+                            sb.append("&origin=" + location);
+                            sb.append("&destination=" + obj.getLocationlatlng()[0] + "," + obj.getLocationlatlng()[1]);
+
+                            direction = sb.toString();
+
+                            Uri uri = Uri.parse(direction);
+
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
+
+                        }
+                    });
+                    behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+                catch(Exception e)
+                {
+                    Log.d("onmarkerclick",e.toString());
+                }
             return true;
             }
         });
@@ -348,11 +370,13 @@ public class MapsActivity extends FragmentActivity
 
         @Override
         public void onLocationChanged(Location location) {
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
-            mMap.animateCamera(cameraUpdate);
-            getPlaces("hospital");
-            locationManager.removeUpdates(this);
+            if (location != null) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f);
+                mMap.animateCamera(cameraUpdate);
+                getPlaces("hospital");
+                locationManager.removeUpdates(this);
+            }
         }
 
         @Override
