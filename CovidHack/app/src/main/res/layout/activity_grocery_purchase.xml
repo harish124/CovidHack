@@ -96,11 +96,20 @@
             android:layout_marginTop="35dp"
             android:layout_marginBottom="32dp"
             android:backgroundTint="#00F000"
-            android:text="Submit grocery List"
+            android:text="Submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cart" />
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00F000"
+            android:text="Add Manuel List"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/manuel"
+            app:layout_constraintTop_toBottomOf="@id/cart"
+            />
         <Button
             android:id="@+id/cart"
             android:layout_width="306dp"
