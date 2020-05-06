@@ -9,7 +9,7 @@
     app:behavior_hideable="false"
     app:behavior_peekHeight="150dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    android:background="#D3D3D3"
+    android:background="#E8E8E8"
     android:elevation="10dp"
     >
 <!--    <LinearLayout-->
@@ -86,10 +86,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hospital Finder"
-            android:padding="15dp"
+            android:paddingTop="15dp"
             android:textColor="#000000"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginHorizontal="10dp"
+            android:paddingHorizontal="10dp"/>
 
 
         <LinearLayout
@@ -97,7 +99,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginVertical="10dp">
+            android:layout_marginVertical="10dp"
+            android:paddingBottom="15dp">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -107,7 +110,7 @@
             android:text="Hospital"
             android:textColor="#FFF"
             android:textSize="12sp"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginHorizontal="15dp"
             />
         <Button
             android:layout_width="wrap_content"
@@ -121,23 +124,23 @@
             />
         </LinearLayout>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/category"
-            android:textAlignment="center"
-            android:background="@android:drawable/btn_default"
-            />
+<!--        <Spinner-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/category"-->
+<!--            android:textAlignment="center"-->
+<!--            android:background="@android:drawable/btn_default"-->
+<!--            />-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_button_unselected"
-            android:id="@+id/search"
-            android:text="Search"
-            android:textColor="#000"
-            />
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/rounded_button_unselected"-->
+<!--            android:id="@+id/search"-->
+<!--            android:text="Search"-->
+<!--            android:textColor="#000"-->
+<!--            />-->
 
     </LinearLayout>
 
@@ -145,18 +148,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_marginVertical="10dp"
-        android:paddingHorizontal="7dp"
-        android:paddingVertical="10dp"
+        android:orientation="horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginVertical="10dp"
         app:layout_constraintEnd_toEndOf="@+id/linear1"
         app:layout_constraintHorizontal_bias="1.0"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="@+id/linear1"
         app:layout_constraintTop_toBottomOf="@+id/linear1"
-        android:id="@+id/hospital_details_linear"
+
+        android:id="@+id/hospital_details_linear">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:orientation="vertical"
+
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="10dp"
+
       >
 
 
@@ -178,15 +190,13 @@
                 android:id="@+id/hospitalname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:paddingHorizontal="10dp"
-                android:background="@drawable/button"
+
+                android:layout_marginHorizontal="10dp"
+
                 android:text="HOSPITAL NAME"
 
                 android:textColor="#000000"
-                android:textSize="24dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
               />
 
@@ -207,14 +217,12 @@
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/button"
-                android:text="ADDRESS"
-                android:textAlignment="center"
+                android:layout_marginHorizontal="10dp"
+
+                android:text="address"
+
                 android:textColor="#000000"
-                android:textSize="24dp"
+                android:textSize="18sp"
               />
 
 
@@ -223,9 +231,8 @@
                 style="?android:attr/ratingBarStyleIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginHorizontal="10dp"
+
                 android:isIndicator="true"
                 android:numStars="5"
                 android:stepSize="0.1"
@@ -241,42 +248,40 @@
             <!--                app:layout_constraintStart_toStartOf="parent"-->
             <!--                app:layout_constraintTop_toBottomOf="@+id/rating" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+
         <TextView
                 android:id="@+id/openinghrs"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/button"
+
                 android:text="closed"
-                android:textAlignment="center"
+
                 android:textColor="#000000"
-                android:textSize="24dp"
+                android:textSize="18sp"
+            android:layout_marginHorizontal="10dp"
               />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/directions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:background="@color/yellow"
-                android:text="   DIRECTION   "
-                android:textAlignment="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+
+                android:background="@mipmap/direction_icon"
                 android:textColor="#000000"
-                android:textSize="24dp"
-                android:textStyle="bold"
-              />
+                android:textStyle="bold" />
         </LinearLayout>
-
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
