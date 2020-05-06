@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -36,6 +38,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
 
@@ -43,7 +46,7 @@ public class MapsActivity extends FragmentActivity
         implements
         OnMapReadyCallback,
         LocationListener {
-
+    private BottomSheetBehavior<View> behavior;
     private GoogleMap mMap;
     private Location location;
     private MarkerOptions currmarker;
@@ -54,10 +57,19 @@ public class MapsActivity extends FragmentActivity
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
     private  LocationManager locationManager;
+    private int checked;
+    private Button hospital;
+    private Button pharmacy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_arumugam);
+
+        //setting radio
+        checked=1;
+        hospital= findViewById(R.id.search_hospital);
+        pharmacy = findViewById(R.id.search_pharmacy);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -84,6 +96,22 @@ public class MapsActivity extends FragmentActivity
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        behavior = BottomSheetBehavior.from(bottomSheet);
+
+        final LinearLayout inner = findViewById(R.id.linear1);
+
+        inner.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                inner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                View hidden = inner.getChildAt(inner.getChildCount()-1);
+
+                behavior.setPeekHeight(hidden.getBottom());
+            }
+        });
+
     }
 
 
@@ -224,6 +252,7 @@ public class MapsActivity extends FragmentActivity
 
                     }
                 });
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             return true;
             }
         });
@@ -340,4 +369,23 @@ public class MapsActivity extends FragmentActivity
         public void onProviderDisabled(String provider) {
 
         }
+
+    public void finderOption(View view) {
+        if(view == hospital && checked==2)
+        {
+            checked=1;
+            ((Button)view).setTextColor(getApplication().getResources().getColor(R.color.white));
+            view.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_selected));
+            pharmacy.setTextColor(getApplication().getResources().getColor(R.color.black));
+            pharmacy.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
+        }
+        else  if(view == pharmacy && checked==1)
+        {
+            checked=2;
+            ((Button)view).setTextColor(getApplication().getResources().getColor(R.color.white));
+            view.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_selected));
+            hospital.setTextColor(getApplication().getResources().getColor(R.color.black));
+            hospital.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
+        }
     }
+}
