@@ -35,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -100,7 +101,12 @@ public class Order_Food extends AppCompatActivity {
                 if (imageSelected) {
                     uploadFile();
                 } else {
-
+                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    Date date = new Date();
+                    System.out.println(dateFormat.format(date));
+                    ListUpload listUpload = new ListUpload(FirebaseAuth.getInstance().getCurrentUser().getUid(), shopId, "Null", "False");
+                    mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
+                    mdatabase.child("Carts").child(dateFormat.format(date)).child("Items").setValue(Arrays.asList(groceries1));
                 }
                 break;
             case R.id.cart:
