@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.clement_activities.Order_Food"></activity>
+        <activity android:name=".activities.clement_activities.Order_Details"></activity>
+        <activity android:name=".activities.clement_activities.Order_Food" />
         <activity android:name=".activities.clement_activities.E_Pass" />
         <activity android:name=".activities.clement_activities.No_Network" />
         <activity android:name=".activities.clement_activities.Store_Menu" />

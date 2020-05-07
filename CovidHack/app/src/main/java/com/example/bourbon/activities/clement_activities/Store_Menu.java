@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.harish_activities.recycler_view_acts.OrderInfo;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.ShopInfo;
 
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ public class Store_Menu extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.storeregister, R.id.nearbystore})
+    @OnClick({R.id.storeregister, R.id.nearbystore,R.id.storeorder})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.storeregister:
@@ -33,8 +34,13 @@ public class Store_Menu extends AppCompatActivity {
                 Intent intent1 = new Intent(this, ShopInfo.class);
                 startActivity(intent1);
                 break;
+            case R.id.storeorder:
+                Intent intent2 = new Intent(this, OrderInfo.class);
+                startActivity(intent2);
+                break;
         }
     }
+
 
 
 }
