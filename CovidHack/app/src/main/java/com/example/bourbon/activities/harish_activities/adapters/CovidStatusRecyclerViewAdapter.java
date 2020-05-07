@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bourbon.R;
+import com.example.bourbon.activities.clement_activities.Graph_Stats;
 import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
@@ -75,7 +76,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
                 binding.statscard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, GraphDaily.class);
+                        Intent intent = new Intent(context, Graph_Stats.class);
                         intent.putExtra("City Name", binding.getPd().getCityName());
                         context.startActivity(intent);
                     }

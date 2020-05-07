@@ -12,12 +12,6 @@
         android:layout_height="match_parent"
         tools:context=".activities.harish_activities.GraphDaily">
 
-        <TextView
-            android:id="@+id/textView"
-            android:text="Hello World!"
-            android:textSize="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
