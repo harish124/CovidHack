@@ -17,6 +17,8 @@ import com.example.bourbon.R;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
 import com.google.gson.JsonObject;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONObject;
 
@@ -69,9 +71,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
             @SuppressLint("MissingPermission")
             private MyViewHolder(@NonNull CovidStatusCardBinding itemView) {
                 super(itemView.getRoot());
-                binding=itemView;
-
-
+                binding = itemView;
             }
 
 
