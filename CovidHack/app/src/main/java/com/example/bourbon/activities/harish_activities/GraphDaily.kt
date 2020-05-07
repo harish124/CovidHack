@@ -1,5 +1,6 @@
 package com.example.bourbon.activities.harish_activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -37,7 +38,7 @@ class GraphDaily : AppCompatActivity() {
         binding=DataBindingUtil.setContentView(this,R.layout.activity_graph_daily)
         init()
 
-
+        val city:String = intent.extras?.getString("City Namegit ").toString()
         parseGraphDailyJson("Ernakulam")
     }
 

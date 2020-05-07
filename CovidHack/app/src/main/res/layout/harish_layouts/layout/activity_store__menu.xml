@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/storeorder"
         android:layout_width="233dp"
         android:layout_height="72dp"
         android:text="Store Orders"

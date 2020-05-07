@@ -19,6 +19,7 @@
         card_view:cardUseCompatPadding="true"
         android:clipToPadding="false"
         android:background="@color/white"
+        android:id="@+id/statscard"
         android:elevation="5dp"
         >
 
@@ -97,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/recoveredCasesLabel"
                         android:layout_toRightOf="@+id/deathsLabel"
-                        android:text="@{pd.deaths}"
+                        android:text="@{pd.recovered}"
                         android:textColor="@color/green"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -118,7 +119,7 @@
                         android:layout_below="@+id/activeCasesLabel"
                         android:layout_toRightOf="@+id/recoveredCasesLabel"
                         android:paddingLeft="10dp"
-                        android:text="@{pd.recovered}"
+                        android:text="@{pd.deaths}"
                         android:textColor="@color/red"
                         android:textSize="20dp"
                         android:textStyle="bold" />

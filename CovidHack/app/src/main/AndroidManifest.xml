@@ -20,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activities.clement_activities.Order_Details"></activity>
         <activity android:name=".activities.harish_activities.GraphDaily"></activity>
         <activity android:name=".activities.clement_activities.Order_Food" />
         <activity android:name=".activities.clement_activities.E_Pass" />
