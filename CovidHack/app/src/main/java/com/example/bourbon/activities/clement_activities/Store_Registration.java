@@ -60,12 +60,14 @@ public class Store_Registration extends AppCompatActivity {
 
 
         if (checkadd.isChecked()) {
-            mDatabase.child("users").child(auth.getUid()).child("Address").addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String address = dataSnapshot.getValue(String.class);
+                    String address = dataSnapshot.child("Address").getValue(String.class);
+                    String pin = dataSnapshot.child("Pincode").getValue(String.class);
 //                    Toast.makeText(Store_Registration.this, address, Toast.LENGTH_SHORT).show();
                     mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(address);
+                    mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pin);
                 }
 
                 @Override
