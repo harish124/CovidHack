@@ -20,7 +20,6 @@ import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
 
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -71,6 +70,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
             @SuppressLint("MissingPermission")
             private MyViewHolder(@NonNull CovidStatusCardBinding itemView,Context context) {
                 super(itemView.getRoot());
+
                 binding=itemView;
                 binding.statscard.setOnClickListener(new View.OnClickListener() {
                     @Override
