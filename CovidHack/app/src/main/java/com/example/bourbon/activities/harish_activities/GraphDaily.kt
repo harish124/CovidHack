@@ -15,6 +15,9 @@ import com.example.bourbon.databinding.ActivityGraphDailyBinding
 import org.json.JSONArray
 import org.json.JSONObject
 import print.Print
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GraphDaily : AppCompatActivity() {
 
@@ -23,8 +26,10 @@ class GraphDaily : AppCompatActivity() {
     private var binding:ActivityGraphDailyBinding?=null
 
 
-    private var dateList:ArrayList<Int>?= ArrayList()
+    private var dateList:ArrayList<Date>?= ArrayList()
     private var activeList:ArrayList<Int>?= ArrayList()
+    private var recoveredList:ArrayList<Int>?= ArrayList()
+    private var deceasedList:ArrayList<Int>?= ArrayList()
 
 
     fun init(){
@@ -64,14 +69,22 @@ class GraphDaily : AppCompatActivity() {
                         val obj:JSONObject?=arr.getJSONObject(i)
                         //p?.sprintf("Active = ${obj?.getString("date")}")
 
-                        p?.sprintf("Date = ${obj?.getString("date")!!.substring(8,10)}")
-                        dateList!!.add(Integer.parseInt(obj?.getString("date")!!.substring(8,10)))
-                        activeList!!.add(Integer.parseInt(obj.getString("active")))
+                        //p?.sprintf("Date = ${obj?.getString("date")!!.substring(8,10)}")
+                        //dateList!!.add(Integer.parseInt(obj?.getString("date")!!.substring(8,10)))
+                        activeList!!.add(Integer.parseInt(obj!!.getString("active")))
+                        recoveredList!!.add(Integer.parseInt(obj!!.getString("recovered")))
+                        deceasedList!!.add(Integer.parseInt(obj!!.getString("deceased")))
+
+                        val format1 = SimpleDateFormat("yyyy-MM-dd")
+                        val format2 = SimpleDateFormat("dd-MM-yyyy")
+                        val format3 = SimpleDateFormat("dd-MM-yyyy")
+                        val date = format1.parse(obj?.getString("date"))
+                        dateList!!.add(format3.parse(format2.format(date)))
                         i+=1
                     }
 
                     val plot=PlotGraphHelper(binding,this)
-                    plot.plotGraph(dateList,activeList)
+                    plot.plotGraph(dateList,activeList,recoveredList,deceasedList)
 
 
                 }, Response.ErrorListener { error: VolleyError? ->

@@ -38,7 +38,7 @@ public class Graph_Stats extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graph__stats);
+        //setContentView(R.layout.activity_graph__stats);
         ButterKnife.bind(this);
 
         String city = getIntent().getExtras().getString("City Name");
