@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
-import com.example.bourbon.activities.harish_activities.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,13 +32,16 @@ public class User_Registration extends AppCompatActivity {
     @BindView(R.id.address)
     EditText address;
     Calendar myCalendar;
-    @BindView(R.id.gender)
-    Spinner gender;
+
     @BindView(R.id.dob)
     EditText dob;
     SimpleDateFormat sdf;
     @BindView(R.id.pincode)
     EditText pincode;
+    @BindView(R.id.male)
+    RadioButton male;
+    @BindView(R.id.female)
+    RadioButton female;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private DatabaseReference mDatabase;
@@ -86,17 +88,18 @@ public class User_Registration extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.send)
+    @OnClick(R.id.register)
     public void onViewClicked() {
 
         mDatabase.child(user.getUid()).child("Name").setValue(firstName.getText().toString());
         mDatabase.child(user.getUid()).child("Address").setValue(address.getText().toString());
         mDatabase.child(user.getUid()).child("Pincode").setValue(pincode.getText().toString());
-        mDatabase.child(user.getUid()).child("Gender").setValue(gender.getSelectedItem().toString());
+//        mDatabase.child(user.getUid()).child("Gender").setValue(gender.getSelectedItem().toString());
         mDatabase.child(user.getUid()).child("DOB").setValue(sdf.format(myCalendar.getTime()));
 
         Intent intent = new Intent(User_Registration.this, Main_menu.class);
         startActivity(intent);
     }
+
 
 }
