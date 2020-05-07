@@ -76,7 +76,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
                 binding.statscard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, Graph_Stats.class);
+                        Intent intent = new Intent(context, GraphDaily.class);
                         intent.putExtra("City Name", binding.getPd().getCityName());
                         context.startActivity(intent);
                     }
