@@ -54,6 +54,7 @@ public class Verifi extends AppCompatActivity {
         String no = b.getString("Mobile");
         sendVerificationCode(no);
         otp = findViewById(R.id.otp);
+        otp.setCursorVisible(false);
 
     }
 
@@ -199,6 +200,7 @@ public class Verifi extends AppCompatActivity {
                 otp.setText(otp.getText()+"9");
                 break;
             case R.id.back:
+                otp.setText(new Startact().removeLastChar(otp.getText().toString()));
                 break;
             case R.id.zero:
                 otp.setText(otp.getText()+"0");

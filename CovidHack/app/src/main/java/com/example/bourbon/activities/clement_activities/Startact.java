@@ -71,7 +71,7 @@ public class Startact extends AppCompatActivity {
 //        });
     }
 
-    @OnClick({R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.back, R.id.zero, R.id.next})
+    @OnClick({R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.next,R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.one:
@@ -102,8 +102,6 @@ public class Startact extends AppCompatActivity {
             case R.id.nine:
                 mobilenum.setText(mobilenum.getText()+"9");
                 break;
-            case R.id.back:
-                break;
             case R.id.zero:
                 mobilenum.setText(mobilenum.getText()+"0");
                 break;
@@ -112,6 +110,16 @@ public class Startact extends AppCompatActivity {
                 i.putExtra("Mobile",mobilenum.getText().toString());
                 startActivity(i);
                 break;
+            case R.id.back:
+            mobilenum.setText(removeLastChar(mobilenum.getText().toString()));
+            break;
         }
+    }
+
+    public String removeLastChar(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+        return s.substring(0, s.length()-1);
     }
 }
