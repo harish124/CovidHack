@@ -2,7 +2,9 @@ package com.example.bourbon.activities.harish_activities.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bourbon.R;
+import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -47,7 +49,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
             p=new Print(parent.getContext());
             context = parent.getContext();
 
-            return new MyViewHolder(binding);
+            return new MyViewHolder(binding,parent.getContext());
         }
 
         @Override
@@ -67,9 +69,17 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
             CovidStatusCardBinding binding;
 
             @SuppressLint("MissingPermission")
-            private MyViewHolder(@NonNull CovidStatusCardBinding itemView) {
+            private MyViewHolder(@NonNull CovidStatusCardBinding itemView,Context context) {
                 super(itemView.getRoot());
                 binding=itemView;
+                binding.statscard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, GraphDaily.class);
+                        intent.putExtra("City Name", binding.getPd().getCityName());
+                        context.startActivity(intent);
+                    }
+                });
 
 
             }
