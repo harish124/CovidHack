@@ -217,8 +217,8 @@
 
     <Button
         android:id="@+id/back"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:background="@drawable/back"
         android:textColor="#ffffff"
         android:textSize="24dp"
