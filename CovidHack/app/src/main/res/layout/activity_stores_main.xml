@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constrainttop_toBottomOf="@id/registration"
+        app:layout_constraintTop_toBottomOf="@+id/registration"
         app:srcCompat="@drawable/store"
         tools:layout_editor_absoluteY="95dp" />
 
