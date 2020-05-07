@@ -108,6 +108,8 @@ public class Order_Food extends AppCompatActivity {
                     mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
                     mdatabase.child("Carts").child(dateFormat.format(date)).child("Items").setValue(Arrays.asList(groceries1));
                 }
+                p.sprintf("Order Successfully Placed");
+                finish();
                 break;
             case R.id.cart:
                 builder.setItems(groceries1, new DialogInterface.OnClickListener() {

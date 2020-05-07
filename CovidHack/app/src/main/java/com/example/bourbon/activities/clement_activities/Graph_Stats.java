@@ -90,7 +90,7 @@ public class Graph_Stats extends AppCompatActivity {
                                 dataPoints[j] = new DataPoint(dates.get(j),confirmed.get(j));
                             }
 
-                            Toast.makeText(Graph_Stats.this,confirmed.size() + " ", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Graph_Stats.this,confirmed.size() + " ", Toast.LENGTH_SHORT).show();
 
                                 LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 //

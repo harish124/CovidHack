@@ -80,7 +80,7 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent8);
                 break;
             case R.id.pass:
-                Intent intent9 = new Intent(Main_menu.this, GraphDaily.class);
+                Intent intent9 = new Intent(Main_menu.this, E_Pass.class);
                 startActivity(intent9);
                 break;
             case R.id.logout:
