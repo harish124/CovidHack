@@ -17,6 +17,7 @@
         card_view:cardPreventCornerOverlap="false"
         card_view:cardUseCompatPadding="true"
         android:clipToPadding="false"
+        android:id="@+id/ordercard"
         android:background="@color/white"
         android:elevation="5dp"
         >
