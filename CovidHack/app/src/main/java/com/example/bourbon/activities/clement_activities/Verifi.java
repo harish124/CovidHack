@@ -54,6 +54,7 @@ public class Verifi extends AppCompatActivity {
         String no = b.getString("Mobile");
         sendVerificationCode(no);
         otp = findViewById(R.id.otp);
+        otp.setCursorVisible(false);
 
     }
 
@@ -138,9 +139,9 @@ public class Verifi extends AppCompatActivity {
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                     } else {
-//                                        Intent intent = new Intent(Verifi.this, User_Registration.class);
-//                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                        startActivity(intent);
+                                        Intent intent = new Intent(Verifi.this, User_Registration.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
                                     }
                                 }
 
@@ -199,6 +200,7 @@ public class Verifi extends AppCompatActivity {
                 otp.setText(otp.getText()+"9");
                 break;
             case R.id.back:
+                otp.setText(new Startact().removeLastChar(otp.getText().toString()));
                 break;
             case R.id.zero:
                 otp.setText(otp.getText()+"0");

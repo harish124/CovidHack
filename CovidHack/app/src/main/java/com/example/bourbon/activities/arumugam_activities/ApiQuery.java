@@ -84,7 +84,7 @@ public class ApiQuery {
     }
 
     public static void stringToObjects() {
-        hospdetails = new ArrayList();
+        hospdetails = new ArrayList<HospitalDetails>();
 
         if (sbuff == null) {
             hospdetails = null;

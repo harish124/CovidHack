@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -19,13 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.clement_activities.E_Pass"></activity>
+        <activity android:name=".activities.clement_activities.Order_Food"></activity>
+        <activity android:name=".activities.clement_activities.E_Pass" />
         <activity android:name=".activities.clement_activities.No_Network" />
         <activity android:name=".activities.clement_activities.Store_Menu" />
-        <activity android:name=".activities.harish_activities.recycler_view_acts.OrderInfo"/>
-
-
-
+        <activity android:name=".activities.harish_activities.recycler_view_acts.OrderInfo" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo" />
         <activity android:name=".activities.clement_activities.Store_Registration" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.CovidStatusInfo" />
@@ -41,13 +40,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity android:name=".activities.harish_activities.MainActivity" />
         <activity android:name=".activities.clement_activities.Donation" />
         <activity android:name=".activities.clement_activities.Volunteer_Registration" />
         <activity android:name=".activities.clement_activities.User_Registration" />
         <activity android:name=".activities.barathan_activities.user_data" />
-        <activity android:name=".activities.clement_activities.Startact"></activity>
+        <activity android:name=".activities.clement_activities.Startact" />
         <activity android:name=".activities.clement_activities.Main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,9 +53,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
         <activity android:name=".activities.clement_activities.Voip" />
@@ -77,11 +72,6 @@
         </service>
 
         <receiver android:name=".activities.arumugam_activities.GeofenceBroadcastReceiver" />
-<!--        <receiver android:name=".activities.clement_activities.NetworkChangeReceiver">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
     </application>
 
 </manifest>
