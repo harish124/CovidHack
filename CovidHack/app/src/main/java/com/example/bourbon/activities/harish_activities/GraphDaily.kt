@@ -42,7 +42,7 @@ class GraphDaily : AppCompatActivity() {
         init()
 
 
-        parseGraphDailyJson("Ernakulam")
+        parseGraphDailyJson(intent.extras?.getString("City Name").toString())
 
         configGraph()
     }
