@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
 import com.example.bourbon.activities.arumugam_activities.MapsActivity;
+import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -79,7 +80,7 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent8);
                 break;
             case R.id.pass:
-                Intent intent9 = new Intent(Main_menu.this, E_Pass.class);
+                Intent intent9 = new Intent(Main_menu.this, GraphDaily.class);
                 startActivity(intent9);
                 break;
             case R.id.logout:
