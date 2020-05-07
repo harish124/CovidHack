@@ -17,22 +17,27 @@ public class PlotGraphHelper {
         this.binding=binding;
     }
 
-    DataPoint dop[]=new DataPoint[500];
+    DataPoint dop[];
     public void plotGraph(ArrayList<Integer> dateList,ArrayList<Integer> activeList){
-        int i=0;
+
 
         Collections.sort(dateList);
         Collections.sort(activeList);
 
-        for(int x: dateList){
-            for(int y:activeList){
-                dop[i]=(new DataPoint(x,y));
-                i+=1;
-            }
+
+        dop=new DataPoint[dateList.size()];
+
+
+        for(int i=0;i<dateList.size();i++){
+            dop[i]=new DataPoint(dateList.get(i),activeList.get(i));
         }
 
 
         LineGraphSeries < DataPoint > series = new LineGraphSeries< >(dop);
         binding.graphDaily.addSeries(series);
+
+
+        binding.graphDaily.getViewport().setMinX(dateList.get(0));
+        binding.graphDaily.getViewport().setMaxX(dateList.get(dateList.size()-1));
     }
 }
