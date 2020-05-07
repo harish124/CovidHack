@@ -9,7 +9,7 @@
         android:id="@+id/registration"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Store Registration"
         android:textAlignment="center"
         android:textColor="#a1a1a1"
@@ -22,10 +22,10 @@
 
     <ImageView
         android:id="@+id/userimage"
-        android:layout_width="132dp"
-        android:layout_height="132dp"
+        android:layout_width="118dp"
+        android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registration"
         app:srcCompat="@drawable/store"
@@ -35,54 +35,51 @@
         android:id="@+id/storename"
         android:layout_width="350dp"
         android:layout_height="65dp"
-        android:layout_marginTop="24dp"
-        android:hint="Name of Store"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Name of Store"
         android:inputType="textMultiLine"
-        android:textStyle="bold"
         android:maxLength="50"
-        android:textSize="20dp"
         android:maxLines="2"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userimage" />
-
 
     <Spinner
         android:id="@+id/storetype"
         android:layout_width="350dp"
         android:layout_height="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:entries="@array/store_type"
-        app:layout_constraintBottom_toTopOf="@id/storeaddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storename"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintTop_toBottomOf="@id/storename" />
 
     <EditText
         android:id="@+id/storeaddress"
         android:layout_width="350dp"
         android:layout_height="65dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
         android:hint="Address "
+        android:maxLength="50"
+        android:maxLines="2"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:ems="10"
-        android:maxLines="2"
-        android:maxLength="50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storename" />
+        app:layout_constraintTop_toBottomOf="@+id/storetype" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:paddingLeft="3dp"
         android:text="Use Registered Address"
         android:textAlignment="center"
@@ -103,10 +100,10 @@
         android:scaleY="1.5"
         app:layout_constraintBottom_toTopOf="@id/pincode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.573"
-        app:layout_constraintStart_toEndOf="@id/textView12"
+        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/storeaddress"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <EditText
         android:id="@+id/pincode"
