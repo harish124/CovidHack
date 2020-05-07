@@ -9,9 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bourbon.R;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -47,6 +54,7 @@ public class CovidStatusRecyclerViewAdapter extends RecyclerView.Adapter<CovidSt
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             holder.binding.setPd(productDetails.get(position));
 //            p.sprintf("DistrictName: "+productDetails.get(position).getDistrictName());
+
         }
 
         @Override
