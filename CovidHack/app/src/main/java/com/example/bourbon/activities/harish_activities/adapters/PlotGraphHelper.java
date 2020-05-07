@@ -1,22 +1,23 @@
 package com.example.bourbon.activities.harish_activities.adapters;
 
 import android.content.Context;
-import android.view.MotionEvent;
+import android.graphics.Color;
 
 import com.example.bourbon.databinding.ActivityGraphDailyBinding;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import print.Print;
 
@@ -31,58 +32,70 @@ public class PlotGraphHelper {
         p=new Print(ctx);
     }
 
-    DataPoint dop[];
-    public void plotGraph(ArrayList<Integer> dateList,ArrayList<Integer> activeList){
+    public void plotGraph(ArrayList<Date> dateList, ArrayList<Integer> activeList
+    ,ArrayList<Integer> recoveredList, ArrayList<Integer> deceasedList){
 
-
-        Collections.sort(dateList);
-        Collections.sort(activeList);
-
-
-        dop=new DataPoint[dateList.size()];
-
-        ArrayList<Entry> dop2=new ArrayList<>();
+        ArrayList<Entry> activeCases=new ArrayList<>();
+        ArrayList<Entry> recoveredCases=new ArrayList<>();
+        ArrayList<Entry> deceasedCases=new ArrayList<>();
 
         for(int i=0;i<dateList.size();i++){
-            dop[i]=new DataPoint(dateList.get(i),activeList.get(i));
-            dop2.add(new Entry(dateList.get(i),activeList.get(i)));
+
+            activeCases.add(new Entry(new Long(dateList.get(i).getTime()).floatValue(),activeList.get(i)));
+            recoveredCases.add(new Entry(new Long(dateList.get(i).getTime()).floatValue(),recoveredList.get(i)));
+            deceasedCases.add(new Entry(new Long(dateList.get(i).getTime()).floatValue(),deceasedList.get(i)));
         }
-
-
-
-
-
-        configGraph(dop2);
-
-        for(int i=0;i<dateList.size();i++){
-            p.sprintf("x = "+dateList.get(i)+" y = "+activeList.get(i));
-        }
-
-        LineGraphSeries < DataPoint > series = new LineGraphSeries< >(dop);
-//        binding.graphDaily.addSeries(series);
-//
-//
-//        binding.graphDaily.getViewport().setMinX(dateList.get(0));
-//        binding.graphDaily.getViewport().setMaxX(dateList.get(dateList.size()-1));
+        binding.lineChart.setNoDataText("No Chart Available\nClick to refresh!");
+        configGraph(activeCases,recoveredCases,deceasedCases);
     }
 
-    private void configGraph(ArrayList<Entry> dop) {
+    private void configGraph(ArrayList<Entry> activeCases,ArrayList<Entry> recoveredCases
+    ,ArrayList<Entry> deceasedCases) {
 
         binding.lineChart.setDragEnabled(true);
-        binding.lineChart.setScaleEnabled(false);
+        binding.lineChart.setScaleEnabled(true);
 
-        LineDataSet set1=new LineDataSet(dop,"Graph1");
+        LineDataSet set1=new LineDataSet(activeCases,"ActiveCases");
+        LineDataSet set2=new LineDataSet(recoveredCases,"RecoveredCases");
+        LineDataSet set3=new LineDataSet(deceasedCases,"DeceasedCases");
+        set1.setColor(Color.RED);
+        set2.setColor(Color.GREEN);
+        set3.setColor(Color.BLUE);
 
-        ArrayList<ILineDataSet> dataSets=new ArrayList<>();
-        dataSets.add(set1);
+//        ArrayList<ILineDataSet> dataSets=new ArrayList<>();
+//        dataSets.add(set1);
+//        dataSets.add(set2);
+//        dataSets.add(set3);
 
-        LineData data=new LineData(dataSets);
+        LineData data1=new LineData();
+        data1.addDataSet(set1);
+        data1.addDataSet(set2);
+        data1.addDataSet(set3);
 
-        binding.lineChart.setData(data);
+
+        binding.lineChart.getXAxis().setGranularityEnabled(true);
+        binding.lineChart.getXAxis().setGranularity(1.0f);
+
+        XAxis xAxis = binding.lineChart.getXAxis();
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                Date date=new Date(new Float(value).longValue());
+                //p.sprintf("MyMpDate = "+date.toString().substring(4,11));
+                return date.toString().substring(4,11);
+            }
+        });
+        binding.lineChart.setData(data1);
+
+        binding.lineChart.invalidate();
+
+
 
 
 
     }
+
+
 
 
 }
