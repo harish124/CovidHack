@@ -121,5 +121,8 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //recyclerview
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+
 
 }
