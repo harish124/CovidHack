@@ -56,6 +56,7 @@ public class User_Registration extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         myCalendar = Calendar.getInstance();
         dob = findViewById(R.id.dob);
+        dob.setText("");
         final DatePickerDialog.OnDateSetListener dae = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -67,7 +68,7 @@ public class User_Registration extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 String myFormat = "dd/MM/yy"; //In which you need put here
                 sdf = new SimpleDateFormat(myFormat, Locale.UK);
-                Toast.makeText(User_Registration.this, sdf.format(myCalendar.getTime()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(User_Registration.this, sdf.format(myCalendar.getTime()), Toast.LENGTH_SHORT).show();
                 dob.setText(sdf.format(myCalendar.getTime()));
             }
 
@@ -92,20 +93,34 @@ public class User_Registration extends AppCompatActivity {
     @OnClick(R.id.register)
     public void onViewClicked() {
 
-        mDatabase.child(user.getUid()).child("Name").setValue(firstName.getText().toString());
-        mDatabase.child(user.getUid()).child("Address").setValue(address.getText().toString());
-        mDatabase.child(user.getUid()).child("Pincode").setValue(pincode.getText().toString());
-        if(male.isChecked()){
-            mDatabase.child(user.getUid()).child("Gender").setValue("Male");
+        if(firstName.getText().toString().length() == 0){
+            firstName.setError("Name is Required");
 
-        }else{
-            mDatabase.child(user.getUid()).child("Gender").setValue("Female");
+        }else if(address.getText().toString().length() == 0){
+            address.setError("Address is Required");
+        }else if(pincode.getText().toString().length() == 0){
+            pincode.setError("Pincode is Required");
+        }else if(!male.isChecked() && !female.isChecked()){
+            male.setError("Select Gender");
+        }else if(dob.getText().toString().length() == 0){
+            dob.setError("Enter Your Date of Birth");
+        }else {
+
+            mDatabase.child(user.getUid()).child("Name").setValue(firstName.getText().toString());
+            mDatabase.child(user.getUid()).child("Address").setValue(address.getText().toString());
+            mDatabase.child(user.getUid()).child("Pincode").setValue(pincode.getText().toString());
+            if (male.isChecked()) {
+                mDatabase.child(user.getUid()).child("Gender").setValue("Male");
+
+            } else {
+                mDatabase.child(user.getUid()).child("Gender").setValue("Female");
+            }
+            mDatabase.child(user.getUid()).child("DOB").setValue(sdf.format(myCalendar.getTime()));
+
+            Intent intent = new Intent(User_Registration.this, Main_menu.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
-        mDatabase.child(user.getUid()).child("DOB").setValue(sdf.format(myCalendar.getTime()));
-
-        Intent intent = new Intent(User_Registration.this, Main_menu.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
 

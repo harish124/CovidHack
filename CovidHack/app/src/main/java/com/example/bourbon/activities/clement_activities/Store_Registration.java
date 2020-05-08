@@ -55,36 +55,53 @@ public class Store_Registration extends AppCompatActivity {
 
     @OnClick(R.id.submit)
     public void onViewClicked() {
-        mDatabase.child("Stores").child(auth.getUid()).child("Name").setValue(storename.getText().toString());
-        mDatabase.child("Stores").child(auth.getUid()).child("Type").setValue(storetype.getSelectedItem().toString());
+        if(storename.getText().toString().length() == 0){
+            storename.setError("Store Name is Required");
+        }else {
 
 
-        if (checkadd.isChecked()) {
-            mDatabase.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String address = dataSnapshot.child("Address").getValue(String.class);
-                    String pin = dataSnapshot.child("Pincode").getValue(String.class);
+
+            if (checkadd.isChecked()) {
+                mDatabase.child("users").child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String address = dataSnapshot.child("Address").getValue(String.class);
+                        String pin = dataSnapshot.child("Pincode").getValue(String.class);
 //                    Toast.makeText(Store_Registration.this, address, Toast.LENGTH_SHORT).show();
-                    mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(address);
-                    mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pin);
+                        mDatabase.child("Stores").child(auth.getUid()).child("Name").setValue(storename.getText().toString());
+                        mDatabase.child("Stores").child(auth.getUid()).child("Type").setValue(storetype.getSelectedItem().toString());
+                        mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(address);
+                        mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pin);
+                        Print p = new Print(Store_Registration.this);
+                        p.sprintf("Store Details Added");
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(Store_Registration.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            } else {
+                if(storeaddress.getText().toString().length() == 0){
+                    storeaddress.setError("Store Address is Required");
+                }else  if(pincode.getText().toString().length() == 0){
+                    pincode.setError("Pincode is Required");
+                }else {
+                    mDatabase.child("Stores").child(auth.getUid()).child("Name").setValue(storename.getText().toString());
+                    mDatabase.child("Stores").child(auth.getUid()).child("Type").setValue(storetype.getSelectedItem().toString());
+                    mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pincode.getText().toString());
+                    mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(storeaddress.getText().toString());
+                    Print p = new Print(this);
+                    p.sprintf("Store Details Added");
+                    finish();
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(Store_Registration.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
-            });
-
-        } else {
-            mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pincode.getText().toString());
-            mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(storeaddress.getText().toString());
         }
-
-        Print p = new Print(this);
-        p.sprintf("Store Details Added");
-        finish();
 
     }
 }
