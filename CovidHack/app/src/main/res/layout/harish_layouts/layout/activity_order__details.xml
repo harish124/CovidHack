@@ -13,26 +13,26 @@
         android:layout_width="215dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="172dp"
-        android:textSize="20dp"
+        android:layout_marginTop="45dp"
         android:paddingRight="10dp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/orderid"
         android:layout_width="130dp"
         android:layout_height="40dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="45dp"
         android:text="Order_ID"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/textView17"
@@ -84,15 +84,18 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custname"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.004" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="121dp"
         android:layout_height="97dp"
-        app:srcCompat="@drawable/orders"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="119dp" />
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:srcCompat="@drawable/orders" />
 </androidx.constraintlayout.widget.ConstraintLayout>
