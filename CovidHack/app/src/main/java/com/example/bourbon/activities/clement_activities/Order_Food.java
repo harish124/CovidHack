@@ -111,7 +111,9 @@ public class Order_Food extends AppCompatActivity {
                     mdatabase.child("Carts").child(dateFormat.format(date)).child("Items").setValue(Arrays.asList(groceries1));
                 }
                 p.sprintf("Order Successfully Placed");
-                finish();
+                Intent intent = new Intent(Order_Food.this, Main_menu.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case R.id.cart:
                 builder.setItems(groceries1, new DialogInterface.OnClickListener() {
