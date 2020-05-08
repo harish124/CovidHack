@@ -72,13 +72,13 @@ class GraphDaily : AppCompatActivity() {
                         //p?.sprintf("Date = ${obj?.getString("date")!!.substring(8,10)}")
                         //dateList!!.add(Integer.parseInt(obj?.getString("date")!!.substring(8,10)))
                         activeList!!.add(Integer.parseInt(obj!!.getString("active")))
-                        recoveredList!!.add(Integer.parseInt(obj!!.getString("recovered")))
-                        deceasedList!!.add(Integer.parseInt(obj!!.getString("deceased")))
+                        recoveredList!!.add(Integer.parseInt(obj.getString("recovered")))
+                        deceasedList!!.add(Integer.parseInt(obj.getString("deceased")))
 
                         val format1 = SimpleDateFormat("yyyy-MM-dd")
                         val format2 = SimpleDateFormat("dd-MM-yyyy")
                         val format3 = SimpleDateFormat("dd-MM-yyyy")
-                        val date = format1.parse(obj?.getString("date"))
+                        val date = format1.parse(obj.getString("date"))
                         dateList!!.add(format3.parse(format2.format(date)))
                         i+=1
                     }
