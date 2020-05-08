@@ -46,12 +46,22 @@ public class Donation extends AppCompatActivity {
 
     @OnClick(R.id.submit)
     public void onViewClicked() {
+        if(!food.isChecked() && !clothing.isChecked() && !others.isChecked()){
+            food.setError("Select atleast One to Donate");
+        }else if(others.isChecked() && (extra.getText().toString().length() ==0) ){
+            extra.setError("Enter atleast one to Donate");
+        }else {
+            submit();
+        }
+    }
+
+    void submit(){
         if (food.isChecked()) {
-            donate += "Food, " ;
+            donate += "Food, ";
         }
 
         if (clothing.isChecked()) {
-            donate += "Cloths ," ;
+            donate += "Cloths ,";
         }
 
         if (others.isChecked()) {
@@ -61,7 +71,7 @@ public class Donation extends AppCompatActivity {
         database.child("Donations").child(user.getUid()).setValue(donate);
 
         Print p = new Print(this);
-        p.sprintf("Details Updated");
+        p.sprintf("Details Updated...You will be Contacted Soon");
         finish();
     }
 }

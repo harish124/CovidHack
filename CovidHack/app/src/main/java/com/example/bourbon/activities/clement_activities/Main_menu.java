@@ -35,14 +35,14 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
-        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
-        if(!lm.isProviderEnabled("gps"))
-        {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivityForResult(intent,1);
-        }else{
-            p.sprintf("Please turn on your Location for some functionalities to work");
-        }
+//        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
+//        if(!lm.isProviderEnabled("gps"))
+//        {
+//            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//            startActivityForResult(intent,1);
+//        }else{
+//            p.sprintf("Please turn on your Location for some functionalities to work");
+//        }
 
 
     }
