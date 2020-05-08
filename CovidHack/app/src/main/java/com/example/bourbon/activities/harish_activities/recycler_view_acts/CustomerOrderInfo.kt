@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bourbon.R
 import com.example.bourbon.activities.harish_activities.adapters.GenericRVAdapter
 import com.example.bourbon.activities.harish_activities.model.CustomerOrder
-import com.example.bourbon.databinding.RvActivityOrderInfoBinding
 import com.example.bourbon.databinding.RvCustomerOrderInfoBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
