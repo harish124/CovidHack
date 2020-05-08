@@ -14,6 +14,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.bourbon.R;
+
 import java.util.Random;
 
 public class NotificationHelper extends ContextWrapper {
