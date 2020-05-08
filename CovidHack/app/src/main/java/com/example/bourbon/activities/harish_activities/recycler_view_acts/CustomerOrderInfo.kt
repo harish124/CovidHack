@@ -7,10 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bourbon.R
-import com.example.bourbon.activities.clement_activities.model.User
 import com.example.bourbon.activities.harish_activities.adapters.GenericRVAdapter
 import com.example.bourbon.activities.harish_activities.model.CustomerOrder
-import com.example.bourbon.activities.harish_activities.model.Order
 import com.example.bourbon.databinding.RvActivityOrderInfoBinding
 import com.example.bourbon.databinding.RvCustomerOrderInfoBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -60,7 +58,7 @@ class CustomerOrderInfo : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 // ...
-                var i:Int=0
+                var i=0
                 for (postSnapshot in dataSnapshot.child("Carts").children) {
                     var purchasedItems:ArrayList<String>?=null
                     // TODO: handle the post
@@ -77,14 +75,14 @@ class CustomerOrderInfo : AppCompatActivity() {
                             for(items in postSnapshot.child(dop).child("Items").children){
                                 purchasedItems?.add(items.value.toString())
                             }
-                            products?.add(CustomerOrder(shopName,custId,dop,dop,purchasedItems,manuel))
-                            adapter?.notifyItemInserted(i)
+                            products.add(CustomerOrder(shopName,custId,dop,dop,purchasedItems,manuel))
+                            adapter.notifyItemInserted(i)
                             i++
                         }else{
                             purchasedItems?.add("NULL")
-                            products?.add(CustomerOrder(custName,custId,"o007",
+                            products.add(CustomerOrder(custName,custId,"o007",
                                     dop,purchasedItems,manuel))
-                            adapter?.notifyItemInserted(i)
+                            adapter.notifyItemInserted(i)
                         }
 
 
