@@ -88,10 +88,16 @@
                 <Button
                     android:id="@+id/shopHere"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Shop Here"
+                    android:layout_height="37dp"
                     android:layout_below="@id/addressText"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/newbutton"
+                    android:text="Shop"
+                    android:textSize="17dp"
+                    android:backgroundTint="#ebebeb"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

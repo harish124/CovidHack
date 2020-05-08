@@ -16,7 +16,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shops Nearby to You"
+                android:text="Shops Nearby You"
                 android:layout_centerHorizontal="true"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
