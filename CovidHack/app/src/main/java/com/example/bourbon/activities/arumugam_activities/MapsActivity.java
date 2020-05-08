@@ -42,6 +42,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
 
+import print.Print;
+
 public class MapsActivity extends FragmentActivity
         implements
         OnMapReadyCallback,
@@ -61,13 +63,15 @@ public class MapsActivity extends FragmentActivity
     private Button hospital;
     private Button pharmacy;
     private LinearLayout hospitaldetailslayout;
+    private Print print;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_arumugam);
 
         //setting radio
-        checked=1;
+        print = new Print(getApplicationContext());
+        checked=0;
         hospital= findViewById(R.id.search_hospital);
         pharmacy = findViewById(R.id.search_pharmacy);
         hospitaldetailslayout = findViewById(R.id.hospital_details_linear);
@@ -120,7 +124,7 @@ public class MapsActivity extends FragmentActivity
         catch(Exception e)
         {
             Log.d("oncreatebottomsheet",e.toString());
-            Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -159,13 +163,15 @@ public class MapsActivity extends FragmentActivity
 
                     if(results==null)
                     {
-                        Toast.makeText(getApplicationContext(),"Result null",Toast.LENGTH_SHORT).show();
+                        print.sprintf("No results found. Please try again in few moments.!");
+                        //Toast.makeText(getApplicationContext(),"Result null",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    if(results.size()==0)
-                        Toast.makeText(getApplicationContext(),"Please try again in few moments",Toast.LENGTH_SHORT).show();
-
+                    if(results.size()==0) {
+                        print.sprintf("Please try again in few moments.!");
+                        // Toast.makeText(getApplicationContext(), "Please try again in few moments", Toast.LENGTH_SHORT).show();
+                    }
                     m=new ArrayList();
 
                     for(int i=0;i<results.size();i++)
@@ -208,7 +214,8 @@ public class MapsActivity extends FragmentActivity
             public boolean onMarkerClick(Marker marker) {
                 if(marker.getSnippet().equals("current location"))
                 {
-                    Toast.makeText(getApplicationContext(),"My Location",Toast.LENGTH_SHORT).show();
+                    print.sprintf("My Location");
+                    //Toast.makeText(getApplicationContext(),"My Location",Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
@@ -287,7 +294,8 @@ public class MapsActivity extends FragmentActivity
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
                     Manifest.permission.READ_CONTACTS)) {
-                Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
+                print.sprintf("Location Services required.!");
+                //Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
             } else {
                 ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},100);
@@ -300,12 +308,14 @@ public class MapsActivity extends FragmentActivity
 
         if(!checkPlayServices())
         {
-            Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
+            print.sprintf("Please install Google Play Services.!");
+            //Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
         }
 
         LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
         if(!lm.isProviderEnabled("gps"))
         {
+            print.sprintf("GPS required");
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
@@ -323,7 +333,8 @@ public class MapsActivity extends FragmentActivity
                     // contacts-related task you need to do.
                     mMap.setMyLocationEnabled(true);
                 } else {
-                    Toast.makeText(this,"Cannot provide the location services",Toast.LENGTH_SHORT).show();
+                    print.sprintf("Cannot provide the location services");
+                    //Toast.makeText(this,"Cannot provide the location services",Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
@@ -395,7 +406,7 @@ public class MapsActivity extends FragmentActivity
         }
 
     public void finderOption(View view) {
-        if(view == hospital && checked==2)
+        if(view == hospital && checked!=1)
         {
             checked=1;
             ((Button)view).setTextColor(getApplication().getResources().getColor(R.color.white));
@@ -404,7 +415,7 @@ public class MapsActivity extends FragmentActivity
             pharmacy.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
             getPlaces("hospital");
         }
-        else  if(view == pharmacy && checked==1)
+        else  if(view == pharmacy && checked!=2)
         {
             checked=2;
             ((Button)view).setTextColor(getApplication().getResources().getColor(R.color.white));
