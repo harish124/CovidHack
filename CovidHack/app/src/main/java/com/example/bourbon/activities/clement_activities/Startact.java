@@ -40,6 +40,12 @@ public class Startact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_main);
         ButterKnife.bind(this);
+        //edited by arumugam
+
+        Intent in = new Intent(this,Main_menu.class);
+        startActivity(in);
+
+        //edit done
         FirebaseMessaging.getInstance().subscribeToTopic("general")
                 .addOnCompleteListener(task -> {
                     String msg = "Successful" ;
