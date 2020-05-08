@@ -11,6 +11,7 @@ import com.example.bourbon.R
 import com.example.bourbon.activities.harish_activities.adapters.GenericRVAdapter
 import com.example.bourbon.activities.harish_activities.model.CustomerOrder
 import com.example.bourbon.databinding.RvActivityOrderInfoBinding
+import com.example.bourbon.databinding.RvCustomerOrderInfoBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -20,7 +21,7 @@ import print.Print
 
 class CustomerOrderInfo : AppCompatActivity() {
 
-    private var binding: RvActivityOrderInfoBinding?=null
+    private var binding: RvCustomerOrderInfoBinding?=null
     private val p=Print(this)
     private var products= arrayListOf<CustomerOrder>()
 
