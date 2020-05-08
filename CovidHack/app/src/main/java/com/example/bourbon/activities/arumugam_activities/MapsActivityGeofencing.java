@@ -230,20 +230,6 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
                     latLngBoundsBuilder.include(latlng);
                 }
 
-                Location location = mMap.getMyLocation();
-                if(location!=null)
-                {
-                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(latLng);
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                    mMap.addMarker(markerOptions);
-                    latLngBoundsBuilder.include(latLng);
-                }
-                else
-                {
-                    print.sprintf("Your location is not available.!");
-                }
                 LatLngBounds latLngBounds = latLngBoundsBuilder.build();
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(latLngBounds,100);
                 mMap.animateCamera(cameraUpdate);
