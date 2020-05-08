@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
 import com.example.bourbon.activities.arumugam_activities.MapsActivity;
+import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing;
 import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,8 +65,8 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent7);
                 break;
             case R.id.hotspot:
-//                Intent intent10 = new Intent(Main_menu.this, E_Pass.class);
-//                startActivity(intent10);
+                Intent intent10 = new Intent(Main_menu.this, MapsActivityGeofencing.class);
+                startActivity(intent10);
                 break;
             case R.id.course:
                 Intent intent1 = new Intent(Main_menu.this, YoutubeList.class);
