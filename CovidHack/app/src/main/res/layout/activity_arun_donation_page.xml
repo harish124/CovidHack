@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#404eed"
+    android:background="#428bff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,15 +13,15 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="100dp"
-            android:layout_height="124dp"
+            android:layout_width="116dp"
+            android:layout_height="81dp"
 
             android:layout_marginStart="20dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/loan"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintHorizontal_bias="0.479"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
-            android:text="WILLING TO DONATE?"
+            android:text="WILLING TO DONATE ?"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="24dp"
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             android:text="CHOOSE THINGS YOU WISH TO DONATE"
             android:textAlignment="center"
@@ -61,33 +61,28 @@
 
         <CheckBox
             android:id="@+id/food"
-            android:layout_width="match_parent"
+            android:layout_width="345dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button"
-            android:text="FOOD"
-            android:textAlignment="center"
-            android:textColor="#000000"
+            android:text="     FOOD"
+            android:textColor="#ffffff"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <CheckBox
             android:id="@+id/clothing"
-            android:layout_width="match_parent"
+            android:layout_width="345dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button"
-            android:text="CLOTHING"
-            android:textAlignment="center"
-            android:textColor="#000000"
+            android:text="     CLOTHING"
+            android:textColor="#ffffff"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,48 +91,50 @@
 
         <CheckBox
             android:id="@+id/others"
-            android:layout_width="match_parent"
+            android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button"
-            android:text="OTHERS"
-            android:textAlignment="center"
-            android:textColor="#000000"
+            android:layout_marginTop="16dp"
+            android:text="     OTHERS"
+            android:textColor="#ffffff"
             android:textSize="24dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/clothing"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <EditText
-            android:id="@+id/extra"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/others" />
+            app:layout_constraintTop_toBottomOf="@+id/clothing" />
+
 
         <Button
+            android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/newbutton"
             android:text="  DONATE  "
             android:textAlignment="center"
-            android:background="@color/yellow"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="24dp"
             android:textStyle="bold"
-            android:id="@+id/submit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintHorizontal_bias="0.425"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/extra" />
+
+        <TextView
+            android:id="@+id/extra"
+            android:layout_width="345dp"
+            android:layout_height="138dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/button"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:maxLines="6"
+            android:padding="10dp"
+            android:scrollHorizontally="false"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.559"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/others" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
