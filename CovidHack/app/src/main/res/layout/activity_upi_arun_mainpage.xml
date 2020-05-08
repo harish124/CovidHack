@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#29f0dc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,21 +19,21 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="98dp"
-            android:layout_height="123dp"
+            android:layout_width="114dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="32dp"
             android:src="@drawable/loan"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_width="370dp"
+            android:layout_height="50dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/button"
-            android:hint="     Name"
+            android:hint="Name"
+            android:inputType="text"
             android:textColorHint="#000000"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,41 +43,51 @@
 
         <EditText
             android:id="@+id/amount"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/button"
-            android:hint="     AMOUNT "
+            android:layout_width="370dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="48dp"
+            android:hint="Amount"
+            android:inputType="number"
             android:textColorHint="#000000"
-            android:inputType="numberDecimal"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
-        <EditText
+        <TextView
             android:id="@+id/notes"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="370dp"
+            android:layout_height="162dp"
+            android:layout_marginTop="48dp"
             android:background="@drawable/button"
-            android:hint="     NOTES "
+            android:inputType="textMultiLine"
+            android:maxLines="6"
+            android:padding="10dp"
+            android:hint="Notes"
             android:textColorHint="#000000"
+            android:scrollHorizontally="false"
+            android:textColor="#000000"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.409"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/amount" />
+            app:layout_constraintTop_toBottomOf="@id/amount" />
 
         <Button
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            android:text="Pay Now"
+            android:layout_marginBottom="84dp"
+            android:background="@drawable/newbutton"
+            android:text="Pay"
             android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notes" />
+            app:layout_constraintTop_toBottomOf="@+id/notes"
+            app:layout_constraintVertical_bias="0.937" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

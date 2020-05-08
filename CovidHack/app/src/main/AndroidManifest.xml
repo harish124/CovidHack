@@ -64,10 +64,10 @@
         <activity android:name=".activities.clement_activities.Verifi" />
         <activity android:name=".activities.clement_activities.Upi_payments" />
         <activity android:name=".activities.clement_activities.Main2Activity" />
-        <activity android:name=".activities.arumugam_activities.MainActivity" />
         <activity android:name=".activities.clement_activities.EmergencyContactInfo" />
         <activity android:name=".activities.arumugam_activities.MapsActivity" />
         <activity android:name=".activities.arumugam_activities.HospitalView" /> <!-- Added by Arumugam -->
+        <activity android:name=".activities.arumugam_activities.MapsActivityGeofencing" />
         <service
             android:name=".activities.clement_activities.MyFirebaseMessagingService"
             android:exported="false">
