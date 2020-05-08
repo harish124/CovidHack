@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import print.Print;
 
 public class Verifi extends AppCompatActivity {
 
@@ -157,6 +158,8 @@ public class Verifi extends AppCompatActivity {
                             //verification unsuccessful.. display an error message
 
                             String message = "Somthing is wrong, we will fix it soon...";
+                            Print p = new Print(Verifi.this);
+                            p.fprintf("Verification Failed");
 
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 message = "Invalid code entered...";

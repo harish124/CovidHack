@@ -22,8 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
 import com.example.bourbon.activities.clement_activities.model.ListUpload;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -156,12 +158,19 @@ public class Order_Food extends AppCompatActivity {
             fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Order_Food.this, "Upload Successful", Toast.LENGTH_SHORT).show();
-                    ListUpload listUpload = new ListUpload(FirebaseAuth.getInstance().getCurrentUser().getUid(), shopId, taskSnapshot.getStorage().getDownloadUrl().toString(), "True");
-                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                    Date date = new Date();
-                    System.out.println(dateFormat.format(date));
-                    mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
+                    taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+//                            Toast.makeText(Order_Food.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+                            ListUpload listUpload = new ListUpload(FirebaseAuth.getInstance().getCurrentUser().getUid(), shopId, uri.toString(), "True");
+                            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                            Date date = new Date();
+                            System.out.println(dateFormat.format(date));
+                            mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
+                            return;
+                        }
+                    });
+
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -173,6 +182,11 @@ public class Order_Food extends AppCompatActivity {
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                }
+            }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
                 }
             });

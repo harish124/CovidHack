@@ -76,13 +76,13 @@ class OrderInfo : AppCompatActivity() {
                             for(items in postSnapshot.child(dop).child("Items").children){
                                 purchasedItems?.add(items.value.toString())
                             }
-                            products?.add(Order(custName,custId,"7",dop,purchasedItems))
+                            products?.add(Order(custName,custId,"7",dop,purchasedItems,manuel))
                             adapter?.notifyItemInserted(i)
                             i++
                         }else{
                             purchasedItems?.add("NULL")
                             products?.add(Order(custName,custId,"o007",
-            dop,purchasedItems))
+            dop,purchasedItems,manuel))
             adapter?.notifyItemInserted(i)
                         }
 
