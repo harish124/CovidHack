@@ -54,7 +54,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:focusable="false"
-        android:hint="Date Of Birth"
+        android:hint="Date of Birth"
         android:inputType="date"
         android:paddingLeft="4dp"
         android:textSize="20dp"

@@ -164,17 +164,28 @@ public class Order_Food extends AppCompatActivity {
                     taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-//                            Toast.makeText(Order_Food.this, "Upload Successful", Toast.LENGTH_SHORT).show();
-                            ListUpload listUpload = new ListUpload(FirebaseAuth.getInstance().getCurrentUser().getUid(), shopId, uri.toString(), "True");
-                            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                            Date date = new Date();
-                            System.out.println(dateFormat.format(date));
-                            mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
-                            p.sprintf("Order Successfully Placed");
-                            Intent intent = new Intent(Order_Food.this, Main_menu.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            return;
+//                            Toast.makeText(Order_Food.this, "Upload 22Successful", Toast.LENGTH_SHORT).show();
+                            try {
+                                ListUpload listUpload = new ListUpload(FirebaseAuth.getInstance().getCurrentUser().getUid(), shopId, uri.toString(), "True");
+//                            Toast.makeText(Order_Food.this, "Upload 22Successful", Toast.LENGTH_SHORT).show();
+
+                                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                                Date date = new Date();
+                                System.out.println(dateFormat.format(date));
+//                                Toast.makeText(Order_Food.this, "Upload 33Successful", Toast.LENGTH_SHORT).show();
+
+                                mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
+//                                Toast.makeText(Order_Food.this, "Upload 44Successful", Toast.LENGTH_SHORT).show();
+
+                                p.sprintf("Order Successfully Placed");
+                                Intent intent = new Intent(Order_Food.this, Main_menu.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                return;
+                            }catch (Exception e){
+                                Toast.makeText(Order_Food.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
 
