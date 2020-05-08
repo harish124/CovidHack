@@ -1,13 +1,11 @@
 package com.example.bourbon.activities.arumugam_activities;
 
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
@@ -16,13 +14,15 @@ import java.util.List;
 
 public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "Geofencing";
+    private static final String TAG = "GeofenceBroadcastReceiv";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
 //        Toast.makeText(context, "Geofence triggered...", Toast.LENGTH_SHORT).show();
+
+        NotificationHelper notificationHelper = new NotificationHelper(context);
 
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
 
@@ -41,18 +41,15 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("Geofencing", "You have entered a geofence.!", MapsActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();
-                NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context)
-                        .setContentTitle("Geofencing")
-                        .setContentText("You have entered a red zone");
-                NotificationManager notificationManager =
-                        (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(100,nBuilder.build());
+                notificationHelper.sendHighPriorityNotification("Geofencing", "You are dwelling inside a geofence.!", MapsActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("Geofencing", "You have exited a geofence.!", MapsActivity.class);
                 break;
         }
 

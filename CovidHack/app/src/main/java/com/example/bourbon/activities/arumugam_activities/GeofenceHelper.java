@@ -4,18 +4,16 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.location.Location;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.maps.model.LatLng;
 
 public class GeofenceHelper extends ContextWrapper {
 
-    private static final String TAG = "Geofencing";
+    private static final String TAG = "GeofenceHelper";
     PendingIntent pendingIntent;
 
     public GeofenceHelper(Context base) {
@@ -29,13 +27,9 @@ public class GeofenceHelper extends ContextWrapper {
                 .build();
     }
 
-    public Geofence getGeofence(String ID, Location latLng, float radius, int transitionTypes) {
-        if(latLng==null)
-        {
-            Log.d("Error","location null");
-        }
+    public Geofence getGeofence(String ID, LatLng latLng, float radius, int transitionTypes) {
         return new Geofence.Builder()
-                .setCircularRegion(latLng.getLatitude(), latLng.getLongitude(), radius)
+                .setCircularRegion(latLng.latitude, latLng.longitude, radius)
                 .setRequestId(ID)
                 .setTransitionTypes(transitionTypes)
                 .setLoiteringDelay(5000)
@@ -47,7 +41,7 @@ public class GeofenceHelper extends ContextWrapper {
         if (pendingIntent != null) {
             return pendingIntent;
         }
-        Intent intent = new Intent(this, com.example.bourbon.activities.arumugam_activities.GeofenceBroadcastReceiver.class);
+        Intent intent = new Intent(this, GeofenceBroadcastReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 2607, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         return pendingIntent;
