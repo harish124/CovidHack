@@ -44,9 +44,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                print.fprintf("You have entered a Red-Zone.!");
+                print.fprintf("You are inside a Red-Zone");
                 //Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("Covidence", "YOU HAVE ENTERED A RED-ZONE.!", MapsActivityGeofencing.class);
+                notificationHelper.sendHighPriorityNotification("Covidence", "YOU ARE INSIDE A RED ZONE.!", MapsActivityGeofencing.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 print.fprintf("You are dwelling inside a Red-Zone.!");
