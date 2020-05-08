@@ -25,14 +25,14 @@
             />
         <TextView
             android:id="@+id/textView"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:layout_width="0dp"
             android:paddingBottom="40dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="24dp"
-            android:text="Dashboard "
+            android:text="Welcome "
             android:textStyle="bold"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
