@@ -1,6 +1,7 @@
 package com.example.bourbon.activities.harish_activities.recycler_view_acts
 
 import android.os.Bundle
+import android.view.animation.OvershootInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,8 @@ import com.example.bourbon.databinding.RvActivityOrderInfoBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import print.Print
 
 class CustomerOrderInfo : AppCompatActivity() {
@@ -48,7 +51,8 @@ class CustomerOrderInfo : AppCompatActivity() {
         binding?.recyclerView?.setLayoutManager(LinearLayoutManager(this))
 
         binding?.recyclerView?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        binding?.recyclerView?.setAdapter(adapter)
+        binding?.recyclerView?.adapter = ScaleInAnimationAdapter(adapter)
+        binding?.recyclerView?.itemAnimator= SlideInUpAnimator(OvershootInterpolator(1f))
     }
 
     fun fetchProductsFromFirebase() {
