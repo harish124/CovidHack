@@ -1,15 +1,12 @@
 package com.example.bourbon.activities.harish_activities.recycler_view_acts;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,21 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bourbon.R;
-import com.example.bourbon.activities.clement_activities.adapter.ProductRecyclerViewAdapter;
-import com.example.bourbon.activities.clement_activities.model.ProductDetails;
 import com.example.bourbon.activities.harish_activities.adapters.CovidStatusRecyclerViewAdapter;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
 import com.example.bourbon.databinding.RvActivityCovidStatusBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +29,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import print.Print;
 
 public class CovidStatusInfo extends Activity {
@@ -55,6 +47,8 @@ public class CovidStatusInfo extends Activity {
         adapter=new CovidStatusRecyclerViewAdapter(products);
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(CovidStatusInfo.this, DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(new ScaleInAnimationAdapter(adapter));
+        binding.recyclerView.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
     }
 
     void init(){
