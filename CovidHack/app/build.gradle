@@ -16,6 +16,7 @@ android {
     }
     buildTypes {
         release {
+            crunchPngs false
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -36,8 +37,11 @@ android {
                             'src/main/res'
                     ]
         }
-    }
 
+    }
+    lintOptions {
+        abortOnError false
+    }
     dataBinding {
         enabled true
     }
@@ -115,8 +119,7 @@ dependencies {
 
     //graph
     implementation 'com.jjoe64:graphview:4.2.2'
-    implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+
 }
