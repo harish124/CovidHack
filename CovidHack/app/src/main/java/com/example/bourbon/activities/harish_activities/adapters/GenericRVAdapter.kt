@@ -25,7 +25,7 @@ class GenericRVAdapter(var products:ArrayList<CustomerOrder>): RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding:CardCustomerOrderBinding= DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), R.layout.card_order,
+                LayoutInflater.from(parent.context), R.layout.card_customer_order,
                 parent, false
         )
 
