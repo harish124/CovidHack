@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,8 +30,12 @@ import com.example.bourbon.databinding.RvHarishEmergencyContactNumBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,13 +74,12 @@ public class EmergencyContactInfo extends Activity {
         flpc = LocationServices.getFusedLocationProviderClient(this);
         checkingPermissions();
 
-
     }
 
     void fetchProdFromFirebase(){
         //clement complete this function
         //this.products=prod fetched from firebase;
-
+        Toast.makeText(this,"fetchProd",Toast.LENGTH_SHORT).show();
         flpc.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
@@ -125,67 +129,56 @@ public class EmergencyContactInfo extends Activity {
 
         });
 
-
-
     }
 
     private void checkingPermissions()
     {
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
+        if(checkPlayServices()) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-                Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
-            } else {
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CALL_PHONE},100);
-            }
-            //return false;
-        }else{
-            Print p =new Print(this);
-//            p.sprintf("Permission Already Granted");
-        }
+                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION}, 100);
 
-        checkingPermissions1();
-
-
-    }
-
-    private void checkingPermissions1()
-    {
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(EmergencyContactInfo.this,
-                    Manifest.permission.READ_CONTACTS)) {
-                Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
             } else {
-                ActivityCompat.requestPermissions(EmergencyContactInfo.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},100);
+                    checkLocation();
+                    fetchProdFromFirebase();
             }
-            //return false;
         }
-
-
-        if(!checkPlayServices())
+        else
         {
-            Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
-        }
-
-        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
-        if(!lm.isProviderEnabled("gps"))
-        {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivityForResult(intent,1);
-        }else{
-            fetchProdFromFirebase();
+            print.Print p = new Print(getApplicationContext());
+            p.sprintf("Google Play Services required.!");
         }
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode==100 && grantResults.length>0)
+        {
+                checkLocation();
+                fetchProdFromFirebase();
+        }
+    }
+
+    private void checkLocation()
+    {
+        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled("gps"))
+        {
+                print.Print p = new Print(getApplicationContext());
+                p.sprintf("GPS required.!");
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+        }
+
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         checkingPermissions();
