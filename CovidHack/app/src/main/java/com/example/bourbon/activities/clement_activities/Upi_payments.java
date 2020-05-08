@@ -37,13 +37,25 @@ public class Upi_payments extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payusingUpi(name.getText().toString(), "pmcares@sbi", amount.getText().toString());
+                if(name.getText().toString().length() == 0){
+                    name.setError("Name is Required");
+
+                }else if(amount.getText().toString().length() == 0){
+                    amount.setError("Payment Amount is Required");
+                }else if(notes.getText().toString().length() == 0){
+                    notes.setError("Notes is Required");
+                }else{
+                    payusingUpi(name.getText().toString(), "pmcares@sbi", amount.getText().toString(),notes.getText().toString());
+
+                }
             }
         });
 
     }
 
-    private void payusingUpi(String name, String upiid, String money) {
+    private void payusingUpi(String name, String upiid, String money,String notes) {
+
+
 
 
         Uri uri =
@@ -54,7 +66,7 @@ public class Upi_payments extends AppCompatActivity {
                         .appendQueryParameter("pn", name)
 //                        .appendQueryParameter("mc", "your-merchant-code")
 //                        .appendQueryParameter("tr", "your-transaction-ref-id")
-                        .appendQueryParameter("tn", notes.getText().toString())
+                        .appendQueryParameter("tn", notes)
                         .appendQueryParameter("am", money)
                         .appendQueryParameter("cu", "INR")
 //                        .appendQueryParameter("url", "your-transaction-url")
