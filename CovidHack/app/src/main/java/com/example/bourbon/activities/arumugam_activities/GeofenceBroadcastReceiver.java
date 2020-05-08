@@ -12,9 +12,12 @@ import com.google.android.gms.location.GeofencingEvent;
 
 import java.util.List;
 
+import print.Print;
+
 public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
     private static final String TAG = "GeofenceBroadcastReceiv";
+    private Print print;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -22,6 +25,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         // an Intent broadcast.
 //        Toast.makeText(context, "Geofence triggered...", Toast.LENGTH_SHORT).show();
 
+        print = new Print(context);
         NotificationHelper notificationHelper = new NotificationHelper(context);
 
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
@@ -40,16 +44,19 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("Geofencing", "You have entered a geofence.!", MapsActivity.class);
+                print.fprintf("You have entered a Red-Zone.!");
+                //Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("Covidence", "YOU HAVE ENTERED A RED-ZONE.!", MapsActivityGeofencing.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("Geofencing", "You are dwelling inside a geofence.!", MapsActivity.class);
+                print.fprintf("You are dwelling inside a Red-Zone.!");
+                //Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("Covidence", "YOU ARE DWELLING INSIDE A RED-ZONE.!", MapsActivityGeofencing.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("Geofencing", "You have exited a geofence.!", MapsActivity.class);
+                print.fprintf("You have exited a Red-Zone.!");
+                //Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("Covidence", "YOU HAVE EXITED A RED-ZONE.!", MapsActivityGeofencing.class);
                 break;
         }
 

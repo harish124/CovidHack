@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,26 +23,40 @@ import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class MapsActivityGeofencing extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+import java.util.HashMap;
+
+import print.Print;
+
+public class MapsActivityGeofencing extends FragmentActivity implements OnMapReadyCallback{
 
     private static final String TAG = "MapsActivity";
+    private Print print;
 
     private GoogleMap mMap;
     private GeofencingClient geofencingClient;
     private GeofenceHelper geofenceHelper;
 
-    private float GEOFENCE_RADIUS = 200;
-    private String GEOFENCE_ID = "SOME_GEOFENCE_ID";
+    private String GEOFENCE_ID = "Red-Zone";
+
+    private DatabaseReference databaseReference;
 
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
@@ -50,6 +65,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_geofencing);
+        print = new Print(getApplicationContext());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -57,6 +73,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
 
         geofencingClient = LocationServices.getGeofencingClient(this);
         geofenceHelper = new GeofenceHelper(this);
+
     }
 
 
@@ -74,21 +91,39 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         mMap = googleMap;
 
         enableUserLocation();
-
-        mMap.setOnMapLongClickListener(this);
     }
 
     private void enableUserLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
+            addingGeofences();
         } else {
             //Ask for permission
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 //We need to show user a dialog for displaying why the permission is needed and then ask for the permission...
+                print.sprintf("Location Services required.!");
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
             } else {
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
             }
+        }
+
+        if (Build.VERSION.SDK_INT >= 29) {
+            //We need background permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                //handleMapLongClick(latLng,GEOFENCE_RADIUS);
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                    //We show a dialog and ask for permission
+                    print.sprintf("Background Location services is required for req-zone alert.!");
+                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                }
+            }
+
+        } else {
+            //handleMapLongClick(latLng,GEOFENCE_RADIUS);
         }
         checkLocation();
     }
@@ -99,49 +134,32 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //We have the permission
                 mMap.setMyLocationEnabled(true);
+                addingGeofences();
+
             } else {
                 //We do not have the permission..
-
+                print.sprintf("Location services are essential for this feature.!");
             }
         }
 
         if (requestCode == BACKGROUND_LOCATION_ACCESS_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //We have the permission
-                Toast.makeText(this, "You can add geofences...", Toast.LENGTH_SHORT).show();
+                print.sprintf("Red-Zones added to the map.!");
+                //Toast.makeText(this, "Red-zones added.!", Toast.LENGTH_SHORT).show();
             } else {
                 //We do not have the permission..
-                Toast.makeText(this, "Background location access is neccessary for geofences to trigger...", Toast.LENGTH_SHORT).show();
+                print.sprintf("Background location access is neccessary for Red-zones to trigger.!");
+                //Toast.makeText(this, "Background location access is neccessary for Red-zones to trigger...", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    @Override
-    public void onMapLongClick(LatLng latLng) {
-        if (Build.VERSION.SDK_INT >= 29) {
-            //We need background permission
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                handleMapLongClick(latLng);
-            } else {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-                    //We show a dialog and ask for permission
-                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
-                } else {
-                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
-                }
-            }
-
-        } else {
-            handleMapLongClick(latLng);
-        }
-
-    }
-
-    private void handleMapLongClick(LatLng latLng) {
-        mMap.clear();
+    private void PlotAndAddGeofence(LatLng latLng,float radius) {
+        //mMap.clear();
         addMarker(latLng);
-        addCircle(latLng, GEOFENCE_RADIUS);
-        addGeofence(latLng, GEOFENCE_RADIUS);
+        addCircle(latLng, radius);
+        addGeofence(latLng, radius);
     }
 
     private void addGeofence(LatLng latLng, float radius) {
@@ -186,8 +204,56 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
         if(!locationManager.isProviderEnabled("gps"))
         {
+            print.sprintf("GPS is required for this feature.");
+            //Toast.makeText(this,"GPS is required.!",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
+    }
+
+    private void addingGeofences()
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Red-Zones");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap<String,String> data = (HashMap<String,String>)dataSnapshot.getValue();
+                LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
+                for( String key : data.keySet())
+                {
+                    String value = data.get(key);
+                    String[] values = value.split(",");
+                    LatLng latlng = new LatLng(Double.parseDouble(values[0]),Double.parseDouble(values[1]));
+                    float radius = Float.parseFloat(values[2])*1000;
+                    PlotAndAddGeofence(latlng,radius);
+                    latLngBoundsBuilder.include(latlng);
+                }
+
+                Location location = mMap.getMyLocation();
+                if(location!=null)
+                {
+                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    mMap.addMarker(markerOptions);
+                    latLngBoundsBuilder.include(latLng);
+                }
+                else
+                {
+                    print.sprintf("Your location is not available.!");
+                }
+                LatLngBounds latLngBounds = latLngBoundsBuilder.build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(latLngBounds,100);
+                mMap.animateCamera(cameraUpdate);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                print.fprintf("Failed to Connect to server.!");
+                //Toast.makeText(getApplicationContext(),"Failed to Connect to server.!",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
