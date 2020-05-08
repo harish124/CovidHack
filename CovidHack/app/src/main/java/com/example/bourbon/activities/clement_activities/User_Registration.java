@@ -104,6 +104,9 @@ public class User_Registration extends AppCompatActivity {
             male.setError("Select Gender");
         }else if(dob.getText().toString().length() == 0){
             dob.setError("Enter Your Date of Birth");
+        }else if(!myCalendar.before(Calendar.getInstance())){
+            dob.setError("Invalid DOB");
+
         }else {
 
             mDatabase.child(user.getUid()).child("Name").setValue(firstName.getText().toString());

@@ -29,6 +29,7 @@
         <activity android:name=".activities.clement_activities.Store_Menu" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.OrderInfo" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo" />
+        <activity android:name=".activities.harish_activities.recycler_view_acts.CustomerOrderInfo"/>
         <activity android:name=".activities.clement_activities.Store_Registration" />
         <activity android:name=".activities.harish_activities.recycler_view_acts.CovidStatusInfo" />
         <!--
