@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,8 +20,10 @@ import com.example.bourbon.activities.harish_activities.recycler_view_acts.Covid
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CustomerOrderInfo;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.IOException;
+import butterknife.BindView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -29,8 +32,11 @@ import print.Print;
 
 public class Main_menu extends AppCompatActivity {
 
+    @BindView(R.id.textView)
+    TextView textView;
     private Print p;
     private Transition transition;
+    DatabaseReference databaseReference;
 
     //harish
     private LocationManager mLocationManager;
@@ -86,7 +92,7 @@ public class Main_menu extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll, R.id.volunteer, R.id.donation, R.id.store, R.id.pass, R.id.logout,R.id.checkout})
+    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll, R.id.volunteer, R.id.donation, R.id.store, R.id.pass, R.id.logout, R.id.checkout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.hospital:
@@ -139,7 +145,7 @@ public class Main_menu extends AppCompatActivity {
             case R.id.checkout:
                 Intent intent15 = new Intent(this, CustomerOrderInfo.class);
                 startActivity(intent15);
-            break;
+                break;
         }
     }
 
