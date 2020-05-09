@@ -30,7 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
->>>>>>> 4fb4f57b0146f5d1906d007d860f63b63a958f6b
         <activity android:name=".activities.clement_activities.Graph_Stats" />
         <activity android:name=".activities.clement_activities.Order_Details" />
         <activity android:name=".activities.harish_activities.GraphDaily" />
