@@ -44,6 +44,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 import java.io.IOException;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -211,6 +212,16 @@ public class Main_menu extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Calendar.getInstance().getTime().toString(),address);
         editor.commit();
+    }
+
+    void getShared(){
+        Map<String,?> keys = sharedPreferences.getAll();
+
+        for(Map.Entry<String,?> entry : keys.entrySet()){
+//            Log.d("map values",entry.getKey() + ": " + entry.getValue().toString());
+            Toast.makeText(this, entry.getValue().toString(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
