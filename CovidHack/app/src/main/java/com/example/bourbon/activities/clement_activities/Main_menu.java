@@ -2,6 +2,7 @@ package com.example.bourbon.activities.clement_activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -29,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 import butterknife.BindView;
 
 import butterknife.ButterKnife;
@@ -44,6 +47,7 @@ public class Main_menu extends AppCompatActivity {
     private Transition transition;
     DatabaseReference databaseReference;
     FirebaseUser auth;
+    SharedPreferences sharedPreferences ;
 
     //harish
     private LocationManager mLocationManager;
@@ -61,6 +65,7 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         auth = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -89,9 +94,9 @@ public class Main_menu extends AppCompatActivity {
 //            p.sprintf("Please turn on your Location for some functionalities to work");
 //        }
 
-        getLocation();
+//        getLocation();
 
-        getHomeLocation();
+//        getHomeLocation();
 
     }
 
@@ -99,7 +104,8 @@ public class Main_menu extends AppCompatActivity {
         try {
             Address address=new Geocoder(this).getFromLocationName("47/18 Krishnapuram Street" +
                     "Choolaimedu Chennai",5).get(0);
-
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(Calendar.getInstance().getTime().toString(),address);
             p.sprintf("Home Lat: "+address.getLatitude()+" Long: "+address.getLongitude());
         } catch (Exception e) {
             p.fprintf("Failed to get Home Lat Long\nError: "+e.getMessage());
@@ -110,7 +116,7 @@ public class Main_menu extends AppCompatActivity {
     void getLocation() {
         try {
             mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, (LocationListener) this);
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, (LocationListener) mlocationListener);
         }
         catch(SecurityException e) {
             e.printStackTrace();
