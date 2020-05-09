@@ -25,6 +25,7 @@ import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CustomerOrderInfo;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,7 +116,7 @@ public class Main_menu extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Log.d("Fused Loc ","Lat: "+location.getLatitude()+"\nLong: "+location.getLongitude());
+                    Log.d("OnNotFused Loc ","Lat: "+location.getLatitude()+"\nLong: "+location.getLongitude());
                 }
 
                 @Override
@@ -266,6 +267,8 @@ public class Main_menu extends AppCompatActivity {
         }).addOnFailureListener((e)-> {
             p.fprintf("Failed to retrieve Locaiton\nError: " + e.getMessage());
         });
+
+
     }
 
 
