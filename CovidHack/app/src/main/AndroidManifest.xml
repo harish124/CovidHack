@@ -61,11 +61,11 @@
         <activity android:name=".activities.barathan_activities.user_data" />
         <activity android:name=".activities.clement_activities.Startact">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <!-- Launcher Denotes that it will be the first launching activity -->
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                &lt;!&ndash; Launcher Denotes that it will be the first launching activity &ndash;&gt;-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
 
         </activity>
         <activity android:name=".activities.clement_activities.Main_menu"></activity>
