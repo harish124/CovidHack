@@ -1,6 +1,12 @@
 package com.example.bourbon.activities.clement_activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +20,7 @@ import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CustomerOrderInfo;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frame_transition.Transition;
@@ -36,6 +44,11 @@ public class Main_menu extends AppCompatActivity {
     private Transition transition;
     DatabaseReference databaseReference;
     FirebaseUser auth;
+
+    //harish
+    private LocationManager mLocationManager;
+    private LocationListener mlocationListener;
+    private FusedLocationProviderClient mfusedLocationProviderClient;
 
     void init() {
         transition = new Transition(this);
@@ -76,7 +89,32 @@ public class Main_menu extends AppCompatActivity {
 //            p.sprintf("Please turn on your Location for some functionalities to work");
 //        }
 
+        getLocation();
 
+        getHomeLocation();
+
+    }
+
+    private void getHomeLocation() {
+        try {
+            Address address=new Geocoder(this).getFromLocationName("47/18 Krishnapuram Street" +
+                    "Choolaimedu Chennai",5).get(0);
+
+            p.sprintf("Home Lat: "+address.getLatitude()+" Long: "+address.getLongitude());
+        } catch (Exception e) {
+            p.fprintf("Failed to get Home Lat Long\nError: "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    void getLocation() {
+        try {
+            mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, (LocationListener) this);
+        }
+        catch(SecurityException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -136,6 +174,5 @@ public class Main_menu extends AppCompatActivity {
                 break;
         }
     }
-
 
 }

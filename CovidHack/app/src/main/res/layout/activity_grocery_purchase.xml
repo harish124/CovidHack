@@ -33,6 +33,7 @@
             android:textColor="#000000"
             android:textSize="25dp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
@@ -40,10 +41,10 @@
             android:id="@+id/store_name"
             android:layout_width="370dp"
             android:layout_height="53dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
             android:textColorHint="#000000"
             android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
@@ -51,13 +52,13 @@
             android:id="@+id/item_name"
             android:layout_width="370dp"
             android:layout_height="60dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
             android:hint="Enter item to be purchased"
             android:paddingBottom="15dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
             android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/store_name" />
 
@@ -66,12 +67,12 @@
             android:id="@+id/item_quantity"
             android:layout_width="370dp"
             android:layout_height="60dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
             android:hint="Enter Quantity"
+            android:paddingBottom="15dp"
             android:textColorHint="#000000"
             android:textSize="20dp"
-            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
@@ -79,24 +80,22 @@
             android:id="@+id/add_item"
             android:layout_width="145dp"
             android:layout_height="55dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/button"
             android:backgroundTint="#ebebeb"
             android:text="Add to Cart"
             android:textSize="17dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/manuel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.078"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_quantity"
-            app:layout_constraintVertical_bias="0.437" />
+            app:layout_constraintTop_toBottomOf="@+id/item_quantity" />
 
         <Button
             android:id="@+id/submit_list"
             android:layout_width="145dp"
             android:layout_height="55dp"
             android:layout_marginTop="35dp"
-            android:layout_marginBottom="32dp"
             android:background="@drawable/button"
             android:backgroundTint="#ebebeb"
             android:text="Place Order"
@@ -104,10 +103,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.851"
-            app:layout_constraintStart_toEndOf="@+id/manuel"
+            app:layout_constraintHorizontal_bias="0.924"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cart"
-            app:layout_constraintVertical_bias="0.142" />
+            app:layout_constraintVertical_bias="0.068" />
 
         <Button
             android:id="@+id/manuel"
@@ -120,11 +119,11 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.069"
+            app:layout_constraintHorizontal_bias="0.078"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cart"
-            app:layout_constraintVertical_bias="0.288" />
+            app:layout_constraintVertical_bias="0.291" />
 
         <Button
             android:id="@+id/cart"
@@ -137,8 +136,8 @@
             android:textSize="17dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.851"
-            app:layout_constraintStart_toEndOf="@+id/add_item"
+            app:layout_constraintHorizontal_bias="0.924"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_quantity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
