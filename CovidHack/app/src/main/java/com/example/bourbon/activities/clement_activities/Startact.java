@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
@@ -40,27 +43,12 @@ public class Startact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_main);
         ButterKnife.bind(this);
-        FirebaseMessaging.getInstance().subscribeToTopic("general")
-                .addOnCompleteListener(task -> {
-                    String msg = "Successful" ;
-                    if (!task.isSuccessful()) {
-                        msg = "Failed";
-                    }
-//                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
-                });
+
 
 
 
             mobilenum.setCursorVisible(false);
-        mauth = FirebaseAuth.getInstance();
-        FirebaseUser user = mauth.getCurrentUser();
-        if(user!=null){
 
-            Intent intent = new Intent(Startact.this, Main_menu.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-            startActivity(intent);
-        }
 //        mobile = findViewById(R.id.mobi);
 //        submit = findViewById(R.id.sub);
 
@@ -72,6 +60,7 @@ public class Startact extends AppCompatActivity {
 //                startActivity(i);
 //            }
 //        });
+
     }
 
     @OnClick({R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.next,R.id.back})
