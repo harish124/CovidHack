@@ -163,13 +163,13 @@ public class MapsActivity extends FragmentActivity
 
                     if(results==null)
                     {
-                        print.sprintf("No results found. Please try again in few moments.!");
+                        print.fprintf("No results found. Please try again in few moments.!");
                         //Toast.makeText(getApplicationContext(),"Result null",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     if(results.size()==0) {
-                        print.sprintf("Please try again in few moments.!");
+                        print.fprintf("Please try again in few moments.!");
                         // Toast.makeText(getApplicationContext(), "Please try again in few moments", Toast.LENGTH_SHORT).show();
                     }
                     m=new ArrayList();
@@ -308,14 +308,14 @@ public class MapsActivity extends FragmentActivity
 
         if(!checkPlayServices())
         {
-            print.sprintf("Please install Google Play Services.!");
+            print.fprintf("Please install Google Play Services.!");
             //Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
         }
 
         LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
         if(!lm.isProviderEnabled("gps"))
         {
-            print.sprintf("GPS required");
+            print.fprintf("GPS required");
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
