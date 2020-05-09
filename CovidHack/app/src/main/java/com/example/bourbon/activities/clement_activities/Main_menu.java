@@ -64,6 +64,14 @@ public class Main_menu extends AppCompatActivity {
     SharedPreferences sharedPreferences ;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
+    public SharedPreferences getSharedPreferences() {
+        return sharedPreferences;
+    }
+
+    public void setSharedPreferences(SharedPreferences sharedPreferences) {
+        this.sharedPreferences = sharedPreferences;
+    }
+
     //harish
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -214,7 +222,7 @@ public class Main_menu extends AppCompatActivity {
         editor.commit();
     }
 
-    void getShared(){
+    public void getShared(){
         Map<String,?> keys = sharedPreferences.getAll();
 
         for(Map.Entry<String,?> entry : keys.entrySet()){
@@ -315,7 +323,7 @@ public class Main_menu extends AppCompatActivity {
                 try {
                     Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
                     //add this below loc info to shared pref
-                    //addr2.getAddressLine(0)
+                    SharedCode(addr2.getAddressLine(0).toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
