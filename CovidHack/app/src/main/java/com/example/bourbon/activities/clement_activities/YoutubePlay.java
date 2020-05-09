@@ -31,7 +31,8 @@ public class YoutubePlay extends YouTubeBaseActivity {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.loadVideo(video_id);
-                youTubePlayerView.initialize("AIzaSyCgMfU9aS6h8qjAF8NxzBHhTS84palI7UY",onInitializedListener);
+
+
             }
 
             @Override
@@ -39,6 +40,8 @@ public class YoutubePlay extends YouTubeBaseActivity {
 
             }
         };
+
+        youTubePlayerView.initialize("AIzaSyCgMfU9aS6h8qjAF8NxzBHhTS84palI7UY",onInitializedListener);
 
 
 
