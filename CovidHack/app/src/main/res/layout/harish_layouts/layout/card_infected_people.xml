@@ -10,26 +10,56 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_margin="60dp"
+            android:id="@+id/infectedPeople"
+            android:layout_width="312dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            card_view:cardCornerRadius="20dp"
+
+            android:layout_marginVertical="2dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+
+            card_view:cardBackgroundColor="#883799"
+            android:clipToPadding="false"
+            android:elevation="5dp"
+            card_view:cardPreventCornerOverlap="false"
+            card_view:cardUseCompatPadding="true"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{pd.dateAndTime}"/>
+                    android:text="@{pd.dateAndTime}"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:layout_margin="10dp"
+                    android:textSize="24dp"
+                    android:textStyle="bold"/>
+
                 <TextView
                     android:id="@+id/addr"
-                    android:layout_below="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{pd.addr}"/>
+                    android:layout_below="@+id/date"
+                    android:padding="10dp"
+                    android:text="@{pd.addr}"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
