@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import com.example.bourbon.R;
 import com.example.bourbon.activities.arumugam_activities.MapsActivity;
 import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing;
+import com.example.bourbon.activities.harish_activities.PersonLocAct;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CustomerOrderInfo;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -213,10 +214,11 @@ public class Main_menu extends AppCompatActivity {
                 break;
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent11 = new Intent(Main_menu.this, Startact.class);
-                intent11.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //Intent intent11 = new Intent(Main_menu.this, Startact.class);
+                transition.goTo(PersonLocAct.class);
+                //intent11.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                startActivity(intent11);
+                //startActivity(intent11);
                 break;
             case R.id.checkout:
                 Intent intent15 = new Intent(this, CustomerOrderInfo.class);
