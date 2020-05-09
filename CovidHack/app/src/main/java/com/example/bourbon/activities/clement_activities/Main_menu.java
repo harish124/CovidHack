@@ -1,20 +1,27 @@
 package com.example.bourbon.activities.clement_activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+
 import android.content.SharedPreferences;
+
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.bourbon.R;
 import com.example.bourbon.activities.arumugam_activities.MapsActivity;
@@ -22,6 +29,8 @@ import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo;
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CustomerOrderInfo;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +40,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 
@@ -48,15 +59,17 @@ public class Main_menu extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseUser auth;
     SharedPreferences sharedPreferences ;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     //harish
-    private LocationManager mLocationManager;
-    private LocationListener mlocationListener;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
     private FusedLocationProviderClient mfusedLocationProviderClient;
 
     void init() {
         transition = new Transition(this);
         p = new Print(this);
+        fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -94,7 +107,10 @@ public class Main_menu extends AppCompatActivity {
 //            p.sprintf("Please turn on your Location for some functionalities to work");
 //        }
 
-//        getLocation();
+
+
+
+        getLocation();
 
 //        getHomeLocation();
 
@@ -104,9 +120,13 @@ public class Main_menu extends AppCompatActivity {
         try {
             Address address=new Geocoder(this).getFromLocationName("47/18 Krishnapuram Street" +
                     "Choolaimedu Chennai",5).get(0);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(Calendar.getInstance().getTime().toString(),address);
+//            SharedCode(address.toString());
             p.sprintf("Home Lat: "+address.getLatitude()+" Long: "+address.getLongitude());
+
+            Address addr2=new Geocoder(this).getFromLocation(13.060661,80.228231,5).get(0);
+//            SharedCode(addr2.toString());
+            p.sprintf("Your Loc Name: "+addr2.getAddressLine(0)+"\nLocality"+addr2.getLocality());
+
         } catch (Exception e) {
             p.fprintf("Failed to get Home Lat Long\nError: "+e.getMessage());
             e.printStackTrace();
@@ -115,12 +135,80 @@ public class Main_menu extends AppCompatActivity {
 
     void getLocation() {
         try {
-            mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, (LocationListener) mlocationListener);
+
+
+            locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
+
+            Geocoder geocoder=new Geocoder(this);
+            locationListener=new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+
+                    try {
+                        Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
+                        //add this below loc info to shared pref
+                        //addr2.getAddressLine(0)
+                        SharedCode(addr2.toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("Fused Loc ","Lat: "+location.getLatitude()+"\nLong: "+location.getLongitude());
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+            };
+
+            if(Build.VERSION.SDK_INT<23)
+            {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        0,0,locationListener);
+            }
+            else if(Build.VERSION.SDK_INT>=23)
+            {
+                if(ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED)
+                {
+                    requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    },1000);
+                }
+                else {
+                    if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)
+                            ==PackageManager.PERMISSION_GRANTED) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                                0,0,locationListener);
+
+                        getLastLocation();
+                        //p.sprintf("Lat = "+location.getLatitude());
+
+                    }
+                }
+            }
+
         }
         catch(SecurityException e) {
             e.printStackTrace();
         }
+    }
+
+    void SharedCode(String address){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Calendar.getInstance().getTime().toString(),address);
+        editor.commit();
     }
 
 
@@ -180,5 +268,50 @@ public class Main_menu extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode==1000)
+        {
+            if(grantResults.length>0)
+            {
+                if(grantResults[0]==PackageManager.PERMISSION_GRANTED)
+                {
+
+                    if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)
+                            ==PackageManager.PERMISSION_GRANTED) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                                0,0,locationListener);
+
+                        getLastLocation();
+                    }
+                }
+            }
+        }
+    }
+
+    void getLastLocation()
+    {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener((location)->{
+            if (location!=null) {
+
+                Geocoder geocoder=new Geocoder(this);
+                try {
+                    Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
+                    //add this below loc info to shared pref
+                    //addr2.getAddressLine(0)
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.d("Fused Loc ","Lat: "+location.getLatitude()+"\nLong: "+location.getLongitude());
+
+            }
+        }).addOnFailureListener((e)-> {
+            p.fprintf("Failed to retrieve Locaiton\nError: " + e.getMessage());
+        });
+    }
+
 
 }

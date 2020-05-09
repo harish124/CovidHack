@@ -160,10 +160,23 @@ public class EmergencyContactInfo extends Activity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode==100 && grantResults.length>0)
+        if(requestCode==100 && grantResults.length>0 )
         {
+            boolean flag=true;
+
+            for(int i : grantResults)
+            {
+                if(i!=PackageManager.PERMISSION_GRANTED)
+                {
+                    flag=false;
+                    break;
+                }
+            }
+
+            if(flag) {
                 checkLocation();
                 fetchProdFromFirebase();
+            }
         }
     }
 
