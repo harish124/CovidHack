@@ -3,6 +3,9 @@ package com.example.bourbon.activities.clement_activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+
+import android.content.SharedPreferences;
+
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +34,14 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 import java.io.IOException;
 
@@ -49,6 +59,8 @@ public class Main_menu extends AppCompatActivity {
     private Print p;
     private Transition transition;
     DatabaseReference databaseReference;
+    FirebaseUser auth;
+    SharedPreferences sharedPreferences ;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     //harish
@@ -68,6 +80,26 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        auth = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                try {
+                    textView.setText("Welcome  " + snapshot.child("users").child(auth.getUid()).child("Name").getValue()
+                            .toString());
+                }catch (Exception e){
+                    Toast.makeText(Main_menu.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Main_menu.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 //        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
 //        if(!lm.isProviderEnabled("gps"))
 //        {
@@ -78,9 +110,11 @@ public class Main_menu extends AppCompatActivity {
 //        }
 
 
+
+
         getLocation();
 
-        getHomeLocation();
+//        getHomeLocation();
 
     }
 
@@ -88,10 +122,11 @@ public class Main_menu extends AppCompatActivity {
         try {
             Address address=new Geocoder(this).getFromLocationName("47/18 Krishnapuram Street" +
                     "Choolaimedu Chennai",5).get(0);
-
+//            SharedCode(address.toString());
             p.sprintf("Home Lat: "+address.getLatitude()+" Long: "+address.getLongitude());
 
             Address addr2=new Geocoder(this).getFromLocation(13.060661,80.228231,5).get(0);
+//            SharedCode(addr2.toString());
             p.sprintf("Your Loc Name: "+addr2.getAddressLine(0)+"\nLocality"+addr2.getLocality());
 
         } catch (Exception e) {
@@ -102,6 +137,8 @@ public class Main_menu extends AppCompatActivity {
 
     void getLocation() {
         try {
+
+
             locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
 
             Geocoder geocoder=new Geocoder(this);
@@ -113,6 +150,7 @@ public class Main_menu extends AppCompatActivity {
                         Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
                         //add this below loc info to shared pref
                         //addr2.getAddressLine(0)
+                        SharedCode(addr2.toString());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -162,10 +200,17 @@ public class Main_menu extends AppCompatActivity {
                     }
                 }
             }
+
         }
         catch(SecurityException e) {
             e.printStackTrace();
         }
+    }
+
+    void SharedCode(String address){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Calendar.getInstance().getTime().toString(),address);
+        editor.commit();
     }
 
 
