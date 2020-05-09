@@ -101,7 +101,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
             //Ask for permission
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 //We need to show user a dialog for displaying why the permission is needed and then ask for the permission...
-                print.sprintf("Location Services required.!");
+                print.fprintf("Location Services required.!");
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
             } else {
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
@@ -115,7 +115,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                     //We show a dialog and ask for permission
-                    print.sprintf("Background Location services is required for req-zone alert.!");
+                    print.fprintf("Background Location services is required for req-zone alert.!");
                     ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
                 } else {
                     ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
@@ -138,7 +138,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
 
             } else {
                 //We do not have the permission..
-                print.sprintf("Location services are essential for this feature.!");
+                print.fprintf("Location services are essential for this feature.!");
             }
         }
 
@@ -149,7 +149,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
                 //Toast.makeText(this, "Red-zones added.!", Toast.LENGTH_SHORT).show();
             } else {
                 //We do not have the permission..
-                print.sprintf("Background location access is neccessary for Red-zones to trigger.!");
+                print.fprintf("Background location access is neccessary for Red-zones to trigger.!");
                 //Toast.makeText(this, "Background location access is neccessary for Red-zones to trigger...", Toast.LENGTH_SHORT).show();
             }
         }
@@ -204,7 +204,7 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
         if(!locationManager.isProviderEnabled("gps"))
         {
-            print.sprintf("GPS is required for this feature.");
+            print.fprintf("GPS is required for this feature.");
             //Toast.makeText(this,"GPS is required.!",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
