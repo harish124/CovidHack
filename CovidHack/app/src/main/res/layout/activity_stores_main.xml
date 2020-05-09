@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ebebeb"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,14 +10,14 @@
         android:id="@+id/registration"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:text="Store Registration"
         android:textAlignment="center"
         android:textColor="#a1a1a1"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,15 +87,15 @@
         android:textColor="#919191"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintEnd_toStartOf="@+id/checkadd"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/storeaddress" />
 
     <CheckBox
         android:id="@+id/checkadd"
-        android:layout_width="31dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:buttonTint="#919191"
         android:scaleX="1.5"
         android:scaleY="1.5"
@@ -132,9 +133,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pincode"
-        app:layout_constraintVertical_bias="0.459" />
+        app:layout_constraintVertical_bias="0.328" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ebebeb"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <EditText
         android:id="@+id/first_name"
         android:layout_width="350dp"
         android:layout_height="65dp"
-        android:layout_marginTop="12dp"
         android:hint="Name"
         android:inputType="textPersonName"
         android:textSize="20dp"
@@ -18,7 +19,6 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userimage" />
-
 
     <EditText
         android:id="@+id/address"
@@ -131,7 +131,7 @@
         android:id="@+id/registration"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:text="Registration"
         android:textAlignment="center"
         android:textColor="#a1a1a1"
@@ -146,11 +146,11 @@
         android:id="@+id/userimage"
         android:layout_width="118dp"
         android:layout_height="106dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registration"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/user" />
 
 
