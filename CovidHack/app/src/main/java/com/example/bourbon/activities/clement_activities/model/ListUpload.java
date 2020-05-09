@@ -1,26 +1,30 @@
 package com.example.bourbon.activities.clement_activities.model;
 
-public class ListUpload {
+import androidx.annotation.Keep;
 
-    private String CustomerId ;
-    private String ShopId;
-    private String imageUri;
-    private String Manuel;
+import java.io.Serializable;
+@Keep
+public class ListUpload implements Serializable {
 
-    public String getCustomerId() {
-        return CustomerId;
+    public String customerId ;
+    public String shopId;
+    public String imageUri;
+    public String manuel;
+
+    public String getcustomerId() {
+        return customerId;
     }
 
-    public void setCustomerId(String customerId) {
-        CustomerId = customerId;
+    public void setcustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public String getShopId() {
-        return ShopId;
+    public String getshopId() {
+        return shopId;
     }
 
-    public void setShopId(String shopId) {
-        ShopId = shopId;
+    public void setshopId(String shopId) {
+        this.shopId = shopId;
     }
 
     public String getImageUri() {
@@ -32,18 +36,18 @@ public class ListUpload {
     }
 
     public ListUpload(String customerId, String shopId, String imageUri,String manuel) {
-        CustomerId = customerId;
-        ShopId = shopId;
+        this.customerId = customerId;
+        this.shopId = shopId;
         this.imageUri = imageUri;
-        Manuel = manuel;
+        this.manuel = manuel;
     }
 
-    public String getManuel() {
-        return Manuel;
+    public String getmanuel() {
+        return manuel;
     }
 
-    public void setManuel(String manuel) {
-        Manuel = manuel;
+    public void setmanuel(String manuel) {
+        this.manuel = manuel;
     }
 
     public ListUpload(){
