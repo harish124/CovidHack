@@ -1,9 +1,11 @@
 package com.example.bourbon.activities.harish_activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.bourbon.R
+import com.example.bourbon.activities.clement_activities.Main_menu
 import com.example.bourbon.activities.harish_activities.model.PersonLocModel
 import com.example.bourbon.databinding.ActivityPersonLocHarishBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +28,7 @@ class PersonLocAct : AppCompatActivity() {
         binding!!.share.setOnClickListener{
             if(binding!!.infectedBox.isChecked()==true){
                 if(binding!!.pushBox.isChecked()==true){
-                    shareToFirebase()
+                    readFromSharedPref()
                     p.sprintf("Your details will be shared now!")
                 }
             }
@@ -34,13 +36,12 @@ class PersonLocAct : AppCompatActivity() {
         }
     }
 
-    fun shareToFirebase(){
-        val obj:PersonLocModel=readFromSharedPref()?: PersonLocModel("1/1/2000","Kerala")
-
+    fun shareToFirebase(obj:PersonLocModel){
 
         database.getReference("Infected")
                 .child(mAuth.currentUser?.uid.toString())
-                .setValue(obj)
+                .child(obj.dateAndTime)
+                .setValue(obj.addr)
                 .addOnCompleteListener{
                     p.sprintf("Published Successfully")
                 }
@@ -50,8 +51,17 @@ class PersonLocAct : AppCompatActivity() {
                 }
     }
 
-    fun readFromSharedPref():PersonLocModel{
+    fun readFromSharedPref(){
         //clement fill this fn
-        return PersonLocModel("1/4/2000","Error")
+
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val keys: Map<String?, *> = sharedPreferences.getAll()
+
+        for ((key, value) in keys) {
+//            Log.d("map values",entry.getKey() + ": " + entry.getValue().toString());
+            val obj=PersonLocModel(key.toString(),value.toString())
+            shareToFirebase(obj)
+        }
+        //shareToFirebase(PersonLocModel("1/4/2000","Error"))
     }
 }
