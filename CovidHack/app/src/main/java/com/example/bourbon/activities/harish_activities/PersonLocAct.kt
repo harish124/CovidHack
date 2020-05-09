@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import frame_transition.Transition
 import print.Print
+import java.util.*
 
 class PersonLocAct : AppCompatActivity() {
 
@@ -40,10 +41,11 @@ class PersonLocAct : AppCompatActivity() {
 
         database.getReference("Infected")
                 .child(mAuth.currentUser?.uid.toString())
-                .child(obj.dateAndTime)
-                .setValue(obj.addr)
+                .child(UUID.randomUUID().toString())
+                .setValue(obj)
                 .addOnCompleteListener{
-                    p.sprintf("Published Successfully")
+                    //p.sprintf("Published Successfully")
+                    println("Published successfully")
                 }
                 .addOnFailureListener{e->
                     p.fprintf("Couldn't publish\nError: ${e.message}")
@@ -54,7 +56,7 @@ class PersonLocAct : AppCompatActivity() {
     fun readFromSharedPref(){
         //clement fill this fn
 
-        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("default",Context.MODE_PRIVATE)
         val keys: Map<String?, *> = sharedPreferences.getAll()
 
         for ((key, value) in keys) {
