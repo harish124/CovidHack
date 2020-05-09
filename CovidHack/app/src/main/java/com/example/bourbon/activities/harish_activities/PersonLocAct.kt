@@ -44,7 +44,8 @@ class PersonLocAct : AppCompatActivity() {
                 .child(UUID.randomUUID().toString())
                 .setValue(obj)
                 .addOnCompleteListener{
-                    p.sprintf("Published Successfully")
+                    //p.sprintf("Published Successfully")
+                    println("Published successfully")
                 }
                 .addOnFailureListener{e->
                     p.fprintf("Couldn't publish\nError: ${e.message}")

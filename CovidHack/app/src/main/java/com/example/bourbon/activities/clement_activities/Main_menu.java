@@ -229,13 +229,13 @@ public class Main_menu extends AppCompatActivity {
 
         for(Map.Entry<String,?> entry : keys.entrySet()){
 //            Log.d("map values",entry.getKey() + ": " + entry.getValue().toString());
-            Toast.makeText(this, entry.getValue().toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, entry.getValue().toString(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
 
-    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll, R.id.volunteer, R.id.donation, R.id.store, R.id.pass, R.id.logout, R.id.checkout})
+    @OnClick({R.id.hospital, R.id.fund, R.id.lab, R.id.hotspot, R.id.course, R.id.toll, R.id.volunteer, R.id.donation, R.id.store, R.id.pass, R.id.logout, R.id.checkout,R.id.infected,R.id.mylocation})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.hospital:
@@ -275,21 +275,29 @@ public class Main_menu extends AppCompatActivity {
                 startActivity(intent8);
                 break;
             case R.id.pass:
-//                Intent intent9 = new Intent(Main_menu.this, E_Pass.class);
-//                startActivity(intent9);
-                transition.goTo(InfectedPeopleInfo.class);
+                Intent intent9 = new Intent(Main_menu.this, E_Pass.class);
+                startActivity(intent9);
+                //transition.goTo(InfectedPeopleInfo.class);
                 break;
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                //Intent intent11 = new Intent(Main_menu.this, Startact.class);
-                transition.goTo(PersonLocAct.class);
-                //intent11.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent11 = new Intent(Main_menu.this, Startact.class);
+                //transition.goTo(PersonLocAct.class);
+                intent11.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                //startActivity(intent11);
+                startActivity(intent11);
                 break;
             case R.id.checkout:
                 Intent intent15 = new Intent(this, CustomerOrderInfo.class);
                 startActivity(intent15);
+                break;
+
+            case R.id.infected:
+                transition.goTo(InfectedPeopleInfo.class);
+                break;
+
+            case R.id.mylocation:
+                transition.goTo(PersonLocAct.class);
                 break;
         }
     }

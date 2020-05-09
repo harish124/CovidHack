@@ -63,7 +63,7 @@ class InfectedPeopleInfo : AppCompatActivity() {
                                 for(innerObj in obj.children)
                                 {
                                     val personLoc=innerObj?.getValue(PersonLocModel::class.java) ?:PersonLocModel("err","err")
-                                    p.sprintf("dateAndPERSON : ${personLoc.dateAndTime}")
+                                    //p.sprintf("dateAndPERSON : ${personLoc.dateAndTime}")
                                     products.add(personLoc)
                                     adapter.notifyItemInserted(i)
                                     i+=1
