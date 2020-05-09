@@ -510,7 +510,7 @@
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/call" />
+                        app:srcCompat="@drawable/infloc" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -547,7 +547,7 @@
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/loan" />
+                        app:srcCompat="@drawable/myloc" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
