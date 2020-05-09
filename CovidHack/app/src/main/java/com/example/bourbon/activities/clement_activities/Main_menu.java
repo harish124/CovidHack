@@ -31,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 
 import butterknife.ButterKnife;
@@ -100,10 +102,19 @@ public class Main_menu extends AppCompatActivity {
         try {
             locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
 
+            Geocoder geocoder=new Geocoder(this);
             locationListener=new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    //add this loc info to shared pref
+
+                    try {
+                        Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
+                        //add this below loc info to shared pref
+                        //addr2.getAddressLine(0)
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     Log.d("Fused Loc ","Lat: "+location.getLatitude()+"\nLong: "+location.getLongitude());
                 }
 
@@ -241,7 +252,14 @@ public class Main_menu extends AppCompatActivity {
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener((location)->{
             if (location!=null) {
 
-                //add this loc info to shared pref
+                Geocoder geocoder=new Geocoder(this);
+                try {
+                    Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
+                    //add this below loc info to shared pref
+                    //addr2.getAddressLine(0)
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Log.d("Fused Loc ","Lat: "+location.getLatitude()+"\nLong: "+location.getLongitude());
 
             }
