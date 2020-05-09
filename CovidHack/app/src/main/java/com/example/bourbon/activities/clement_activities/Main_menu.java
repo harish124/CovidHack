@@ -81,7 +81,7 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("default",MODE_PRIVATE);
         auth = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -113,7 +113,7 @@ public class Main_menu extends AppCompatActivity {
 
 
 
-        getLocation();
+//        getLocation();
 
 //        getHomeLocation();
 
@@ -139,7 +139,6 @@ public class Main_menu extends AppCompatActivity {
     void getLocation() {
         try {
 
-
             locationManager=(LocationManager)getSystemService(LOCATION_SERVICE);
 
             Geocoder geocoder=new Geocoder(this);
@@ -148,6 +147,8 @@ public class Main_menu extends AppCompatActivity {
                 public void onLocationChanged(Location location) {
 
                     try {
+                        Toast.makeText(Main_menu.this, "Called", Toast.LENGTH_SHORT).show();
+
                         Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
                         //add this below loc info to shared pref
                         //addr2.getAddressLine(0)
@@ -209,6 +210,7 @@ public class Main_menu extends AppCompatActivity {
     }
 
     void SharedCode(String address){
+//        Toast.makeText(this, "Inside Shared Pref", Toast.LENGTH_SHORT).show();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Calendar.getInstance().getTime().toString(),address);
         editor.commit();
@@ -316,6 +318,7 @@ public class Main_menu extends AppCompatActivity {
                     Address addr2=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),5).get(0);
                     //add this below loc info to shared pref
                     //addr2.getAddressLine(0)
+                    SharedCode(addr2.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

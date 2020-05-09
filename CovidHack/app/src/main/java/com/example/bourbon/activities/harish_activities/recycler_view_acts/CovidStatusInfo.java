@@ -62,7 +62,7 @@ public class CovidStatusInfo extends Activity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         binding= DataBindingUtil.setContentView(CovidStatusInfo.this, R.layout.rv_activity_covid_status);
         configRecyclerView();
-
+        p.sprintf("Click Card to View Overall Stats");
         fetchProdFromFirebase();
 
     }
