@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#29f0dc"
+    android:background="#ebebeb"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -71,11 +71,11 @@
 
     <Button
         android:id="@+id/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/newbutton"
+        android:layout_width="100dp"
+        android:layout_height="46dp"
+        android:background="@drawable/button"
         android:text="Pay"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
