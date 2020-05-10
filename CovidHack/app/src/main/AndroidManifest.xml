@@ -23,11 +23,7 @@
         <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo"></activity>
         <activity android:name=".activities.harish_activities.PersonLocAct" />
         <activity android:name=".activities.clement_activities.Splash_Screen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <!-- Launcher Denotes that it will be the first launching activity -->
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".activities.clement_activities.Graph_Stats" />
         <activity android:name=".activities.clement_activities.Order_Details" />
@@ -65,7 +61,11 @@
 
         </activity>
         <activity android:name=".activities.clement_activities.Main_menu" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- Launcher Denotes that it will be the first launching activity -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
