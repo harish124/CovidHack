@@ -93,6 +93,7 @@ public class ApiQuery {
 
         try {
             JSONObject jsonobj = new JSONObject(sbuff.toString());
+            Log.d("Arumugam",jsonobj.toString());
             JSONArray jsonarray = jsonobj.getJSONArray("results");
 
             for (int i = 0; i < jsonarray.length(); i++) {
