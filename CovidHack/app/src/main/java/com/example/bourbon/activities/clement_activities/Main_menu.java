@@ -84,7 +84,9 @@ public class Main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+
+        sharedPreferences = getSharedPreferences("default",Context.MODE_PRIVATE);
+
         auth = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -140,9 +142,7 @@ public class Main_menu extends AppCompatActivity {
     void getLocation() {
         try {
 
-
             locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
             Geocoder geocoder = new Geocoder(this);
             locationListener = new LocationListener() {
                 @Override
@@ -203,7 +203,9 @@ public class Main_menu extends AppCompatActivity {
         }
     }
 
+
     void SharedCode(String address) {
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Calendar.getInstance().getTime().toString(), address);
         editor.apply();

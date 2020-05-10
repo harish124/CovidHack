@@ -43,6 +43,7 @@ android {
     }
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
     dataBinding {
         enabled true
@@ -125,6 +126,8 @@ dependencies {
 
     //recyclerview
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
 
 }
