@@ -53,7 +53,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,13 +62,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="@color/yellow"
-                app:cardCornerRadius="12dp"
                 android:id="@+id/hospital"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -97,13 +97,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                app:cardBackgroundColor="@color/yellow"
-                android:layout_margin="10dp"
                 android:id="@+id/fund"
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -117,10 +117,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="PM FUND"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
                         android:textColor="#000000"
-                        />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/fund1"
@@ -132,10 +131,11 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -144,13 +144,13 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="@color/yellow"
                 android:id="@+id/lab"
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -165,9 +165,8 @@
                         android:layout_marginTop="10dp"
                         android:text="STATS"
                         android:textColor="#000000"
-                        android:textStyle="bold"
                         android:textSize="24sp"
-                        />
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/lab1"
@@ -180,13 +179,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@color/yellow"
                 android:id="@+id/hotspot"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -200,10 +199,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="RED ZONE"
-                        android:textStyle="bold"
                         android:textColor="#000000"
                         android:textSize="24sp"
-                        />
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/hotspot1"
@@ -217,10 +215,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:orientation="horizontal"
             android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -228,13 +226,13 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="@color/yellow"
                 android:id="@+id/course"
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -245,13 +243,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/course1"
-                        android:textColor="#000000"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="COURSES"
-                        android:textStyle="bold"
+                        android:textColor="#000000"
                         android:textSize="24sp"
-                        />
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/course1"
@@ -264,13 +261,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                app:cardBackgroundColor="@color/yellow"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="12dp"
                 android:id="@+id/toll"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -282,12 +279,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/toll1"
                         android:layout_centerHorizontal="true"
-                        android:textColor="#000000"
                         android:layout_marginTop="10dp"
                         android:text="TOLL FREE"
-                        android:textStyle="bold"
+                        android:textColor="#000000"
                         android:textSize="24sp"
-                        />
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/toll1"
@@ -304,7 +300,7 @@
         <LinearLayout
             android:id="@+id/linearLayout4"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -313,11 +309,11 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/store"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:id="@+id/store"
                 app:cardBackgroundColor="@color/yellow"
                 app:cardCornerRadius="12dp">
 
@@ -348,11 +344,11 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/checkout"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:id="@+id/checkout"
                 app:cardBackgroundColor="@color/yellow"
                 app:cardCornerRadius="12dp">
 
@@ -384,11 +380,10 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -397,13 +392,13 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                app:cardBackgroundColor="@color/yellow"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="12dp"
                 android:id="@+id/volunteer"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -432,13 +427,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="@color/yellow"
                 android:id="@+id/donation"
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -452,10 +447,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="DONATION"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
                         android:textColor="#000000"
-                        />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/donation1"
@@ -471,7 +465,7 @@
         <LinearLayout
             android:id="@+id/linearLayout7"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -480,17 +474,17 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                app:cardBackgroundColor="@color/yellow"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="12dp"
                 android:id="@+id/infected"
-                android:layout_weight="1">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/textView16"
@@ -506,8 +500,8 @@
 
                     <ImageView
                         android:id="@+id/infloc"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         app:srcCompat="@drawable/infloc" />
@@ -515,14 +509,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
                 android:id="@+id/mylocation"
-                app:cardBackgroundColor="@color/yellow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
 
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -536,10 +530,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="MY LOC"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
                         android:textColor="#000000"
-                        />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/myloc"
@@ -556,7 +549,7 @@
         <LinearLayout
             android:id="@+id/linearLayout6"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -565,13 +558,13 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                app:cardBackgroundColor="@color/yellow"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="12dp"
                 android:id="@+id/pass"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -600,14 +593,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
                 android:id="@+id/logout"
-                app:cardBackgroundColor="@color/yellow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
 
-                app:cardCornerRadius="12dp"
-                android:layout_weight="1">
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -621,10 +614,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:text="LOG-OUT"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
                         android:textColor="#000000"
-                        />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/logout1"
