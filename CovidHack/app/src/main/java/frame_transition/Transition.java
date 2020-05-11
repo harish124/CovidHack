@@ -4,7 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 
 public class Transition {
-    Intent intent;
+    public Intent getIntent() {
+        return intent;
+    }
+
+    public void setIntent(Intent intent) {
+        this.intent = intent;
+    }
+
+    private Intent intent;
     private Context ctx;
 
     public Transition(Context ctx) {
