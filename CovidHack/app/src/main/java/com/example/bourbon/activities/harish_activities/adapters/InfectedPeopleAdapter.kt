@@ -16,8 +16,6 @@ import print.Print
 
 class InfectedPeopleAdapter(var products:ArrayList<PersonLocModel>): RecyclerView.Adapter<InfectedPeopleAdapter.MyViewHolder>() {
     var p: Print? = null
-
-
     class MyViewHolder(itemView: CardInfectedPeopleBinding, context: Context) : RecyclerView.ViewHolder(itemView.root) {
         var binding: CardInfectedPeopleBinding? = null
 
@@ -25,8 +23,6 @@ class InfectedPeopleAdapter(var products:ArrayList<PersonLocModel>): RecyclerVie
             binding = itemView
 
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -44,7 +40,7 @@ class InfectedPeopleAdapter(var products:ArrayList<PersonLocModel>): RecyclerVie
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding?.pd = products.get(position)
+        holder.binding?.pd = products[position]
 
     }
 }
