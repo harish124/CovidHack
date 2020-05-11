@@ -27,8 +27,8 @@ class PersonLocAct : AppCompatActivity() {
         binding=DataBindingUtil.setContentView(this,R.layout.activity_person_loc_harish)
 
         binding!!.share.setOnClickListener{
-            if(binding!!.infectedBox.isChecked()==true){
-                if(binding!!.pushBox.isChecked()==true){
+            if(binding!!.infectedBox.isChecked){
+                if(binding!!.pushBox.isChecked){
                     readFromSharedPref()
                     p.sprintf("Your details will be shared now!")
                 }
@@ -37,7 +37,7 @@ class PersonLocAct : AppCompatActivity() {
         }
     }
 
-    fun shareToFirebase(obj:PersonLocModel){
+    private fun shareToFirebase(obj:PersonLocModel){
 
         database.getReference("Infected")
                 .child(mAuth.currentUser?.uid.toString())
@@ -53,11 +53,11 @@ class PersonLocAct : AppCompatActivity() {
                 }
     }
 
-    fun readFromSharedPref(){
+    private fun readFromSharedPref(){
         //clement fill this fn
 
         val sharedPreferences = getSharedPreferences("default",Context.MODE_PRIVATE)
-        val keys: Map<String?, *> = sharedPreferences.getAll()
+        val keys: Map<String?, *> = sharedPreferences.all
 
         for ((key, value) in keys) {
 //            Log.d("map values",entry.getKey() + ": " + entry.getValue().toString());

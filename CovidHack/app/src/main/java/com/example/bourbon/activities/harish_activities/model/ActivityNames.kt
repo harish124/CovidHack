@@ -1,5 +1,6 @@
 package com.example.bourbon.activities.harish_activities.model
 
+import android.content.Intent
 import com.example.bourbon.activities.arumugam_activities.MapsActivity
 import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing
 import com.example.bourbon.activities.clement_activities.*
@@ -10,7 +11,7 @@ import com.example.bourbon.activities.harish_activities.recycler_view_acts.Infec
 import frame_transition.Transition
 import print.Print
 
-class ActivityNames(val transition: Transition,val p:Print) {
+class ActivityNames(private val transition: Transition, val p:Print) {
 
     val arr= arrayOf(MapsActivity::class.java,
     Upi_payments::class.java,
@@ -32,8 +33,8 @@ class ActivityNames(val transition: Transition,val p:Print) {
     }
 
     fun nextActivity2(cname:Class<*>){
-
         transition.goTo(cname)
+        transition.intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }
 
 

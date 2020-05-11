@@ -9,14 +9,14 @@
             type="com.example.bourbon.activities.harish_activities.model.ActivityNames" />
         <variable
             name="pd2"
-            type="com.example.bourbon.activities.clement_activities.Dashboard" />
+            type="com.example.bourbon.activities.harish_activities.Dashboard" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:background="@drawable/bgapps"
         android:layout_height="match_parent"
-        tools:context=".activities.clement_activities.Dashboard">
+        tools:context=".activities.harish_activities.Dashboard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -611,7 +611,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="@color/yellow"
-                    android:onClick="@{(v)->pd.nextActivity(pd.arr[13])}"
+                    android:onClick="@{(v)->pd.nextActivity2(pd.arr[13])}"
                     app:cardCornerRadius="12dp">
 
                     <RelativeLayout
