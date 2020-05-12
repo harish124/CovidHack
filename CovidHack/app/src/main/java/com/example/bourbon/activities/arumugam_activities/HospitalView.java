@@ -38,24 +38,21 @@ public class HospitalView extends AppCompatActivity {
         rating.setRating(Float.parseFloat(obj.getRating()));
         openinghrs.setText(obj.getOpeningHours());
 
-        directionbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        directionbutton.setOnClickListener(v -> {
 
-                String direction="";
-                StringBuilder sb= new StringBuilder();
-                sb.append("https://www.google.com/maps/dir/?api=1");
-                sb.append("&origin="+location);
-                sb.append("&destination="+obj.getLocationlatlng()[0]+","+obj.getLocationlatlng()[1]);
+            String direction;
+            StringBuilder sb= new StringBuilder();
+            sb.append("https://www.google.com/maps/dir/?api=1");
+            sb.append("&origin=").append(location);
+            sb.append("&destination="+obj.getLocationlatlng()[0]+","+obj.getLocationlatlng()[1]);
 
-                direction=sb.toString();
+            direction=sb.toString();
 
-                Uri uri = Uri.parse(direction);
+            Uri uri = Uri.parse(direction);
 
-                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(intent);
 
-            }
         });
 
     }

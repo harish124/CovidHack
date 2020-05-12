@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.bourbon.R
-import com.example.bourbon.activities.clement_activities.Main_menu
+
 import com.example.bourbon.activities.harish_activities.model.PersonLocModel
 import com.example.bourbon.databinding.ActivityPersonLocHarishBinding
 import com.google.firebase.auth.FirebaseAuth

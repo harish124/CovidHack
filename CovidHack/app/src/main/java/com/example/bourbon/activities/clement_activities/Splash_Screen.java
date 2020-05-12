@@ -10,6 +10,7 @@ import android.widget.Space;
 import android.widget.Toast;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.harish_activities.Dashboard;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,7 +58,7 @@ public class Splash_Screen extends AppCompatActivity {
                             try {
                                 if (snapshot.child("users").hasChild(user.getUid())) {
                                     // run some code
-                                    Intent intent = new Intent(Splash_Screen.this, Main_menu.class);
+                                    Intent intent = new Intent(Splash_Screen.this, Dashboard.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 } else {

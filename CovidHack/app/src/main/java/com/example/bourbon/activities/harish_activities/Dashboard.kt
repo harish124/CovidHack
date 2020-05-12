@@ -11,6 +11,9 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -20,7 +23,10 @@ import com.example.bourbon.databinding.ActivityMainBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import frame_transition.Transition
 import print.Print
 import java.io.IOException
@@ -50,13 +56,51 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         callPermissions()
         binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding?.pd= ActivityNames(transition,p)
+        binding?.pd= ActivityNames(transition,p,this)
         sharedPreferences= getSharedPreferences("default", Context.MODE_PRIVATE)
         locationManager= (getSystemService(Context.LOCATION_SERVICE) as LocationManager)
         geocoder=Geocoder(this)
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
+        setAnimationsToCards()
         fetchLocation()
+
+        database.getReference("users")
+                .child(mAuth.uid ?: "987654321qwert")
+                .addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onDataChange(user: DataSnapshot) {
+                        println("User = ${user}\nName: ${user.child("Name").value}")
+                        binding!!.textView.text="Welcome ${user.child("Name").getValue().toString()}"
+                    }
+
+                })
+
+
+    }
+
+    private fun setAnimationsToCards(){
+        val a=AnimationUtils.loadAnimation(this,R.anim.left_to_right)
+        val b=AnimationUtils.loadAnimation(this,R.anim.right_to_left)
+
+        binding!!.hospital.startAnimation(a)
+        binding!!.lab.startAnimation(a)
+        binding!!.course.startAnimation(a)
+        binding!!.store.startAnimation(a)
+        binding!!.volunteer.startAnimation(a)
+        binding!!.pass.startAnimation(a)
+        binding!!.infected.startAnimation(a)
+
+        binding!!.fund.startAnimation(b)
+        binding!!.hotspot.startAnimation(b)
+        binding!!.toll.startAnimation(b)
+        binding!!.checkout.startAnimation(b)
+        binding!!.donation.startAnimation(b)
+        binding!!.logout.startAnimation(b)
+        binding!!.mylocation.startAnimation(b)
 
     }
 
@@ -65,6 +109,7 @@ class Dashboard : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION)
         ==PackageManager.PERMISSION_GRANTED) {
 
+            //p.sprintf("Line 1")
             fusedLocationProviderClient!!.requestLocationUpdates(locationRequest,
                     object:LocationCallback(){
                         override fun onLocationResult(locationResult: LocationResult?) {
@@ -113,12 +158,14 @@ class Dashboard : AppCompatActivity() {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
                         getLastLocation()
+                        fetchLocation()
                     }
                 }
                 else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
                         getLastLocation()
+                        fetchLocation()
                     }
                 }
             }

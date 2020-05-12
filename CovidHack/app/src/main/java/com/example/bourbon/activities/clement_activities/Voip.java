@@ -67,18 +67,15 @@ public class Voip extends AppCompatActivity {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
                 mFusedLocationClient.getLastLocation().addOnCompleteListener(
-                        new OnCompleteListener<Location>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Location> task) {
-                                Location location = task.getResult();
-                                if (location == null) {
-                                    requestNewLocationData();
-                                } else {
-                                    Toast.makeText(Voip.this, "Lattutude : " + location.getLatitude()+ "Longitude : "+location.getLongitude(), Toast.LENGTH_SHORT).show();
+                        task -> {
+                            Location location = task.getResult();
+                            if (location == null) {
+                                requestNewLocationData();
+                            } else {
+                                Toast.makeText(Voip.this, "Lattutude : " + location.getLatitude()+ "Longitude : "+location.getLongitude(), Toast.LENGTH_SHORT).show();
 //                                    latTextView.setText(location.getLatitude()+"");
 //                                    lonTextView.setText(location.getLongitude()+"");
-                                    getLocationName(location.getLatitude(),location.getLongitude());
-                                }
+                                getLocationName(location.getLatitude(),location.getLongitude());
                             }
                         }
                 );
