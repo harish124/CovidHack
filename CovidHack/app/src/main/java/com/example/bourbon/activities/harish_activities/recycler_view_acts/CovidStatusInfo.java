@@ -47,8 +47,14 @@ public class CovidStatusInfo extends Activity {
         adapter=new CovidStatusRecyclerViewAdapter(products);
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(CovidStatusInfo.this, DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setAdapter(new ScaleInAnimationAdapter(adapter));
-        binding.recyclerView.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
+        ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(adapter);
+        binding.recyclerView.setAdapter(scaleInAnimationAdapter);
+        scaleInAnimationAdapter.setFirstOnly(false);
+        scaleInAnimationAdapter.setDuration(1000);
+        //scaleInAnimationAdapter.setHasStableIds(false);
+        scaleInAnimationAdapter.setInterpolator(new OvershootInterpolator(.100f));
+
+        //binding.recyclerView.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
     }
 
     void init(){

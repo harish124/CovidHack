@@ -7,9 +7,7 @@
         <variable
             name="pd"
             type="com.example.bourbon.activities.harish_activities.model.ActivityNames" />
-        <variable
-            name="pd2"
-            type="com.example.bourbon.activities.harish_activities.Dashboard" />
+
     </data>
 
     <ScrollView
@@ -37,16 +35,15 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:textColor="#FFFFFF"
                 android:layout_width="0dp"
-                android:paddingBottom="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-
                 android:layout_marginTop="24dp"
-                android:text="Welcome "
-                android:textStyle="bold"
+                android:paddingBottom="40dp"
+                android:text=""
+                android:textColor="#FFFFFF"
                 android:textSize="30sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
