@@ -11,6 +11,8 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -60,6 +62,7 @@ class Dashboard : AppCompatActivity() {
         geocoder=Geocoder(this)
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
+        setAnimationsToCards()
         fetchLocation()
 
         database.getReference("users")
@@ -76,6 +79,28 @@ class Dashboard : AppCompatActivity() {
 
                 })
 
+
+    }
+
+    private fun setAnimationsToCards(){
+        val a=AnimationUtils.loadAnimation(this,R.anim.left_to_right)
+        val b=AnimationUtils.loadAnimation(this,R.anim.right_to_left)
+
+        binding!!.hospital.startAnimation(a)
+        binding!!.lab.startAnimation(a)
+        binding!!.course.startAnimation(a)
+        binding!!.store.startAnimation(a)
+        binding!!.volunteer.startAnimation(a)
+        binding!!.pass.startAnimation(a)
+        binding!!.infected.startAnimation(a)
+
+        binding!!.fund.startAnimation(b)
+        binding!!.hotspot.startAnimation(b)
+        binding!!.toll.startAnimation(b)
+        binding!!.checkout.startAnimation(b)
+        binding!!.donation.startAnimation(b)
+        binding!!.logout.startAnimation(b)
+        binding!!.mylocation.startAnimation(b)
 
     }
 
