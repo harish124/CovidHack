@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bourbon.R;
 import com.example.bourbon.activities.clement_activities.model.ListUpload;
+import com.example.bourbon.activities.harish_activities.Dashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -110,7 +111,7 @@ public class Order_Food extends AppCompatActivity {
                     mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
                     mdatabase.child("Carts").child(dateFormat.format(date)).child("Items").setValue(Arrays.asList(groceries1));
                     p.sprintf("Order Successfully Placed");
-                    Intent intent = new Intent(Order_Food.this, Main_menu.class);
+                    Intent intent = new Intent(Order_Food.this, Dashboard.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
@@ -178,7 +179,7 @@ public class Order_Food extends AppCompatActivity {
 //                                Toast.makeText(Order_Food.this, "Upload 44Successful", Toast.LENGTH_SHORT).show();
 
                                 p.sprintf("Order Successfully Placed");
-                                Intent intent = new Intent(Order_Food.this, Main_menu.class);
+                                Intent intent = new Intent(Order_Food.this, Dashboard.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 return;
