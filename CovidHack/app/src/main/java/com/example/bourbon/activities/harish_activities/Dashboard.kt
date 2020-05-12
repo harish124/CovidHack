@@ -63,7 +63,7 @@ class Dashboard : AppCompatActivity() {
         fetchLocation()
 
         database.getReference("users")
-                .child(mAuth.uid ?: "0fW4KxnDPUgQILoc4SDTT1OwJMn2")
+                .child(mAuth.uid ?: "987654321qwert")
                 .addListenerForSingleValueEvent(object:ValueEventListener{
                     override fun onCancelled(p0: DatabaseError) {
                         TODO("Not yet implemented")
@@ -84,6 +84,7 @@ class Dashboard : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION)
         ==PackageManager.PERMISSION_GRANTED) {
 
+            //p.sprintf("Line 1")
             fusedLocationProviderClient!!.requestLocationUpdates(locationRequest,
                     object:LocationCallback(){
                         override fun onLocationResult(locationResult: LocationResult?) {
@@ -132,12 +133,14 @@ class Dashboard : AppCompatActivity() {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
                         getLastLocation()
+                        fetchLocation()
                     }
                 }
                 else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
                         getLastLocation()
+                        fetchLocation()
                     }
                 }
             }

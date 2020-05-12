@@ -254,7 +254,7 @@ public class MapsActivity extends FragmentActivity
                         rating.setVisibility(View.GONE);
                     }
 
-                    if(obj.getOpeningHours()!="Not Available") {
+                    if(!obj.getOpeningHours().equals("Not Available")) {
                         openinghrs.setVisibility(View.VISIBLE);
                         openinghrs.setText(obj.getOpeningHours());
                     }
