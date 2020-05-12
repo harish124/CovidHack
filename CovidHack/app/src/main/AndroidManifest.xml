@@ -19,18 +19,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo"/>
         <activity android:name=".activities.harish_activities.Dashboard">
+
+        </activity>
+        <activity android:name=".activities.harish_activities.PersonLocAct" />
+        <activity android:name=".activities.clement_activities.Splash_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Launcher Denotes that it will be the first launching activity -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activities.harish_activities.PersonLocAct" />
-        <activity android:name=".activities.clement_activities.Splash_Screen">
-
         </activity>
         <activity android:name=".activities.clement_activities.Graph_Stats" />
         <activity android:name=".activities.clement_activities.Order_Details" />
@@ -67,9 +68,9 @@
 
 
         </activity>
-        <activity android:name=".activities.clement_activities.Main_menu" >
+<!--        <activity android:name=".activities.clement_activities.Main_menu" >-->
 
-        </activity>
+<!--        </activity>-->
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
         <activity android:name=".activities.clement_activities.Voip" />
