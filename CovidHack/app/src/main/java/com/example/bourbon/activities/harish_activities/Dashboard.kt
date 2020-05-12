@@ -11,6 +11,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -20,7 +21,10 @@ import com.example.bourbon.databinding.ActivityMainBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import frame_transition.Transition
 import print.Print
 import java.io.IOException
@@ -50,13 +54,28 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         callPermissions()
         binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding?.pd= ActivityNames(transition,p)
+        binding?.pd= ActivityNames(transition,p,this)
         sharedPreferences= getSharedPreferences("default", Context.MODE_PRIVATE)
         locationManager= (getSystemService(Context.LOCATION_SERVICE) as LocationManager)
         geocoder=Geocoder(this)
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
         fetchLocation()
+
+        database.getReference("users")
+                .child(mAuth.uid ?: "0fW4KxnDPUgQILoc4SDTT1OwJMn2")
+                .addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onDataChange(user: DataSnapshot) {
+                        println("User = ${user}\nName: ${user.child("Name").value}")
+                        binding!!.textView.text="Welcome ${user.child("Name").getValue().toString()}"
+                    }
+
+                })
+
 
     }
 
