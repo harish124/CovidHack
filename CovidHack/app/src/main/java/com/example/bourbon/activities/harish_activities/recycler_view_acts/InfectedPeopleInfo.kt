@@ -3,12 +3,8 @@ package com.example.bourbon.activities.harish_activities.recycler_view_acts
 import android.os.Bundle
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.bourbon.R
 import com.example.bourbon.activities.harish_activities.adapters.InfectedPeopleAdapter

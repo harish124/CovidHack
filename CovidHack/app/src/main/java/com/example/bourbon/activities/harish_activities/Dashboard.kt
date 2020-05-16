@@ -130,7 +130,8 @@ class Dashboard : AppCompatActivity() {
                                         """.trimIndent())
                                 }
                                 catch (e:Exception){
-                                    p.fprintf("Error: ${e.message}")
+                                    //p.fprintf("Error: ${e.message}")
+                                    println("Error: ${e.message}")
                                 }
                             }
                         }

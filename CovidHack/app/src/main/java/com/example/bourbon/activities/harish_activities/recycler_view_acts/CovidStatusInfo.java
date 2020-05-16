@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.OvershootInterpolator;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,9 +45,10 @@ public class CovidStatusInfo extends Activity {
 
     void configRecyclerView() {
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(CovidStatusInfo.this));
+        //binding.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayout.VERTICAL));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter=new CovidStatusRecyclerViewAdapter(products);
-        binding.recyclerView.addItemDecoration(new DividerItemDecoration(CovidStatusInfo.this, DividerItemDecoration.VERTICAL));
+        //binding.recyclerView.addItemDecoration(new DividerItemDecoration(CovidStatusInfo.this, DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(adapter);
         ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(adapter);
         binding.recyclerView.setAdapter(scaleInAnimationAdapter);
