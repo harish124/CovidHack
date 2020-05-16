@@ -93,8 +93,6 @@ class InfectedPeopleInfo : AppCompatActivity() {
                                     i+=1
                                 }
 
-
-
                             }
                         }
 
@@ -118,6 +116,9 @@ class InfectedPeopleInfo : AppCompatActivity() {
                             for (obj in usersList.children) {
 
                                 for (innerObj in obj.children) {
+                                    println("""
+                                        innerObj: $innerObj
+                                    """.trimIndent())
                                     val personLoc = innerObj?.getValue(PersonLocModel::class.java)
                                             ?: PersonLocModel("err", "err")
                                     //p.sprintf("dateAndPERSON : ${personLoc.dateAndTime}")
