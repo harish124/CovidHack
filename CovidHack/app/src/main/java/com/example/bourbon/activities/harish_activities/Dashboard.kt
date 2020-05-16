@@ -46,8 +46,8 @@ class Dashboard : AppCompatActivity() {
     private var geocoder:Geocoder?=null
 
     private val locationRequest=LocationRequest().apply {
-        interval = 10000
-        fastestInterval = 5000
+        interval = 1800000
+        fastestInterval = 1750000
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
     private var fusedLocationProviderClient:FusedLocationProviderClient?= null
