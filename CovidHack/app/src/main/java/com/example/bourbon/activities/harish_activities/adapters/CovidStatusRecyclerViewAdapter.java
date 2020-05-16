@@ -19,6 +19,7 @@ import com.example.bourbon.R;
 import com.example.bourbon.activities.clement_activities.Graph_Stats;
 import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
+import com.example.bourbon.databinding.CardCovidStatsBinding;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
 
 
