@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -20,6 +21,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.bourbon.R;
 import com.example.bourbon.activities.clement_activities.model.ListUpload;
 import com.example.bourbon.activities.harish_activities.Dashboard;
@@ -35,11 +42,16 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +59,10 @@ import butterknife.OnClick;
 import print.Print;
 
 public class Order_Food extends AppCompatActivity {
+
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAA7Ohurdc:APA91bGATg-02XfKY8klsUr9hAaYIeGLvY8CYQHfLEykFk3b21cS7LpPN_SPyXYHVJcZ1qp9XT9NWepsAIjYMdt9NrjtlKJu0vmfr-uH0KIzymDWfO0y3EYWqnahtUTcmiPNuXfx9uxf";
+    final private String contentType = "application/json";
 
     @BindView(R.id.store_name)
     TextView storeName;
@@ -103,6 +119,7 @@ public class Order_Food extends AppCompatActivity {
             case R.id.submit_list:
                 if (imageSelected) {
                     uploadFile();
+
                 } else {
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     Date date = new Date();
@@ -110,6 +127,7 @@ public class Order_Food extends AppCompatActivity {
                     ListUpload listUpload = new ListUpload(FirebaseAuth.getInstance().getCurrentUser().getUid(), shopId, "Null", "False");
                     mdatabase.child("Carts").child(dateFormat.format(date)).setValue(listUpload);
                     mdatabase.child("Carts").child(dateFormat.format(date)).child("Items").setValue(Arrays.asList(groceries1));
+                    Notify();
                     p.sprintf("Order Successfully Placed");
                     Intent intent = new Intent(Order_Food.this, Dashboard.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -179,6 +197,7 @@ public class Order_Food extends AppCompatActivity {
 //                                Toast.makeText(Order_Food.this, "Upload 44Successful", Toast.LENGTH_SHORT).show();
 
                                 p.sprintf("Order Successfully Placed");
+                                Notify();
                                 Intent intent = new Intent(Order_Food.this, Dashboard.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
@@ -220,4 +239,45 @@ public class Order_Food extends AppCompatActivity {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
+
+    void Notify(){
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+        try {
+            notifcationBody.put("title", "New Order");
+            notifcationBody.put("message", "You have got a New Order to Deliver");
+            notifcationBody.put("shopId",shopId);
+            notification.put("to", "/topics/stores");
+            notification.put("data", notifcationBody);
+        } catch (JSONException e) {
+            Log.e("Notification Error", "onCreate: " + e.getMessage() );
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("My Notification", "onResponse: " + response.toString());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Order_Food.this, "Request error", Toast.LENGTH_LONG).show();
+                        Log.i("Notification Error", "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", serverKey);
+                params.put("Content-Type", contentType);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(jsonObjectRequest);
+    }
+
 }
