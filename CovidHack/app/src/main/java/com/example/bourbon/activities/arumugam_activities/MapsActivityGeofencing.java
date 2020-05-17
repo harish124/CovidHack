@@ -208,18 +208,6 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         mMap.addCircle(circleOptions);
     }
 
-//    private void checkLocation()
-//    {
-//        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-//        if(!locationManager.isProviderEnabled("gps"))
-//        {
-//            print.fprintf("GPS is required for this feature.");
-//            //Toast.makeText(this,"GPS is required.!",Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//            startActivity(intent);
-//        }
-//    }
-
     private void addingGeofences()
     {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Red-Zones");
