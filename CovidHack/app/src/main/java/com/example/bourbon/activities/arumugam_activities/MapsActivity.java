@@ -1,12 +1,15 @@
 package com.example.bourbon.activities.arumugam_activities;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -27,7 +30,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bourbon.R;
+import com.example.bourbon.activities.clement_activities.EmergencyContactInfo;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +50,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
@@ -48,7 +61,7 @@ import print.Print;
 public class MapsActivity extends FragmentActivity
         implements
         OnMapReadyCallback,
-        LocationListener {
+        GoogleMap.OnMyLocationChangeListener {
     private BottomSheetBehavior<View> behavior;
     private GoogleMap mMap;
     private Location location;
@@ -59,7 +72,6 @@ public class MapsActivity extends FragmentActivity
     private Spinner sp;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
-    private  LocationManager locationManager;
     private int checked;
     private Button hospital;
     private Button pharmacy;
@@ -88,29 +100,7 @@ public class MapsActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        searchbutton = (Button) findViewById(R.id.search);
-
-//        sp = (Spinner) findViewById(R.id.category);
-//        String[] options = {"Hospital", "Pharmacy"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MapsActivity.this, android.R.layout.simple_spinner_item, options);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        sp.setAdapter(adapter);
-
         try{
-
-            locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
-
             View bottomSheet = findViewById(R.id.bottom_sheet);
             behavior = BottomSheetBehavior.from(bottomSheet);
 
@@ -155,27 +145,17 @@ public class MapsActivity extends FragmentActivity
 
                     if(location==null)
                         return;
-//                    currmarker = new MarkerOptions();
-//                    LatLng latlng = new LatLng(location.getLatitude(),location.getLongitude());
-//                    currmarker.position(latlng);
-//                    currmarker.title("My Location");
-//                    currmarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-//                    currmarker.snippet("current location");
-//                    mMap.addMarker(currmarker);
-//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,15.0f));
-
                     results = ApiQuery.ping(location,place.toLowerCase());
 
                     if(results==null)
                     {
-                        print.fprintf("No results found. Please try again in few moments.!");
-                        //Toast.makeText(getApplicationContext(),"Result null",Toast.LENGTH_SHORT).show();
+                        print.fprintf("No results found. Please try again in few moments");
                         return;
                     }
 
                     if(results.size()==0) {
-                        print.fprintf("Please try again in few moments.!");
-                        // Toast.makeText(getApplicationContext(), "Please try again in few moments", Toast.LENGTH_SHORT).show();
+                        print.fprintf("Please try again in few moments");
+                        checked=0;
                     }
                     m=new ArrayList();
 
@@ -202,17 +182,8 @@ public class MapsActivity extends FragmentActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
+        mMap.setOnMyLocationChangeListener(this);
         checkingPermissions();
-
-//        searchbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                getPlaces("hospital");
-//
-//            }
-//        });
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -220,23 +191,15 @@ public class MapsActivity extends FragmentActivity
                 if(marker.getSnippet().equals("current location"))
                 {
                     print.sprintf("My Location");
-                    //Toast.makeText(getApplicationContext(),"My Location",Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
                 hospitaldetailslayout.setVisibility(View.VISIBLE);
-
-//                Intent intent = new Intent(getApplicationContext(),HospitalView.class);
-//                intent.putExtra("obj",results.get(Integer.parsInt(marker.getSnippet())));
                 try {
                     Location l = mMap.getMyLocation();
                     StringBuilder sb = new StringBuilder();
                     sb.append(l.getLatitude() + "," + l.getLongitude());
                     String location = sb.toString();
-//                intent.putExtra("loc",loc);
-//                startActivity(intent);
-//                return true;
-
 
                     HospitalDetails obj = results.get(Integer.parseInt(marker.getSnippet()));
                     TextView hospitalname = findViewById(R.id.hospitalname);
@@ -299,31 +262,22 @@ public class MapsActivity extends FragmentActivity
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
                     Manifest.permission.READ_CONTACTS)) {
-                print.sprintf("Location Services required.!");
-                //Toast.makeText(this,"Location Services required",Toast.LENGTH_SHORT).show();
+                print.sprintf("Location Services required");
             } else {
                 ActivityCompat.requestPermissions(MapsActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},100);
             }
-            //return false;
         }
         else{
+            checkLocation();
             mMap.setMyLocationEnabled(true);
         }
 
         if(!checkPlayServices())
         {
-            print.fprintf("Please install Google Play Services.!");
-            //Toast.makeText(this,"Please install Google Play Services.!",Toast.LENGTH_SHORT).show();
+            print.fprintf("Please install Google Play Services");
         }
 
-        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
-        if(!lm.isProviderEnabled("gps"))
-        {
-            print.fprintf("GPS required");
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
         return true;
     }
 
@@ -336,9 +290,10 @@ public class MapsActivity extends FragmentActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
+                    checkLocation();
                     mMap.setMyLocationEnabled(true);
                 } else {
-                    print.sprintf("Cannot provide the location services");
+                    print.fprintf("Cannot find hospitals/pharmacies without location services");
                     //Toast.makeText(this,"Cannot provide the location services",Toast.LENGTH_SHORT).show();
                 }
                 return;
@@ -384,32 +339,6 @@ public class MapsActivity extends FragmentActivity
 
     }
 
-        @Override
-        public void onLocationChanged(Location location) {
-            if (location != null) {
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f);
-                mMap.animateCamera(cameraUpdate);
-                getPlaces("hospital");
-                locationManager.removeUpdates(this);
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-
     public void finderOption(View view) {
         if(view == hospital && checked!=1)
         {
@@ -428,6 +357,90 @@ public class MapsActivity extends FragmentActivity
             hospital.setTextColor(getApplication().getResources().getColor(R.color.black));
             hospital.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
             getPlaces("pharmacy");
+        }
+    }
+
+    @Override
+    public void onMyLocationChange(Location location) {
+
+        if (location != null) {
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f);
+            mMap.animateCamera(cameraUpdate);
+            pharmacy.setTextColor(getApplication().getResources().getColor(R.color.black));
+            pharmacy.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
+            hospital.setTextColor(getApplication().getResources().getColor(R.color.black));
+            hospital.setBackground( getApplication().getResources().getDrawable(R.drawable.rounded_button_unselected));
+            mMap.setOnMyLocationChangeListener(null);
+        }
+    }
+
+    private void checkLocation()
+    {
+        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled("gps")) {
+
+            LocationRequest locationRequest = LocationRequest.create();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationRequest.setInterval(10000);
+            locationRequest.setFastestInterval(10000 / 2);
+
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+            builder.setAlwaysShow(true);
+
+            Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(this)
+                    .checkLocationSettings(builder.build());
+            result.addOnCompleteListener(task -> {
+                try {
+                    LocationSettingsResponse response =
+                            task.getResult(ApiException.class);
+                } catch (ApiException ex) {
+                    switch (ex.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            try {
+                                ResolvableApiException resolvableApiException =
+                                        (ResolvableApiException) ex;
+                                resolvableApiException
+                                        .startResolutionForResult(MapsActivity.this,
+                                                100);
+                            } catch (IntentSender.SendIntentException e) {
+                                Log.d("Locationrequest",e.toString());
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            print.fprintf("Cannot find hospitals/pharmacies without GPS");
+                            break;
+                        case LocationSettingsStatusCodes.SUCCESS:
+                            break;
+                    }
+                }
+            });
+        }else {
+            print.sprintf("GPS already enabled");
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode) {
+            case LocationRequest.PRIORITY_HIGH_ACCURACY:
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        // All required changes were successfully made
+                        print.sprintf("GPS enabled");
+                        Log.i("activityresult", "onActivityResult: GPS Enabled by user");
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        // The user was asked to change settings, but chose not to
+                        print.fprintf("Cannot find hospitals/pharmacies without GPS");
+                        Log.i("activityresult", "onActivityResult: User rejected GPS request");
+                        break;
+                    default:
+                        break;
+                }
+                break;
         }
     }
 }
