@@ -1,5 +1,7 @@
 package com.example.bourbon.activities.clement_activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.bourbon.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -20,17 +23,46 @@ import static com.firebase.ui.auth.AuthUI.TAG;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    SharedPreferences sharedPreferences;
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+        Log.e("New Token",s);
+        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Token",s);
+        editor.commit();
+    }
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
         if(remoteMessage.getData().size()>0){
-            showNotification(remoteMessage.getData().get("title"),remoteMessage.getData().get("message"));
 
+//            Log.e("Notify",remoteMessage.getFrom());
+            if(remoteMessage.getFrom().equals("/topics/stores")){
+                Log.e("Notify","Enter Store");
+                if(remoteMessage.getData().get("shopId").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    Log.e("Notify","Enter UID");
+                    showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+                }
+            }else {
+                showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+            }
         }
 
+
         if(remoteMessage.getNotification() !=null){
-            showNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+//            Log.e("Notify",remoteMessage.getFrom());
+            if(remoteMessage.getFrom().equals("/topics/stores")){
+                Log.e("Notify","Enter Store");
+                if(remoteMessage.getData().get("shopId").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    Log.e("Notify","Enter UID");
+                    showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+                }
+            }else {
+                showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+            }
         }
     }
 

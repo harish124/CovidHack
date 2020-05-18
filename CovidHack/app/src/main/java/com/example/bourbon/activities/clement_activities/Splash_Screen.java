@@ -43,6 +43,7 @@ public class Splash_Screen extends AppCompatActivity {
 //                        Toast.makeText(Startact.this,msg, Toast.LENGTH_SHORT).show();
                         });
 
+
                 mauth = FirebaseAuth.getInstance();
                 FirebaseUser user = mauth.getCurrentUser();
                 mDatabase = FirebaseDatabase.getInstance().getReference();
