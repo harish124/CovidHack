@@ -9,7 +9,7 @@ import com.example.bourbon.R
 import com.example.bourbon.activities.harish_activities.model.CustomerOrder
 import com.example.bourbon.databinding.CardCustomerOrderBinding
 
-class GenericRVAdapter(var products:ArrayList<CustomerOrder>): RecyclerView.Adapter<GenericRVAdapter.MyViewHolder>() {
+class CustomerOrderRvAdapter(var products:ArrayList<CustomerOrder>): RecyclerView.Adapter<CustomerOrderRvAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView:CardCustomerOrderBinding,context:Context):RecyclerView.ViewHolder(itemView.root) {
         var binding:CardCustomerOrderBinding?=null
