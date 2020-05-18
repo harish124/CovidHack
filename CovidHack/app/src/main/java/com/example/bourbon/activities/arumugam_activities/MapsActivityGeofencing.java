@@ -6,8 +6,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -19,10 +21,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.bourbon.R;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +43,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -199,18 +208,6 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         mMap.addCircle(circleOptions);
     }
 
-    private void checkLocation()
-    {
-        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-        if(!locationManager.isProviderEnabled("gps"))
-        {
-            print.fprintf("GPS is required for this feature.");
-            //Toast.makeText(this,"GPS is required.!",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-    }
-
     private void addingGeofences()
     {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Red-Zones");
@@ -241,5 +238,74 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
                 //Toast.makeText(getApplicationContext(),"Failed to Connect to server.!",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void checkLocation()
+    {
+        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled("gps")) {
+
+            LocationRequest locationRequest = LocationRequest.create();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationRequest.setInterval(10000);
+            locationRequest.setFastestInterval(10000 / 2);
+
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+            builder.setAlwaysShow(true);
+
+            Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(this)
+                    .checkLocationSettings(builder.build());
+            result.addOnCompleteListener(task -> {
+                try {
+                    LocationSettingsResponse response =
+                            task.getResult(ApiException.class);
+                } catch (ApiException ex) {
+                    switch (ex.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            try {
+                                ResolvableApiException resolvableApiException =
+                                        (ResolvableApiException) ex;
+                                resolvableApiException
+                                        .startResolutionForResult(MapsActivityGeofencing.this,
+                                                100);
+                            } catch (IntentSender.SendIntentException e) {
+                                Log.d("Locationrequest",e.toString());
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            print.fprintf("Cannot send notification without GPS");
+                            break;
+                        case LocationSettingsStatusCodes.SUCCESS:
+                            break;
+                    }
+                }
+            });
+        }else {
+            print.sprintf("GPS already enabled");
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode) {
+            case LocationRequest.PRIORITY_HIGH_ACCURACY:
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        // All required changes were successfully made
+                        print.sprintf("GPS enabled");
+                        Log.i("activityresult", "onActivityResult: GPS Enabled by user");
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        // The user was asked to change settings, but chose not to
+                        print.fprintf("Cannot send notification without GPS");
+                        Log.i("activityresult", "onActivityResult: User rejected GPS request");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+        }
     }
 }

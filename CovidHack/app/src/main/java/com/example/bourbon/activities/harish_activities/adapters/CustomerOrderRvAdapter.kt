@@ -1,22 +1,30 @@
 package com.example.bourbon.activities.harish_activities.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bourbon.R
+import com.example.bourbon.activities.clement_activities.Customer_Order_Details
+import com.example.bourbon.activities.clement_activities.Order_Details
 import com.example.bourbon.activities.harish_activities.model.CustomerOrder
 import com.example.bourbon.databinding.CardCustomerOrderBinding
 
-class GenericRVAdapter(var products:ArrayList<CustomerOrder>): RecyclerView.Adapter<GenericRVAdapter.MyViewHolder>() {
+class CustomerOrderRvAdapter(var products:ArrayList<CustomerOrder>): RecyclerView.Adapter<CustomerOrderRvAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView:CardCustomerOrderBinding,context:Context):RecyclerView.ViewHolder(itemView.root) {
         var binding:CardCustomerOrderBinding?=null
 
         init {
             binding=itemView
+            binding?.customercard?.setOnClickListener{
+                val intent = Intent(context, Customer_Order_Details::class.java)
+                intent.putExtra("MyClass", binding?.pd);
+                context.startActivity(intent)
 
+            }
 
         }
 

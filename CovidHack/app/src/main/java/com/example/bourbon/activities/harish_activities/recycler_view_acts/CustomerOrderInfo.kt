@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bourbon.R
-import com.example.bourbon.activities.harish_activities.adapters.GenericRVAdapter
+import com.example.bourbon.activities.harish_activities.adapters.CustomerOrderRvAdapter
 import com.example.bourbon.activities.harish_activities.model.CustomerOrder
 import com.example.bourbon.databinding.RvCustomerOrderInfoBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +24,7 @@ class CustomerOrderInfo : AppCompatActivity() {
     private val p=Print(this)
     private var products= arrayListOf<CustomerOrder>()
 
-    private val adapter=GenericRVAdapter(products)
+    private val adapter=CustomerOrderRvAdapter(products)
     private var mDatabase: DatabaseReference?=null
     private var auth: FirebaseAuth?=null
     private var user: FirebaseUser?=null

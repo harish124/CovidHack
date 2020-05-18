@@ -30,7 +30,18 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activities.clement_activities.Customer_Order_Details"></activity>
         <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo" />
-        <activity android:name=".activities.harish_activities.Dashboard">
+<!--        <activity android:name=".activities.harish_activities.Dashboard">-->
+<!--&lt;!&ndash;        <activity android:name=".activities.harish_activities.TestDashboard">&ndash;&gt;-->
+
+<!--        </activity>-->
+
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
+
+<!--        <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo" />-->
+        <activity android:name=".activities.harish_activities.Dashboard"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Launcher Denotes that it will be the first launching activity -->
@@ -63,7 +74,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.harish_activities.MainActivity" />
         <activity android:name=".activities.clement_activities.Donation" />
         <activity android:name=".activities.clement_activities.Volunteer_Registration" />
         <activity android:name=".activities.clement_activities.User_Registration" />
