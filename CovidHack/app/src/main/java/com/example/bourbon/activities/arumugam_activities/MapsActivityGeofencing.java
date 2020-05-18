@@ -110,7 +110,6 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
     private void enableUserLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            //addingGeofences();
         } else {
             //Ask for permission
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -125,7 +124,6 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         if (Build.VERSION.SDK_INT >= 29) {
             //We need background permission
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                //handleMapLongClick(latLng,GEOFENCE_RADIUS);
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                     //We show a dialog and ask for permission
@@ -136,8 +134,6 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
                 }
             }
 
-        } else {
-            //handleMapLongClick(latLng,GEOFENCE_RADIUS);
         }
         checkLocation();
     }
@@ -146,31 +142,24 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == FINE_LOCATION_ACCESS_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //We have the permission
                 mMap.setMyLocationEnabled(true);
                 addingGeofences();
 
             } else {
-                //We do not have the permission..
                 print.fprintf("Location services are essential for this feature.!");
             }
         }
 
         if (requestCode == BACKGROUND_LOCATION_ACCESS_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //We have the permission
                 print.sprintf("Red-Zones added to the map.!");
-                //Toast.makeText(this, "Red-zones added.!", Toast.LENGTH_SHORT).show();
             } else {
-                //We do not have the permission..
                 print.fprintf("Background location access is neccessary for Red-zones to trigger.!");
-                //Toast.makeText(this, "Background location access is neccessary for Red-zones to trigger...", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void PlotAndAddGeofence(LatLng latLng,float radius) {
-        //mMap.clear();
         addMarker(latLng);
         addCircle(latLng, radius);
         addGeofence(latLng, radius);
