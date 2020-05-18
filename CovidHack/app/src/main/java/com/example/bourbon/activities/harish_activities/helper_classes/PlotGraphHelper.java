@@ -1,4 +1,4 @@
-package com.example.bourbon.activities.harish_activities.adapters;
+package com.example.bourbon.activities.harish_activities.helper_classes;
 
 import android.content.Context;
 import android.graphics.Color;
