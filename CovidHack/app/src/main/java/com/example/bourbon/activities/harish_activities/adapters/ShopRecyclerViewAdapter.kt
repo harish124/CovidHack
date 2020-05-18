@@ -52,7 +52,7 @@ class ShopRecyclerViewAdapter(var shopList:ArrayList<Shop>?): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder?.binding?.pd= shopList!!.get(position)
+        holder.binding?.pd= shopList!!.get(position)
 
 
     }
