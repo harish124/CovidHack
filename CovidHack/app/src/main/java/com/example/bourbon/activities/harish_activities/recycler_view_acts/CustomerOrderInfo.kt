@@ -86,11 +86,17 @@ class CustomerOrderInfo : AppCompatActivity() {
                             products.add(CustomerOrder(custName,custId,"o007",
                                     dop,purchasedItems,manuel))
                             adapter.notifyItemInserted(i)
+                            i++
                         }
 
 
                     }
                 }
+                if(i==0){
+                    val toast = Toast.makeText(applicationContext, "No Orders Placed Yet", Toast.LENGTH_LONG)
+                    toast.show()
+                }
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
