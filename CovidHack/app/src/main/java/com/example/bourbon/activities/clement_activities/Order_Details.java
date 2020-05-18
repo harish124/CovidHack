@@ -224,6 +224,8 @@ public class Order_Details extends AppCompatActivity {
                                             count = 1;
                                             Print p = new Print(Order_Details.this);
                                             p.sprintf("Order Rejected");
+                                            MyNotificationManager myNotificationManager = new MyNotificationManager(getApplicationContext(),"Order Rejected","The Shop has rejected your order",order.getCustId());
+                                            myNotificationManager.Notify();
                                             Intent intent = new Intent(Order_Details.this, Dashboard.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);

@@ -79,6 +79,10 @@ class ShopInfo : AppCompatActivity() {
                         i++
                     }
                 }
+                if(i==0){
+                    val toast = Toast.makeText(applicationContext, "No Shops Nearby", Toast.LENGTH_LONG)
+                    toast.show()
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

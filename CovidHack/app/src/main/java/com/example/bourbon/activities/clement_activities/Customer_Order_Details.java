@@ -42,6 +42,7 @@ public class Customer_Order_Details extends AppCompatActivity {
     TextView custname;
     CustomerOrder order;
     AlertDialog.Builder builder;
+    String shopId;
     @BindView(R.id.rejectorder)
     Button rejectorder;
     @BindView(R.id.customer)
@@ -67,7 +68,7 @@ public class Customer_Order_Details extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(count == 0) {
-                    String shopId = dataSnapshot.child("Carts").child(order.getDOP()).child("shopId").getValue().toString();
+                    shopId = dataSnapshot.child("Carts").child(order.getDOP()).child("shopId").getValue().toString();
                     custname.setText(dataSnapshot.child("Stores").child(shopId).child("Name").getValue().toString());
                 }
             }
@@ -171,6 +172,8 @@ public class Customer_Order_Details extends AppCompatActivity {
                                         count = 1;
                                         Print p = new Print(Customer_Order_Details.this);
                                         p.sprintf("Order Cancelled Successfully");
+                                        MyNotificationManager myNotificationManager = new MyNotificationManager(getApplicationContext(),"Order Cancelled","A Customer has cancelled an order",shopId);
+                                        myNotificationManager.Notify();
                                         Intent intent = new Intent(Customer_Order_Details.this, Dashboard.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
