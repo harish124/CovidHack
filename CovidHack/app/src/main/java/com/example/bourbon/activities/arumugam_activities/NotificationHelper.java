@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -49,6 +50,8 @@ public class NotificationHelper extends ContextWrapper {
         Intent intent = new Intent(this, activityName);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 267, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Uri urisound = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.notificationsound);
+
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(body)
@@ -56,6 +59,7 @@ public class NotificationHelper extends ContextWrapper {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle(title).bigText(body))
                 .setContentIntent(pendingIntent)
+                .setSound(urisound)
                 .setAutoCancel(true)
                 .build();
 
