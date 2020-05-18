@@ -54,7 +54,9 @@ import java.util.HashMap;
 
 import print.Print;
 
-public class MapsActivityGeofencing extends FragmentActivity implements OnMapReadyCallback{
+public class MapsActivityGeofencing extends FragmentActivity implements OnMapReadyCallback,
+        GoogleMap.OnMapLongClickListener,
+        GoogleMap.OnMyLocationChangeListener{
 
     private static final String TAG = "MapsActivity";
     private Print print;
@@ -100,12 +102,15 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
         mMap = googleMap;
 
         enableUserLocation();
+
+        mMap.setOnMyLocationChangeListener(this);
+        mMap.setOnMapLongClickListener(this);
     }
 
     private void enableUserLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            addingGeofences();
+            //addingGeofences();
         } else {
             //Ask for permission
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -306,6 +311,20 @@ public class MapsActivityGeofencing extends FragmentActivity implements OnMapRea
                         break;
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        PlotAndAddGeofence(latLng,2000);
+    }
+
+    @Override
+    public void onMyLocationChange(Location location) {
+        if(location!=null)
+        {
+            addingGeofences();
+            mMap.setOnMyLocationChangeListener(null);
         }
     }
 }
