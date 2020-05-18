@@ -1,6 +1,7 @@
 package com.example.bourbon.activities.clement_activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +76,16 @@ public class Store_Registration extends AppCompatActivity {
                         mDatabase.child("Stores").child(auth.getUid()).child("Pincode").setValue(pin);
                         Print p = new Print(Store_Registration.this);
                         p.sprintf("Store Details Added");
-                        finish();
+                        FirebaseMessaging.getInstance().subscribeToTopic("stores")
+                                .addOnCompleteListener(task -> {
+                                    String msg = "Successful" ;
+                                    if (!task.isSuccessful()) {
+                                        msg = "Failed";
+                                    }
+                                    Log.e("Subscribed",msg);
+//                        Toast.makeText(Store_Registration.this,msg, Toast.LENGTH_SHORT).show();
+                                    finish();
+                                });
                     }
 
                     @Override
@@ -96,7 +107,17 @@ public class Store_Registration extends AppCompatActivity {
                     mDatabase.child("Stores").child(auth.getUid()).child("Address").setValue(storeaddress.getText().toString());
                     Print p = new Print(this);
                     p.sprintf("Store Details Added");
-                    finish();
+                    FirebaseMessaging.getInstance().subscribeToTopic("stores")
+                            .addOnCompleteListener(task -> {
+                                String msg = "Successful" ;
+                                if (!task.isSuccessful()) {
+                                    msg = "Failed";
+                                }
+                                Log.e("Subscribed",msg);
+//                        Toast.makeText(Store_Registration.this,msg, Toast.LENGTH_SHORT).show();
+                                finish();
+                            });
+
                 }
             }
 

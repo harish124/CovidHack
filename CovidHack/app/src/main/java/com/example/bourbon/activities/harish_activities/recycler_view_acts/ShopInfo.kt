@@ -67,7 +67,7 @@ class ShopInfo : AppCompatActivity() {
                 var i:Int=0
                 for (postSnapshot in dataSnapshot.child("Stores").children) {
                     // TODO: handle the post
-                    if(postSnapshot.child("Pincode").value.toString() == pincode){
+                    if(postSnapshot.child("Pincode").value.toString() == pincode && (postSnapshot.key != uid)){
                         var name:String = postSnapshot.child("Name").value.toString()
                         var type:String = postSnapshot.child("Type").value.toString()
                         var address:String = postSnapshot.child("Address").value.toString()
