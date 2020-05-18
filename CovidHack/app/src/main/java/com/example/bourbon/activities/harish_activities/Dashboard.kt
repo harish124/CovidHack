@@ -13,12 +13,26 @@ import android.os.Looper
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.OvershootInterpolator
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.bourbon.R
+import com.example.bourbon.activities.harish_activities.adapters.DashboardAdapter
+import com.example.bourbon.activities.harish_activities.adapters.NewsAdapter
+import com.example.bourbon.activities.harish_activities.helper_classes.NewsApiHelper
 import com.example.bourbon.activities.harish_activities.model.ActivityNames
+import com.example.bourbon.activities.harish_activities.model.DashboardCards
+import com.example.bourbon.activities.harish_activities.model.NewsClassModel
 import com.example.bourbon.databinding.ActivityMainBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnSuccessListener
@@ -28,6 +42,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import frame_transition.Transition
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import print.Print
 import java.io.IOException
 import java.util.*
@@ -40,6 +56,13 @@ class Dashboard : AppCompatActivity() {
     private val p = Print(this)
     private val mAuth = FirebaseAuth.getInstance()
     private val database= FirebaseDatabase.getInstance()
+
+    private var products= arrayListOf<DashboardCards>()
+    private val adapter= DashboardAdapter(products)
+
+    private val newsProducts=arrayListOf<NewsClassModel>()
+    private val newsAdapter= NewsAdapter(newsProducts)
+
     private val uid=mAuth.currentUser?.uid.toString() ?: "404"
     private var sharedPreferences:SharedPreferences?=null
     private var locationManager: LocationManager?=null
@@ -56,14 +79,25 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         callPermissions()
         binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        configFeaturesRecyclerView()
+        configNewsRecyclerView()
+        fetchProducts()
+
+        //val newsApiHelper=NewsApiHelper(this,newsProducts,newsAdapter)
+        //newsApiHelper.fetchNews()
+
+        fetchNews()
+
+
         binding?.pd= ActivityNames(transition,p,this)
         sharedPreferences= getSharedPreferences("default", Context.MODE_PRIVATE)
         locationManager= (getSystemService(Context.LOCATION_SERVICE) as LocationManager)
         geocoder=Geocoder(this)
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
-        setAnimationsToCards()
         fetchLocation()
+
 
         database.getReference("users")
                 .child(mAuth.uid ?: "987654321qwert")
@@ -82,25 +116,84 @@ class Dashboard : AppCompatActivity() {
 
     }
 
-    private fun setAnimationsToCards(){
-        val a=AnimationUtils.loadAnimation(this,R.anim.left_to_right)
-        val b=AnimationUtils.loadAnimation(this,R.anim.right_to_left)
+    private fun fetchProducts() {
+        val act=ActivityNames(Transition(this), Print(this),this)
+        for(i in 0..12){
 
-        binding!!.hospital.startAnimation(a)
-        binding!!.lab.startAnimation(a)
-        binding!!.course.startAnimation(a)
-        binding!!.store.startAnimation(a)
-        binding!!.volunteer.startAnimation(a)
-        binding!!.pass.startAnimation(a)
-        binding!!.infected.startAnimation(a)
+            val c= DashboardCards(act.namesArr[i],act.drawableArr[i],act.arr[i],0)
 
-        binding!!.fund.startAnimation(b)
-        binding!!.hotspot.startAnimation(b)
-        binding!!.toll.startAnimation(b)
-        binding!!.checkout.startAnimation(b)
-        binding!!.donation.startAnimation(b)
-        binding!!.logout.startAnimation(b)
-        binding!!.mylocation.startAnimation(b)
+            products.add(c)
+            adapter.notifyItemInserted(i)
+        }
+
+        products.add(DashboardCards(act.namesArr[13],act.drawableArr[13],act.arr[13],1))
+        adapter.notifyItemInserted(13)
+    }
+
+    private fun configFeaturesRecyclerView() {
+        binding?.recyclerView?.setHasFixedSize(true)
+        binding?.recyclerView?.setLayoutManager(GridLayoutManager(this,2))
+        binding?.recyclerView?.adapter = ScaleInAnimationAdapter(adapter).apply{
+            setFirstOnly(false)
+            setDuration(1000)
+            setHasStableIds(false)
+            setInterpolator(OvershootInterpolator(.100f))
+        }
+        binding?.recyclerView?.itemAnimator= SlideInUpAnimator(OvershootInterpolator(1f))
+    }
+    private fun configNewsRecyclerView() {
+        binding?.newsRecyclerView?.setHasFixedSize(true)
+        val lm=LinearLayoutManager(this)
+        lm.orientation=RecyclerView.HORIZONTAL
+        binding?.newsRecyclerView?.setLayoutManager(lm)
+        binding?.newsRecyclerView?.adapter = ScaleInAnimationAdapter(newsAdapter).apply{
+            setFirstOnly(false)
+            setDuration(1000)
+            setHasStableIds(false)
+            setInterpolator(OvershootInterpolator(.100f))
+        }
+        binding?.newsRecyclerView?.itemAnimator= SlideInUpAnimator(OvershootInterpolator(1f))
+    }
+
+    fun fetchNews(){
+        val requestQueue= Volley.newRequestQueue(this)
+        val apiKey="ab1e7cf4b1534ec0a0f4f36589e81f18"
+
+        val url = "http://newsapi.org/v2/top-headlines?country=in&apiKey=$apiKey"
+
+
+        println("Reached fetchNews")
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener { response ->
+                    println("""
+                        Response: $response
+                    """.trimIndent())
+
+                    val articles=response.getJSONArray("articles")
+
+                    for(i in 0..11){
+                        val article=articles.getJSONObject(i)
+                        val item=NewsClassModel(article.getString("title"),
+                                article.getString("description"),
+                                article.getString("author"))
+
+                        newsProducts.add(item)
+                        newsAdapter.notifyItemInserted(i)
+                        println("Adding Items: $item")
+                    }
+
+
+                },
+                Response.ErrorListener { e ->
+                    // TODO: Handle error
+                    println("""
+                        Error:  ${e.message}
+                    """.trimIndent())
+                }
+        )
+
+        requestQueue.add(jsonObjectRequest)
+
 
     }
 

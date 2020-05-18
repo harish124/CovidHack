@@ -50,7 +50,7 @@ class OrderRVAdapter(var products:ArrayList<Order>?):RecyclerView.Adapter<OrderR
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder?.binding?.pd= products!!.get(position)
+        holder.binding?.pd= products!!.get(position)
 
     }
 }

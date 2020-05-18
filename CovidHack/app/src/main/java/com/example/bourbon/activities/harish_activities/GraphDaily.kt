@@ -10,7 +10,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.bourbon.R
-import com.example.bourbon.activities.harish_activities.adapters.PlotGraphHelper
+import com.example.bourbon.activities.harish_activities.helper_classes.PlotGraphHelper
 import com.example.bourbon.databinding.ActivityGraphDailyBinding
 import org.json.JSONArray
 import org.json.JSONObject
@@ -83,7 +83,7 @@ class GraphDaily : AppCompatActivity() {
                         i+=1
                     }
 
-                    val plot=PlotGraphHelper(binding,this)
+                    val plot= PlotGraphHelper(binding, this)
                     plot.plotGraph(dateList,activeList,recoveredList,deceasedList)
 
 
