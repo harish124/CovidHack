@@ -4,17 +4,7 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=3C:9E:D5:E0:28:F0:E6:5E:8E:9A:5E:FC:EE:3C:63:F2:38:12:0E:C4%3Bcom.arumugam.hospitalfinder
-
-
     You can also add your credentials to an existing key, using these values:
-
-
-    com.arumugam.hospitalfinder
-
-    SHA-1 certificate fingerprint:
-    3C:9E:D5:E0:28:F0:E6:5E:8E:9A:5E:FC:EE:3C:63:F2:38:12:0E:C4
 
 
     Alternatively, follow the directions here:
