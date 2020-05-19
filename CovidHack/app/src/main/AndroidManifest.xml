@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bourbon">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -28,40 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.clement_activities.Customer_Order_Details"></activity>
-        <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo" />
-<!--        <activity android:name=".activities.harish_activities.Dashboard">-->
-<!--&lt;!&ndash;        <activity android:name=".activities.harish_activities.TestDashboard">&ndash;&gt;-->
 
-<!--        </activity>-->
-
-        <meta-data
-            android:name="firebase_performance_logcat_enabled"
-            android:value="true" />
-
-<!--        <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo" />-->
-        <activity android:name=".activities.harish_activities.Dashboard"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <!-- Launcher Denotes that it will be the first launching activity -->
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.harish_activities.PersonLocAct" />
-        <activity android:name=".activities.clement_activities.Splash_Screen"></activity>
-        <activity android:name=".activities.clement_activities.Graph_Stats" />
-        <activity android:name=".activities.clement_activities.Order_Details" />
-        <activity android:name=".activities.harish_activities.GraphDaily" />
-        <activity android:name=".activities.clement_activities.Order_Food" />
-        <activity android:name=".activities.clement_activities.E_Pass" />
-        <activity android:name=".activities.clement_activities.No_Network" />
-        <activity android:name=".activities.clement_activities.Store_Menu" />
-        <activity android:name=".activities.harish_activities.recycler_view_acts.OrderInfo" />
-        <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo" />
-        <activity android:name=".activities.harish_activities.recycler_view_acts.CustomerOrderInfo" />
-        <activity android:name=".activities.clement_activities.Store_Registration" />
-        <activity android:name=".activities.harish_activities.recycler_view_acts.CovidStatusInfo" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -74,11 +42,44 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".activities.arumugam_activities.MapsActivityShelterMapping"
+            android:label="@string/title_activity_maps_shelter_mapping"></activity>
+        <activity android:name=".activities.clement_activities.Customer_Order_Details" />
+        <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo" /> <!-- <activity android:name=".activities.harish_activities.Dashboard"> -->
+        <!-- &lt;!&ndash;        <activity android:name=".activities.harish_activities.TestDashboard">&ndash;&gt; -->
+        <!-- </activity> -->
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" /> <!-- <activity android:name=".activities.harish_activities.recycler_view_acts.InfectedPeopleInfo" /> -->
+        <activity
+            android:name=".activities.harish_activities.Dashboard"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- Launcher Denotes that it will be the first launching activity -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.harish_activities.PersonLocAct" />
+        <activity android:name=".activities.clement_activities.Splash_Screen" />
+        <activity android:name=".activities.clement_activities.Graph_Stats" />
+        <activity android:name=".activities.clement_activities.Order_Details" />
+        <activity android:name=".activities.harish_activities.GraphDaily" />
+        <activity android:name=".activities.clement_activities.Order_Food" />
+        <activity android:name=".activities.clement_activities.E_Pass" />
+        <activity android:name=".activities.clement_activities.No_Network" />
+        <activity android:name=".activities.clement_activities.Store_Menu" />
+        <activity android:name=".activities.harish_activities.recycler_view_acts.OrderInfo" />
+        <activity android:name=".activities.harish_activities.recycler_view_acts.ShopInfo" />
+        <activity android:name=".activities.harish_activities.recycler_view_acts.CustomerOrderInfo" />
+        <activity android:name=".activities.clement_activities.Store_Registration" />
+        <activity android:name=".activities.harish_activities.recycler_view_acts.CovidStatusInfo" />
         <activity android:name=".activities.clement_activities.Donation" />
         <activity android:name=".activities.clement_activities.Volunteer_Registration" />
         <activity android:name=".activities.clement_activities.User_Registration" />
         <activity android:name=".activities.barathan_activities.user_data" />
-        <activity android:name=".activities.clement_activities.Startact"></activity> <!-- <activity android:name=".activities.clement_activities.Main_menu" > -->
+        <activity android:name=".activities.clement_activities.Startact" /> <!-- <activity android:name=".activities.clement_activities.Main_menu" > -->
         <!-- </activity> -->
         <activity android:name=".activities.clement_activities.YoutubePlay" />
         <activity android:name=".activities.clement_activities.YoutubeList" />
