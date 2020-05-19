@@ -11,17 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.bourbon.R;
-import com.example.bourbon.activities.clement_activities.Graph_Stats;
 import com.example.bourbon.activities.harish_activities.GraphDaily;
 import com.example.bourbon.activities.harish_activities.model.CovidStatus;
-import com.example.bourbon.databinding.CardCovidStatsBinding;
 import com.example.bourbon.databinding.CovidStatusCardBinding;
-
 
 import java.util.ArrayList;
 

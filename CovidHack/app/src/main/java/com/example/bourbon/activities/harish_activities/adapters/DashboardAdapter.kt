@@ -38,6 +38,7 @@ class DashboardAdapter(var products:ArrayList<DashboardCards>): RecyclerView.Ada
         val card=products[position]
         holder.binding.pd = card
         holder.binding.cardImage.setImageResource(card.pic)
+
         holder.binding.dashboardCard.setOnClickListener{
             ActivityNames(Transition(ctx!!),Print(ctx!!), ctx!!).
             call(card.click,card.cname)
