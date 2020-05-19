@@ -80,7 +80,7 @@ class ShopInfo : AppCompatActivity() {
                     }
                 }
                 if(i==0){
-                    val toast = Toast.makeText(applicationContext, "No Shops Nearby", Toast.LENGTH_LONG)
+                    val toast = Toast.makeText(applicationContext, "No Shops Nearby", Toast.LENGTH_SHORT)
                     toast.show()
                 }
             }

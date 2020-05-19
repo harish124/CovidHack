@@ -76,7 +76,7 @@
         android:id="@+id/viewcart"
         android:layout_width="137dp"
         android:layout_height="62dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/newbutton"
         android:backgroundTint="#ebebeb"
         android:text="View Cart"
@@ -97,7 +97,7 @@
         android:backgroundTint="#ebebeb"
         android:text="Reject Order"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/rejectorder"
+        app:layout_constraintBottom_toTopOf="@id/deliverorder"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewcart" />
@@ -111,4 +111,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17"
         app:srcCompat="@drawable/orders" />
+
+    <Button
+        android:layout_width="137dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/newbutton"
+        android:backgroundTint="#ebebeb"
+        android:id="@+id/deliverorder"
+        app:layout_constraintTop_toBottomOf="@+id/rejectorder"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:visibility="gone"
+        android:text="Reject Order"
+        android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
