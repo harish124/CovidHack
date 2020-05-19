@@ -93,7 +93,7 @@ class CustomerOrderInfo : AppCompatActivity() {
                     }
                 }
                 if(i==0){
-                    val toast = Toast.makeText(applicationContext, "No Orders Placed Yet", Toast.LENGTH_LONG)
+                    val toast = Toast.makeText(applicationContext, "No Orders Placed Yet", Toast.LENGTH_SHORT)
                     toast.show()
                 }
 

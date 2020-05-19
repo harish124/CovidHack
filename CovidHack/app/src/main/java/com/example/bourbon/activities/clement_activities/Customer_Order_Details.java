@@ -67,7 +67,7 @@ public class Customer_Order_Details extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(count == 0) {
+                if(count == 0 && dataSnapshot.child("Carts").hasChild(order.getDOP())) {
                     shopId = dataSnapshot.child("Carts").child(order.getDOP()).child("shopId").getValue().toString();
                     custname.setText(dataSnapshot.child("Stores").child(shopId).child("Name").getValue().toString());
                 }
