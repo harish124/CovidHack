@@ -5,6 +5,7 @@ import android.content.Intent
 import com.example.bourbon.R
 import com.example.bourbon.activities.arumugam_activities.MapsActivity
 import com.example.bourbon.activities.arumugam_activities.MapsActivityGeofencing
+import com.example.bourbon.activities.arumugam_activities.MapsActivityShelterMapping
 import com.example.bourbon.activities.clement_activities.*
 import com.example.bourbon.activities.harish_activities.PersonLocAct
 import com.example.bourbon.activities.harish_activities.recycler_view_acts.CovidStatusInfo
@@ -32,6 +33,7 @@ class ActivityNames(private val transition: Transition, val p:Print,val ctx:Cont
             InfectedPeopleInfo::class.java,
             PersonLocAct::class.java,
 
+            MapsActivityShelterMapping::class.java,
             E_Pass::class.java,
             Startact::class.java)
 
@@ -51,6 +53,7 @@ class ActivityNames(private val transition: Transition, val p:Print,val ctx:Cont
             "Infected Loc",
             "My Loc",
 
+            "Shelter",
             "E-Pass",
             "Log-Out"
     )
@@ -71,6 +74,7 @@ class ActivityNames(private val transition: Transition, val p:Print,val ctx:Cont
             R.drawable.infloc,
             R.drawable.myloc,
 
+            R.drawable.store,
             R.drawable.pass,
             R.drawable.logout
     )
