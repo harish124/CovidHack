@@ -118,7 +118,7 @@ class Dashboard : AppCompatActivity() {
 
     private fun fetchProducts() {
         val act=ActivityNames(Transition(this), Print(this),this)
-        for(i in 0..12){
+        for(i in 0..13){
 
             val c= DashboardCards(act.namesArr[i],act.drawableArr[i],act.arr[i],0)
 
