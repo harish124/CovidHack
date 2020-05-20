@@ -1,9 +1,11 @@
 package com.example.bourbon.activities.harish_activities
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -11,12 +13,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,7 +26,6 @@ import com.android.volley.toolbox.Volley
 import com.example.bourbon.R
 import com.example.bourbon.activities.harish_activities.adapters.DashboardAdapter
 import com.example.bourbon.activities.harish_activities.adapters.NewsAdapter
-import com.example.bourbon.activities.harish_activities.helper_classes.NewsApiHelper
 import com.example.bourbon.activities.harish_activities.model.ActivityNames
 import com.example.bourbon.activities.harish_activities.model.DashboardCards
 import com.example.bourbon.activities.harish_activities.model.NewsClassModel
@@ -49,7 +45,7 @@ import java.io.IOException
 import java.util.*
 
 
-class Dashboard : AppCompatActivity() {
+class Dashboard : Activity() {
 
     private var binding:ActivityMainBinding?=null
     private val transition = Transition(this)
@@ -109,6 +105,9 @@ class Dashboard : AppCompatActivity() {
                     override fun onDataChange(user: DataSnapshot) {
                         println("User = ${user}\nName: ${user.child("Name").value}")
                         binding!!.textView.text="Welcome ${user.child("Name").getValue().toString()}"
+                        val custom_font: Typeface = Typeface.createFromAsset(assets, "fonts/exotc350bdbtbold.ttf")
+                        binding!!.textView.setTypeface(custom_font)
+
                     }
 
                 })
@@ -133,12 +132,14 @@ class Dashboard : AppCompatActivity() {
     private fun configFeaturesRecyclerView() {
         binding?.recyclerView?.setHasFixedSize(true)
         binding?.recyclerView?.setLayoutManager(GridLayoutManager(this,2))
+
         binding?.recyclerView?.adapter = ScaleInAnimationAdapter(adapter).apply{
             setFirstOnly(false)
             setDuration(1000)
             setHasStableIds(false)
             setInterpolator(OvershootInterpolator(.100f))
         }
+
         binding?.recyclerView?.itemAnimator= SlideInUpAnimator(OvershootInterpolator(1f))
     }
     private fun configNewsRecyclerView() {

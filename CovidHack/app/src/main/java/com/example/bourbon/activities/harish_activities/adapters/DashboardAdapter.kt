@@ -1,6 +1,7 @@
 package com.example.bourbon.activities.harish_activities.adapters
 
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -15,6 +16,7 @@ import print.Print
 class DashboardAdapter(var products:ArrayList<DashboardCards>): RecyclerView.Adapter<DashboardAdapter.MyViewHolder>() {
     var p: Print? = null
     var ctx:Context?=null
+    var custom_font: Typeface?=null
     class MyViewHolder(val binding: CardDashboardBinding, context: Context) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -26,7 +28,7 @@ class DashboardAdapter(var products:ArrayList<DashboardCards>): RecyclerView.Ada
         )
         p = Print(parent.context)
         ctx=parent.context
-
+        custom_font = Typeface.createFromAsset(parent.context.assets, "fonts/exotc350bdbtbold.ttf")
         return MyViewHolder(binding, parent.context)
     }
 
@@ -38,11 +40,15 @@ class DashboardAdapter(var products:ArrayList<DashboardCards>): RecyclerView.Ada
         val card=products[position]
         holder.binding.pd = card
         holder.binding.cardImage.setImageResource(card.pic)
+
         holder.binding.dashboardCard.setOnClickListener{
             ActivityNames(Transition(ctx!!),Print(ctx!!), ctx!!).
             call(card.click,card.cname)
         }
         holder.binding.cardTitle.text=card.name
+        holder.binding.cardTitle.setTypeface(custom_font)
+
+
 
     }
 }
