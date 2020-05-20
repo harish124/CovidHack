@@ -14,6 +14,10 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.bourbon.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -46,11 +50,14 @@ import java.util.HashMap;
 import print.Print;
 
 public class MapsActivityShelterMapping extends FragmentActivity implements OnMapReadyCallback,
-    GoogleMap.OnMyLocationChangeListener{
+        View.OnClickListener,
+        GoogleMap.OnMyLocationChangeListener{
 
     private GoogleMap mMap;
     private DatabaseReference databaseReference;
     private Print print;
+    private Button search;
+    private Spinner sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,14 @@ public class MapsActivityShelterMapping extends FragmentActivity implements OnMa
         mapFragment.getMapAsync(this);
 
         print = new Print(this);
+
+        sp = (Spinner) findViewById(R.id.distance);
+
+        String[] options = new String[] { "5 Kilometers","10 Kilometers","50 Kilometers","100 Kilometers"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,options);
+        sp.setAdapter(adapter);
+
+
     }
 
 
@@ -82,7 +97,7 @@ public class MapsActivityShelterMapping extends FragmentActivity implements OnMa
 
     }
 
-    private void fetchShelters(Location location)
+    private void fetchShelters(Location location,int dis)
     {
         databaseReference=FirebaseDatabase.getInstance().getReference("/Shelters");
 
@@ -91,7 +106,7 @@ public class MapsActivityShelterMapping extends FragmentActivity implements OnMa
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     HashMap<String, String> dict = (HashMap<String, String>) dataSnapshot.getValue();
-                    plotMarkers(dict, location);
+                    plotMarkers(dict, location,dis);
                 }
                 else
                 {
@@ -106,20 +121,10 @@ public class MapsActivityShelterMapping extends FragmentActivity implements OnMa
         });
     }
 
-    private void plotMarkers(HashMap<String,String> dict,Location location)
+    private void plotMarkers(HashMap<String,String> dict,Location location,int dis)
     {
+        mMap.clear();
         LatLngBounds.Builder latlngbuilder = new LatLngBounds.Builder();
-        for(String title : dict.keySet())
-        {
-            String l = dict.get(title);
-            String[] latlng = l.split(",");
-            LatLng ll = new LatLng(Double.parseDouble(latlng[0]),Double.parseDouble(latlng[1]));
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(ll);
-            markerOptions.title(title);
-            latlngbuilder.include(ll);
-            mMap.addMarker(markerOptions);
-        }
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(location.getLatitude(),location.getLongitude()));
@@ -128,21 +133,34 @@ public class MapsActivityShelterMapping extends FragmentActivity implements OnMa
         latlngbuilder.include(new LatLng(location.getLatitude(),location.getLongitude()));
         mMap.addMarker(markerOptions);
 
-        LatLngBounds latLngBounds = latlngbuilder.build();
-        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds,100));
-    }
+        int cnt=0;
 
-    @Override
-    public void onMyLocationChange(Location location) {
+        double curdist=0.0;
 
-        if(location!=null)
+        for(String title : dict.keySet())
         {
-            fetchShelters(location);
-            mMap.setOnMyLocationChangeListener(null);
+            String l = dict.get(title);
+            String[] latlng = l.split(",");
+            LatLng ll = new LatLng(Double.parseDouble(latlng[0]),Double.parseDouble(latlng[1]));
+            Location temp = new Location("gps");
+            temp.setLongitude(ll.longitude);
+            temp.setLatitude(ll.latitude);
+            curdist = location.distanceTo(temp);
+            if(Math.ceil(curdist)<=(dis*1000))
+            {
+                cnt++;
+                MarkerOptions markerOptions2 = new MarkerOptions();
+                markerOptions2.position(ll);
+                markerOptions2.title(title);
+                latlngbuilder.include(ll);
+                mMap.addMarker(markerOptions2);
+            }
         }
+
+        print.sprintf("got "+cnt+" shelters in the radius of "+dis);
+        LatLngBounds latLngBounds = latlngbuilder.build();
+        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds,200));
     }
-
-
 
     private void checkLocation()
     {
@@ -284,4 +302,29 @@ public class MapsActivityShelterMapping extends FragmentActivity implements OnMa
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+            Location location = mMap.getMyLocation();
+
+            if(location!=null)
+            {
+                int dis = Integer.parseInt(sp.getSelectedItem().toString().split(" ")[0]);
+                fetchShelters(location,dis);
+            }
+            else
+            {
+                print.fprintf("Failed to get your location. Please enable GPS if it is disabled.");
+            }
+    }
+
+    @Override
+    public void onMyLocationChange(Location location) {
+        if(location!=null)
+        {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15.0f));
+            search = (Button) findViewById(R.id.plot);
+            search.setOnClickListener(this);
+            mMap.setOnMyLocationChangeListener(null);
+        }
+    }
 }
